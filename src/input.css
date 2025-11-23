@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: #d97706;
+        border-radius: 5px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: #b45309;
+    }
+
+    /* Utility for text stroke */
+    .text-stroke {
+        -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
+    }
+
+    /* Glassmorphism Utilities */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .glass-panel-dark {
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Scrollytelling Setup */
+    .scrolly-image {
+        transition: opacity 0.5s ease-in-out, transform 0.5s ease-out;
+    }
+
+    /* Ensure sticky works */
+    .sticky-container {
+        position: sticky !important;
+        top: 6rem !important;
+    }
+}

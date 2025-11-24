@@ -23,8 +23,9 @@ function App() {
     useEffect(() => {
         AOS.init({
             duration: 1000,
-            once: true,
+            once: false, // Анимация повторяется каждый раз при прокрутке
             offset: 100,
+            mirror: true, // Анимация исчезает при прокрутке вверх
         });
     }, []);
 

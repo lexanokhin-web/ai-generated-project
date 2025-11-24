@@ -36,8 +36,8 @@ const Navbar = () => {
                         <Link to="/uber-uns" className="text-sm font-medium hover:text-accent transition-colors">Über Uns</Link>
                         <a href="/#services" className="text-sm font-medium hover:text-accent transition-colors">Leistungen</a>
                         <Link to="/ratgeber" className="text-sm font-medium hover:text-accent transition-colors">Ratgeber</Link>
-                        <a href="/#process" className="text-sm font-medium hover:text-accent transition-colors">Ablauf</a>
-                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors">Referenzen</a>
+                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors">Projekte & Referenzen</a>
+                        <a href="/#contact" className="text-sm font-medium hover:text-accent transition-colors">Kontakt</a>
                     </nav>
 
                     {/* CTA */}
@@ -67,8 +67,8 @@ const Navbar = () => {
                     <div className="lg:hidden absolute top-20 left-0 w-full bg-white shadow-lg py-4 px-6 flex flex-col space-y-4">
                         <Link to="/uber-uns" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Über Uns</Link>
                         <a href="/#services" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Leistungen</a>
-                        <a href="/#process" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Ablauf</a>
-                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Referenzen</a>
+                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Projekte & Referenzen</a>
+                        <a href="/#contact" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Kontakt</a>
                         <a href="/#contact" className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 text-center" onClick={() => setIsMobileMenuOpen(false)}>
                             Kostenlos Beraten Lassen
                         </a>

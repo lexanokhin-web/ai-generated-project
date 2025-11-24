@@ -19,8 +19,8 @@ const Navbar = () => {
                     <nav className="hidden lg:flex items-center space-x-8">
                         <Link to="/uber-uns" className="text-sm font-medium hover:text-accent transition-colors">Über Uns</Link>
                         <a href="/#services" className="text-sm font-medium hover:text-accent transition-colors">Leistungen</a>
-                        <a href="/#process" className="text-sm font-medium hover:text-accent transition-colors">Ablauf</a>
-                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors">Referenzen</a>
+                        <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors">Projekte & Referenzen</a>
+                        <a href="/#contact" className="text-sm font-medium hover:text-accent transition-colors">Kontakt</a>
                     </nav>
 
                     {/* CTA */}
@@ -49,8 +49,8 @@ const Navbar = () => {
                 <div className="lg:hidden absolute top-20 left-0 w-full bg-white shadow-lg py-4 px-6 flex flex-col space-y-4">
                     <Link to="/uber-uns" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Über Uns</Link>
                     <a href="/#services" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Leistungen</a>
-                    <a href="/#process" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Ablauf</a>
-                    <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Referenzen</a>
+                    <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Projekte & Referenzen</a>
+                    <a href="/#contact" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Kontakt</a>
                     <a href="/#contact" className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 text-center" onClick={() => setIsOpen(false)}>
                         Kostenlos Beraten Lassen
                     </a>

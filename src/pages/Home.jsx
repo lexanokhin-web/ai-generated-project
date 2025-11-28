@@ -4,6 +4,10 @@ import VanillaTilt from 'vanilla-tilt';
 import { Helmet } from 'react-helmet-async';
 import Section from '../components/UI/Section';
 import StructuredData from '../components/SEO/StructuredData';
+import AnimatedBackground from '../components/UI/AnimatedBackground';
+import HeroScene from '../components/3D/HeroScene';
+import { ArrowRight, CheckCircle, Hammer, Wrench, PaintRoller } from 'lucide-react';
+import LiquidGlassTool from '../components/UI/LiquidGlassTool';
 
 const Home = () => {
     const [activeStep, setActiveStep] = useState(1);
@@ -154,8 +158,9 @@ const Home = () => {
             {/* Hero Section */}
             <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
+                    <HeroScene />
                     <img src="/images/image-1.png" alt="Traumhaus Renovierung Ratzeburg"
-                        className="w-full h-full object-cover animate-subtle-zoom" loading="lazy" />
+                        className="w-full h-full object-cover animate-subtle-zoom opacity-50" loading="lazy" />
                     <div className="absolute inset-0 bg-slate-900/60 mix-blend-multiply"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 </div>
@@ -179,9 +184,7 @@ const Home = () => {
                             </a>
                             <a href="#services" className="w-full sm:w-auto px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 group flex items-center justify-center gap-2">
                                 <span>Unsere Leistungen</span>
-                                <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                                </svg>
+                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </a>
                         </div>
                     </div>
@@ -299,12 +302,17 @@ const Home = () => {
                             </Link>
                         ))}
                     </div>
+
+                    {/* Liquid Glass Tools */}
+                    <LiquidGlassTool Icon={Hammer} className="top-20 left-10 hidden lg:block" size={65} duration={7} />
+                    <LiquidGlassTool Icon={Wrench} className="bottom-20 right-10 hidden lg:block" size={60} delay={1.5} duration={6} />
                 </div>
             </Section>
 
             {/* Reasons Section */}
-            <Section className="bg-slate-50 overflow-hidden">
-                <div className="container mx-auto px-6">
+            <Section className="bg-slate-50 overflow-hidden relative">
+                <AnimatedBackground variant="blobs" />
+                <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-20" data-aos="fade-up">
                         <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span></h2>
                         <p className="mt-4 text-slate-600">Weil wir Handwerk lieben und Service leben.</p>
@@ -365,8 +373,9 @@ const Home = () => {
             </Section>
 
             {/* Process Section */}
-            <Section id="process" className="bg-white overflow-visible">
-                <div className="container mx-auto px-6">
+            <Section id="process" className="bg-white overflow-visible relative">
+                <AnimatedBackground variant="lines" />
+                <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-bold text-slate-900">Ihr Weg zum <span className="text-accent font-serif italic">Traumhaus</span></h2>
                         <p className="text-slate-500 mt-2">In 4 einfachen Schritten zum Ziel</p>
@@ -412,8 +421,9 @@ const Home = () => {
             </Section>
 
             {/* Comparison Table */}
-            <Section className="bg-slate-50">
-                <div className="container mx-auto px-6 max-w-5xl">
+            <Section className="bg-slate-50 relative">
+                <AnimatedBackground variant="blobs" />
+                <div className="container mx-auto px-6 max-w-5xl relative z-10">
                     <h2 className="text-3xl font-bold text-center mb-12">Der Unterschied liegt im Detail</h2>
                     <div className="overflow-x-auto rounded-2xl shadow-xl bg-white">
                         <table className="w-full text-left border-collapse">
@@ -426,10 +436,10 @@ const Home = () => {
                             </thead>
                             <tbody className="divide-y divide-slate-100">
                                 {[
-                                    { feature: "Zentraler Ansprechpartner", us: "✔ Ja, Einer für Alles", them: "✘ Nein, Viele Telefonate" },
-                                    { feature: "Gewerke-Koordination", us: "✔ Übernehmen wir komplett", them: "✘ Ihre Aufgabe (Stress)" },
-                                    { feature: "Festpreisgarantie", us: "✔ Garantiert", them: "✘ Oft versteckte Kosten" },
-                                    { feature: "Termintreue", us: "✔ Verbindlicher Plan", them: "✘ Verzögerungen üblich" }
+                                    { feature: "Zentraler Ansprechpartner", us: <><CheckCircle className="inline w-5 h-5 mr-2" /> Ja, Einer für Alles</>, them: "✘ Nein, Viele Telefonate" },
+                                    { feature: "Gewerke-Koordination", us: <><CheckCircle className="inline w-5 h-5 mr-2" /> Übernehmen wir komplett</>, them: "✘ Ihre Aufgabe (Stress)" },
+                                    { feature: "Festpreisgarantie", us: <><CheckCircle className="inline w-5 h-5 mr-2" /> Garantiert</>, them: "✘ Oft versteckte Kosten" },
+                                    { feature: "Termintreue", us: <><CheckCircle className="inline w-5 h-5 mr-2" /> Verbindlicher Plan</>, them: "✘ Verzögerungen üblich" }
                                 ].map((row, idx) => (
                                     <tr key={idx} className="hover:bg-slate-50 transition-colors">
                                         <td className="p-6 font-medium text-slate-700">{row.feature}</td>
@@ -466,6 +476,9 @@ const Home = () => {
                             <p className="text-slate-400 uppercase tracking-widest text-sm">Kundenzufriedenheit</p>
                         </div>
                     </div>
+
+                    {/* Liquid Glass Tool */}
+                    <LiquidGlassTool Icon={PaintRoller} className="top-1/2 -translate-y-1/2 left-10 hidden lg:block" size={75} duration={8} />
                 </div>
             </Section>
 
@@ -548,8 +561,9 @@ const Home = () => {
             </Section>
 
             {/* FAQ Section */}
-            <Section className="bg-white">
-                <div className="container mx-auto px-6 max-w-3xl">
+            <Section className="bg-white relative">
+                <AnimatedBackground variant="lines" />
+                <div className="container mx-auto px-6 max-w-3xl relative z-10">
                     <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Häufig gestellte Fragen</h2>
                     <div className="space-y-4">
                         {[

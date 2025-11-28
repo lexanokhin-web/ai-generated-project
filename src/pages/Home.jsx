@@ -374,7 +374,7 @@ const Home = () => {
 
             {/* Process Section */}
             <Section id="process" className="bg-white overflow-visible relative">
-                <AnimatedBackground variant="lines" />
+                <AnimatedBackground variant="laminate" />
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-16">
                         <h2 className="text-4xl font-bold text-slate-900">Ihr Weg zum <span className="text-accent font-serif italic">Traumhaus</span></h2>
@@ -562,7 +562,7 @@ const Home = () => {
 
             {/* FAQ Section */}
             <Section className="bg-white relative">
-                <AnimatedBackground variant="lines" />
+                <AnimatedBackground variant="laminate" />
                 <div className="container mx-auto px-6 max-w-3xl relative z-10">
                     <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Häufig gestellte Fragen</h2>
                     <div className="space-y-4">

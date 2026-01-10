@@ -41,12 +41,12 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-xl p-4 md:p-10"
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-xl p-4 md:p-10 touch-none"
             >
                 {/* Close Button */}
                 <button
                     onClick={onClose}
-                    className="absolute top-6 right-6 z-[110] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 group"
+                    className="absolute top-6 right-6 z-[120] p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors border border-white/20 group"
                 >
                     <X className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
                 </button>
@@ -57,7 +57,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                 </div>
 
                 {/* Main Content */}
-                <div className="relative w-full h-full flex items-center justify-center max-w-7xl">
+                <div className="relative w-full h-full flex items-center justify-center max-w-7xl overflow-hidden">
                     <button
                         onClick={handlePrev}
                         className="absolute left-0 md:-left-20 z-[110] p-4 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10 hidden md:block"
@@ -65,26 +65,36 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                         <ChevronLeft className="w-8 h-8" />
                     </button>
 
-                    <div className="relative w-full h-full flex flex-col items-center justify-center">
+                    <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
                         <motion.div
                             key={currentIndex}
+                            drag="x"
+                            dragConstraints={{ left: 0, right: 0 }}
+                            dragElastic={0.2}
+                            onDragEnd={(e, { offset, velocity }) => {
+                                const swipe = Math.abs(offset.x) > 50;
+                                if (swipe) {
+                                    if (offset.x > 0) handlePrev();
+                                    else handleNext();
+                                }
+                            }}
                             initial={{ opacity: 0, scale: 0.9, x: 20 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
                             exit={{ opacity: 0, scale: 0.9, x: -20 }}
                             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="relative w-full h-[70vh] md:h-[80vh] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
+                            className="relative w-full h-[70vh] md:h-[80vh] rounded-3xl overflow-hidden shadow-2xl border border-white/10 cursor-grab active:cursor-grabbing touch-pan-y"
                         >
                             <img
                                 src={images[currentIndex].img}
                                 alt={images[currentIndex].title}
-                                className="w-full h-full object-cover"
+                                className="w-full h-full object-cover pointer-events-none"
                             />
                             {/* Title Overlay */}
-                            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent">
+                            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none">
                                 <div className="max-w-3xl">
                                     <p className="text-accent text-xs font-bold uppercase tracking-[0.3em] mb-2">{images[currentIndex].cat}</p>
                                     <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{images[currentIndex].title}</h2>
-                                    <p className="text-white/60 text-lg font-light leading-relaxed">{images[currentIndex].desc || "Individuelle Handwerksarbeit in höchster Präzision."}</p>
+                                    <p className="text-white/60 text-lg font-light leading-relaxed">{images[currentIndex].desc || "Individuelle Handwerksarbeit in höchster Präзision."}</p>
                                 </div>
                             </div>
                         </motion.div>

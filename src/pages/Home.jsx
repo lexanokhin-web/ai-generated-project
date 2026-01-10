@@ -6,12 +6,34 @@ import Section from '../components/UI/Section';
 import StructuredData from '../components/SEO/StructuredData';
 import AnimatedBackground from '../components/UI/AnimatedBackground';
 import HeroScene from '../components/3D/HeroScene';
-import { ArrowRight, CheckCircle, Hammer, Wrench, PaintRoller } from 'lucide-react';
+import { ArrowRight, CheckCircle, Hammer, Wrench, PaintRoller, Trophy, Calendar, Heart, Star } from 'lucide-react';
 import LiquidGlassTool from '../components/UI/LiquidGlassTool';
+import ProjectGalleryModal from '../components/UI/ProjectGalleryModal';
+
 
 const Home = () => {
     const [activeStep, setActiveStep] = useState(1);
     const [activeFaq, setActiveFaq] = useState(null);
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+
+    const projectImages = [
+        { img: "/images/image-21.png", title: "Küchensanierung Ratzeburg", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
+        { img: "/images/bathroom.png", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
+        { img: "/images/kitchen.png", title: "Moderne Loft-Küche", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme и Funktionalität." },
+        { img: "/images/living-room.png", title: "Wohnzimmer Redesign", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
+        { img: "/images/open-plan.png", title: "Open-Plan Living", cat: "Sanierung", desc: "Zusammenführung von Räumen für ein großzügiges Wohngefühl." },
+        { img: "/images/wardrobe.png", title: "Maßgeschneiderter Stauraum", cat: "Tischler", desc: "Individuelle Schranklösungen nach Maß für maximale Platzausnutzung." },
+        { img: "/images/image-22.png", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Zeitloses Design trifft auf Funktionalität в Schleswig-Holstein." },
+        { img: "/images/image-23.png", title: "Wohnraum Design", cat: "Modernisierung", desc: "Kreative Raumkonzepte für Ihr individuelles Wohnerlebnis." },
+        { img: "/images/image-24.png", title: "Eingangsbereich & Treppe", cat: "Innenausbau", desc: "Einladende Gestaltung des Entrées mit langlebigen Materialien." },
+        { img: "/images/image-25.png", title: "Fassadensanierung", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
+    ];
+
+    const openGallery = (index) => {
+        setSelectedProjectIndex(index);
+        setIsGalleryOpen(true);
+    };
 
     // Tilt Effect
     useEffect(() => {
@@ -171,11 +193,12 @@ const Home = () => {
                             Handwerkskunst in Ratzeburg & Umgebung
                         </span>
                         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-8" data-aos="fade-up" data-aos-delay="100">
-                            Verwandeln Sie Ihr Haus in ein <span className="font-serif italic text-accent">Zuhause</span>.
+                            <span className="block mb-2">Haus & Wohnungs-</span>
+                            <span className="font-serif italic text-accent">Renovierung & Sanierung</span>.
                         </h1>
                         <p className="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl mx-auto font-light" data-aos="fade-up" data-aos-delay="200">
-                            Wir verstehen, dass eine Renovierung mehr ist als nur Baustelle. Es geht um Ihr Wohlbefinden.
-                            Winter & Usselmann GbR realisiert Ihre Wohnträume in Schleswig-Holstein – stressfrei, pünktlich und zum Festpreis.
+                            Von der exklusiven Badsanierung bis zum trockenen Innenausbau: Winter & Usselmann steht für höchste handwerkliche Qualität und fachgerechte Koordination aller Gewerke.
+                            Wir realisieren Ihr Bauvorhaben in Ratzeburg und Umgebung – präzise, zuverlässig und zum garantierten Festpreis.
                         </p>
 
                         <div className="flex flex-col sm:flex-row items-center justify-center gap-4" data-aos="fade-up" data-aos-delay="300">
@@ -206,66 +229,101 @@ const Home = () => {
             </section>
 
             {/* Marquee Section */}
-            <div className="bg-white py-10 border-b border-slate-100 overflow-hidden">
-                <p className="text-center text-slate-400 text-xs font-bold tracking-widest uppercase mb-6">Wir vertrauen auf Markenqualität</p>
-                <div className="relative w-full flex overflow-hidden">
-                    <div className="animate-marquee whitespace-nowrap flex gap-16 min-w-full items-center">
-                        <span className="text-3xl font-bold text-slate-300">BOSCH</span>
-                        <span className="text-3xl font-bold text-slate-300">MAKITA</span>
-                        <span className="text-3xl font-bold text-slate-300">KNAUF</span>
-                        <span className="text-3xl font-bold text-slate-300">STO</span>
-                        <span className="text-3xl font-bold text-slate-300">BRILLUX</span>
-                        <span className="text-3xl font-bold text-slate-300">WÜRTH</span>
-                        <span className="text-3xl font-bold text-slate-300">FESTOOL</span>
-                        {/* Duplicate */}
-                        <span className="text-3xl font-bold text-slate-300">BOSCH</span>
-                        <span className="text-3xl font-bold text-slate-300">MAKITA</span>
-                        <span className="text-3xl font-bold text-slate-300">KNAUF</span>
-                        <span className="text-3xl font-bold text-slate-300">STO</span>
-                        <span className="text-3xl font-bold text-slate-300">BRILLUX</span>
-                        <span className="text-3xl font-bold text-slate-300">WÜRTH</span>
-                        <span className="text-3xl font-bold text-slate-300">FESTOOL</span>
+            <div className="bg-white py-12 border-y border-slate-100 overflow-hidden relative">
+                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+                <p className="text-center text-slate-400 text-xs font-bold tracking-[0.3em] uppercase mb-8">Wir vertrauen auf deutsche Markenqualität</p>
+                <div className="relative w-full overflow-hidden">
+                    <div className="animate-marquee whitespace-nowrap flex gap-20 items-center w-max pr-20">
+                        {[
+                            "BOSCH Professional", "MAKITA", "KNAUF", "STO", "BRILLUX", "WÜRTH", "FESTOOL",
+                            "METABO", "LIEBHERR", "GROHE", "VIESSMANN", "SCHÜCO", "HANSA", "CAPAROL", "WEBER"
+                        ].map((brand, i) => (
+                            <div key={i} className="flex items-center gap-4 group">
+                                <span className="text-3xl lg:text-4xl font-black text-slate-200 group-hover:text-accent transition-colors duration-500 cursor-default select-none tracking-tighter">
+                                    {brand}
+                                </span>
+                                <div className="w-2 h-2 rounded-full bg-accent/20 group-hover:bg-accent transition-colors"></div>
+                            </div>
+                        ))}
+                        {/* Duplicate for seamless loop */}
+                        {[
+                            "BOSCH Professional", "MAKITA", "KNAUF", "STO", "BRILLUX", "WÜRTH", "FESTOOL",
+                            "METABO", "LIEBHERR", "GROHE", "VIESSMANN", "SCHÜCO", "HANSA", "CAPAROL", "WEBER"
+                        ].map((brand, i) => (
+                            <div key={`dup-${i}`} className="flex items-center gap-4 group">
+                                <span className="text-3xl lg:text-4xl font-black text-slate-200 group-hover:text-accent transition-colors duration-500 cursor-default select-none tracking-tighter">
+                                    {brand}
+                                </span>
+                                <div className="w-2 h-2 rounded-full bg-accent/20 group-hover:bg-accent transition-colors"></div>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
 
             {/* About Section */}
-            <Section id="about" className="bg-white overflow-hidden">
-                <div className="absolute top-20 right-0 text-[12rem] font-bold text-slate-50 leading-none select-none pointer-events-none z-0">W&U</div>
+            <Section id="about" className="bg-slate-50/50 overflow-hidden relative">
+                <AnimatedBackground variant="modern-aura" className="opacity-40" />
+                <div className="absolute -top-24 -right-24 text-[20rem] font-black text-slate-100 select-none pointer-events-none z-0">W&U</div>
+
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                        <div data-aos="fade-right">
-                            <h2 className="text-sm font-bold text-accent uppercase tracking-widest mb-4">Über Winter & Usselmann</h2>
-                            <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                                Wir bauen nicht nur um.<br /><span className="font-serif italic text-accent">Wir schaffen Lebensqualität.</span>
-                            </h3>
-                            <div className="space-y-6 text-slate-600 text-lg leading-relaxed">
-                                <p>Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Ratzeburg, aber es passt nicht mehr ganz zu Ihrem Leben. Das Bad ist veraltet, der Boden knarrt, oder Sie brauchen einfach mehr Platz.</p>
-                                <p>Eine Renovierung ist oft mit Ängsten verbunden: Lärm, Dreck, unzuverlässige Handwerker. Wir treten an, um das zu ändern. Als Ihr lokaler Partner in Schleswig-Holstein garantieren wir Ihnen einen reibungslosen Ablauf.</p>
-                                <div className="border-l-4 border-accent pl-6 py-2 italic text-slate-800 font-medium">
-                                    "Unser Ziel ist es, dass Sie sich schon während der Bauphase auf das Ergebnis freuen können – ohne Sorgen."
+                    <div className="flex flex-col lg:flex-row gap-12 lg:gap-0 items-center">
+                        {/* Text Content - Positioned to reveal behind glass */}
+                        <div className="w-full lg:w-3/5 lg:pr-12 z-20" data-aos="fade-right">
+                            <div className="glass-panel p-8 lg:p-16 rounded-[2.5rem] shadow-2xl border-l-[1px] border-white/40 bg-white/60 backdrop-blur-xl relative">
+                                <div className="absolute top-0 right-0 p-8 opacity-10">
+                                    <Hammer className="w-24 h-24 text-accent" />
                                 </div>
-                                <p>Michael Winter & Das Team</p>
-                            </div>
-                            <div className="mt-8">
-                                <img src="/images/image-4.png" alt="Unterschrift Michael Winter" className="h-16 opacity-70" />
+
+                                <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Über Winter & Usselmann</h2>
+                                <h3 className="text-4xl md:text-6xl font-extrabold text-slate-900 mb-8 leading-[1.1]">
+                                    Wir bauen nicht nur um.<br />
+                                    <span className="font-serif italic text-accent font-normal">Wir schaffen Lebensqualität.</span>
+                                </h3>
+
+                                <div className="space-y-6 text-slate-600 text-lg lg:text-xl leading-relaxed font-light">
+                                    <p>
+                                        Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Ratzeburg, aber es passt nicht mehr ganz zu Ihrem Leben.
+                                        Das Bad ist veraltet, der Boden knarrt, oder Sie brauchen einfach mehr Platz.
+                                    </p>
+                                    <p>
+                                        Eine Renovierung ist oft mit Ängsten verbunden: Lärm, Dreck, unzuverlässige Handwerker.
+                                        Wir treten an, um das zu ändern. Als Ihr lokaler Partner in Schleswig-Holstein garantieren wir Ihnen einen reibungslosen Ablauf.
+                                    </p>
+
+                                    <div className="flex items-center gap-6 py-6 border-y border-slate-200/50 my-8">
+                                        <img src="/images/image-4.png" alt="Unterschrift Michael Winter" className="h-16 opacity-80" />
+                                        <div className="h-12 w-px bg-slate-200"></div>
+                                        <div>
+                                            <p className="font-bold text-slate-900">Michael Winter</p>
+                                            <p className="text-sm text-accent">Geschäftsführer & Visionär</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="relative mt-12 lg:mt-0">
-                            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl shadow-slate-200" data-aos="zoom-in" data-tilt>
-                                <img src="/images/image-5.png" alt="Unser Team bei der Arbeit in Ratzeburg" className="w-full h-auto object-cover transform hover:scale-105 transition-duration-700" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                                <div className="absolute bottom-6 left-6 text-white">
-                                    <p className="font-bold text-xl">Michael Winter</p>
-                                    <p className="text-sm opacity-80">Geschäftsführer</p>
+                        {/* Image Composition - Overlapping */}
+                        <div className="w-full lg:w-2/5 relative lg:-ml-20 z-10 mt-12 lg:mt-0">
+                            <div className="relative group" data-aos="zoom-in" data-tilt>
+                                <div className="absolute -inset-4 bg-accent/20 rounded-[2.5rem] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                                <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
+                                    <img src="/images/image-5.png" alt="Handwerkskunst" className="w-full h-auto object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000" />
+                                    <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/40 via-transparent to-transparent"></div>
                                 </div>
-                            </div>
-                            <div className="absolute -bottom-10 -left-10 w-1/2 z-20 rounded-xl overflow-hidden shadow-xl border-4 border-white hidden md:block" data-aos="fade-up" data-aos-delay="200" data-tilt>
-                                <img src="/images/image-6.png" alt="Detailarbeit Handwerk" className="w-full h-full object-cover" />
-                            </div>
-                            <div className="absolute -top-6 -right-6 w-32 h-32 bg-accent rounded-full flex items-center justify-center text-white font-bold text-center p-4 shadow-lg z-30 animate-slow-spin">
-                                <div className="text-xs uppercase tracking-widest">Qualität<br />aus einer<br />Hand</div>
+
+                                {/* Floating Sticker */}
+                                <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent rounded-full flex items-center justify-center text-white font-bold text-center p-6 shadow-2xl z-20 rotate-12 group-hover:rotate-0 transition-transform duration-500">
+                                    <div className="text-sm uppercase tracking-widest leading-tight">
+                                        Meister<br />Qualität<br /><span className="text-[0.6rem] font-medium opacity-80">Ratzeburg & SH</span>
+                                    </div>
+                                </div>
+
+                                {/* Secondary Overlap Image */}
+                                <div className="absolute -bottom-16 -left-16 w-2/3 z-30 rounded-3xl overflow-hidden shadow-2xl border-4 border-white hidden xl:block" data-aos="fade-up" data-aos-delay="400">
+                                    <img src="/images/image-6.png" alt="Detail" className="w-full h-full object-cover" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -279,8 +337,8 @@ const Home = () => {
                 </div>
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-sm font-bold text-accent uppercase tracking-widest mb-4">Unsere Expertise</h2>
-                        <h3 className="text-4xl md:text-5xl font-bold text-white mb-6">Alles für Ihr <span className="font-serif italic text-accent">perfektes Zuhause</span></h3>
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Unsere Expertise</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-white mb-8">Alles für Ihr <span className="font-serif italic text-accent">perfektes Zuhause</span></h3>
                         <p className="text-slate-400 text-lg">Von kleinen Reparaturen bis zur Kernsanierung – wir sind Ihre Experten in Schleswig-Holstein.</p>
                     </div>
 
@@ -310,87 +368,97 @@ const Home = () => {
             </Section>
 
             {/* Reasons Section */}
-            <Section className="bg-slate-50 overflow-hidden relative">
+            <Section className="bg-slate-50 overflow-hidden relative border-t border-slate-100">
                 <AnimatedBackground variant="blobs" />
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-20" data-aos="fade-up">
-                        <h2 className="text-4xl md:text-5xl font-bold text-slate-900">Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span></h2>
-                        <p className="mt-4 text-slate-600">Weil wir Handwerk lieben und Service leben.</p>
+                    <div className="text-center mb-32" data-aos="fade-up">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.4em] mb-4">Ihre Vorteile</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span></h3>
+                        <p className="mt-4 text-slate-500 text-xl max-w-2xl mx-auto">Weil wir Handwerk lieben, Service leben und Räume schaffen, in denen man sich wirklich zu Hause fühlt.</p>
                     </div>
 
-                    <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
-                        <div className="w-full md:w-1/2" data-aos="fade-right">
-                            <span className="text-8xl font-bold text-slate-200 absolute -top-10 -left-10 z-0">01</span>
-                            <div className="relative z-10 glass-panel p-8 rounded-xl shadow-lg border-l-4 border-accent">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3">Pünktliche Fertigstellung</h3>
-                                <p className="text-slate-600">Wir wissen, wie wichtig Ihr Einzugstermin ist. Dank präziser Planung garantieren wir Ihnen eine termingerechte Fertigstellung. Sie können Ihren Umzug sicher planen.</p>
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2" data-aos="fade-left">
-                            <img src="/images/image-14.png" className="w-2/3 mx-auto rounded-full aspect-square object-cover drop-shadow-2xl hover:scale-105 transition-transform duration-500" alt="Pünktlichkeit" />
-                        </div>
-                    </div>
+                    <div className="space-y-16">
+                        {[
+                            {
+                                id: "01",
+                                title: "Pünktliche Fertigstellung",
+                                img: "/images/image-14.png",
+                                text: "Wir wissen, wie wichtig Ihr Einzugstermin ist. Dank präziser Planung garantieren wir Ihnen eine termingerechte Fertigstellung. В Ratzeburg und Umgebung sind wir bekannt für unsere Verlässlichkeit – Sie können Ihren Umzug sicher planen."
+                            },
+                            {
+                                id: "02",
+                                title: "Absolute Kostentransparenz",
+                                img: "/images/image-15.png",
+                                text: "Bei uns gibt es keine versteckten Kosten. Sie erhalten ein detailliertes Festpreisangebot. Wir kalkulieren ehrlich und nachvollziehbar. Das bedeutet für Sie: Maximale Planungssicherheit für Ihr Budget, von Anfang an."
+                            },
+                            {
+                                id: "03",
+                                title: "Ein Ansprechpartner",
+                                img: "/images/image-16.png",
+                                text: "Schluss mit dem Telefon-Marathon. Wir koordinieren alle Gewerke – Maler, Fliesenleger und Trockenbauer – komplett für Sie. Sie kommunizieren nur mit uns. Wir übernehmen die gesamte Organisation und Logistik Ihres Bauprojekts."
+                            },
+                            {
+                                id: "04",
+                                title: "Qualität, die bleibt",
+                                img: "/images/image-17.png",
+                                text: "Wir verwenden nur Materialien, die wir auch in unserem eigenen Zuhause verbauen würden. Vom ersten Pinselstrich bis zum fertigen Objekt – jeder Schritt unterliegt strengster Qualitätskontrolle."
+                            }
+                        ].map((reason, idx) => (
+                            <div key={idx} className={`flex flex-col ${idx % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-8 lg:gap-16`}>
+                                {/* Large Image Area */}
+                                <div className="w-full md:w-1/2 group relative" data-aos={idx % 2 === 1 ? "fade-left" : "fade-right"} data-aos-duration="1200">
+                                    <div className="absolute -inset-4 bg-accent/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                    <div className="relative h-[300px] lg:h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl">
+                                        <img src={reason.img} alt={reason.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
+                                        <div className="absolute top-10 left-10 text-7xl font-black text-white/20 select-none">{reason.id}</div>
+                                    </div>
+                                </div>
 
-                    <div className="flex flex-col md:flex-row-reverse items-center gap-12 mb-24">
-                        <div className="w-full md:w-1/2" data-aos="fade-left">
-                            <span className="text-8xl font-bold text-slate-200 absolute -top-10 -right-10 z-0">02</span>
-                            <div className="relative z-10 glass-panel p-8 rounded-xl shadow-lg border-r-4 border-accent">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3">Absolute Kostentransparenz</h3>
-                                <p className="text-slate-600">Bei uns gibt es keine versteckten Kosten. Sie erhalten ein detailliertes Festpreisangebot. Das bedeutet für Sie: Maximale Planungssicherheit für Ihr Budget.</p>
+                                {/* Content Area */}
+                                <div className="w-full md:w-1/2" data-aos={idx % 2 === 1 ? "fade-right" : "fade-left"} data-aos-duration="1200">
+                                    <div className="glass-panel p-8 lg:p-12 rounded-[2.5rem] border-l-[1px] border-white/40 bg-white/40 shadow-xl relative overflow-hidden group">
+                                        <div className="absolute -right-4 -bottom-4 opacity-[0.03] group-hover:opacity-10 transition-opacity">
+                                            <Hammer className="w-32 h-32 text-accent" />
+                                        </div>
+                                        <h3 className="text-2xl lg:text-4xl font-bold text-slate-900 mb-6 leading-tight">
+                                            {reason.title}
+                                        </h3>
+                                        <p className="text-slate-600 text-lg lg:text-xl leading-relaxed font-light mb-8">
+                                            {reason.text}
+                                        </p>
+                                        <div className="flex items-center text-accent font-bold text-sm tracking-widest uppercase">
+                                            Exzellenz garantiert
+                                            <ArrowRight className="ml-2 w-4 h-4" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="w-full md:w-1/2" data-aos="fade-right">
-                            <img src="/images/image-15.png" className="w-2/3 mx-auto rounded-full aspect-square object-cover drop-shadow-2xl hover:scale-105 transition-transform duration-500" alt="Kostenkontrolle" />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col md:flex-row items-center gap-12 mb-24">
-                        <div className="w-full md:w-1/2" data-aos="fade-right">
-                            <span className="text-8xl font-bold text-slate-200 absolute -top-10 -left-10 z-0">03</span>
-                            <div className="relative z-10 glass-panel p-8 rounded-xl shadow-lg border-l-4 border-accent">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3">Ein Ansprechpartner für alles</h3>
-                                <p className="text-slate-600">Schluss mit dem Telefon-Marathon. Wir koordinieren Maler, Fliesenleger und Trockenbauer für Sie. Sie haben genau einen Ansprechpartner: Uns.</p>
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2" data-aos="fade-left">
-                            <img src="/images/image-16.png" className="w-2/3 mx-auto rounded-full aspect-square object-cover drop-shadow-2xl hover:scale-105 transition-transform duration-500" alt="Koordination" />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col md:flex-row-reverse items-center gap-12">
-                        <div className="w-full md:w-1/2" data-aos="fade-left">
-                            <span className="text-8xl font-bold text-slate-200 absolute -top-10 -right-10 z-0">04</span>
-                            <div className="relative z-10 glass-panel p-8 rounded-xl shadow-lg border-r-4 border-accent">
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3">Qualität, die bleibt</h3>
-                                <p className="text-slate-600">Wir verwenden nur Materialien, die wir auch in unseren eigenen vier Wänden nutzen würden. Langlebig, nachhaltig und hochwertig. Für ein Ergebnis, an dem Sie Jahre Freude haben.</p>
-                            </div>
-                        </div>
-                        <div className="w-full md:w-1/2" data-aos="fade-right">
-                            <img src="/images/image-17.png" className="w-2/3 mx-auto rounded-full aspect-square object-cover drop-shadow-2xl hover:scale-105 transition-transform duration-500" alt="Qualität" />
-                        </div>
+                        ))}
                     </div>
                 </div>
             </Section>
 
             {/* Process Section */}
             <Section id="process" className="bg-white overflow-visible relative">
-                <AnimatedBackground variant="laminate" />
+                <AnimatedBackground variant="modern-aura" />
                 <div className="container mx-auto px-6 relative z-10">
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl font-bold text-slate-900">Ihr Weg zum <span className="text-accent font-serif italic">Traumhaus</span></h2>
-                        <p className="text-slate-500 mt-2">In 4 einfachen Schritten zum Ziel</p>
+                    <div className="text-center mb-24">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Der Prozess</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Ihr Weg zum <span className="text-accent font-serif italic">Traumhaus</span></h3>
+                        <p className="text-slate-500 mt-4 text-lg">In 4 einfachen Schritten zum Ziel</p>
                     </div>
 
                     <div className="flex flex-col lg:flex-row gap-16 relative">
-                        <div className="lg:w-1/2 sticky-container self-start">
-                            <div className="h-[500px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl relative bg-slate-900 flex items-center justify-center text-white">
+                        <div className="w-full lg:w-1/2 sticky-container self-start z-20">
+                            <div className="h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl relative bg-slate-900 flex items-center justify-center text-white border-4 border-white">
                                 <img src="/images/image-18.png" className="w-full h-full object-cover opacity-80" alt="Der perfekte Plan" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                                 <h3 className="absolute bottom-10 left-10 text-3xl font-bold">Der perfekte Plan</h3>
                             </div>
                         </div>
 
-                        <div className="lg:w-1/2 space-y-32 py-10">
+                        <div className="w-full lg:w-1/2 space-y-32 py-10 relative z-10">
                             {[
                                 { id: 1, title: "Beratung & Design", desc: "Wir hören zu. In Ratzeburg und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
                                 { id: 2, title: "Festpreisangebot", desc: "Sie erhalten ein glasklares Angebot. Wir erklären Ihnen jeden Posten, damit Sie genau wissen, wofür Sie bezahlen." },
@@ -424,7 +492,10 @@ const Home = () => {
             <Section className="bg-slate-50 relative">
                 <AnimatedBackground variant="blobs" />
                 <div className="container mx-auto px-6 max-w-5xl relative z-10">
-                    <h2 className="text-3xl font-bold text-center mb-12">Der Unterschied liegt im Detail</h2>
+                    <div className="text-center mb-16">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Transparenz</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Der Unterschied liegt im <span className="text-accent font-serif italic">Detail</span></h3>
+                    </div>
                     <div className="overflow-x-auto rounded-2xl shadow-xl bg-white">
                         <table className="w-full text-left border-collapse">
                             <thead>
@@ -454,122 +525,168 @@ const Home = () => {
             </Section>
 
             {/* Stats Section */}
-            <Section className="bg-slate-900 text-white" id="stats-section">
-                <div className="container mx-auto px-6">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-                        <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10" data-tilt>
-                            <div className="text-5xl font-bold text-accent mb-2 flex justify-center items-center">
-                                <span className="counter" data-target="15">0</span><span>+</span>
+            <Section className="bg-slate-900 overflow-hidden relative" id="stats-section">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent pointer-events-none"></div>
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        {[
+                            { target: "15", label: "Jahre Erfahrung", icon: Calendar, color: "text-accent" },
+                            { target: "250", label: "Projekte in SH", icon: Trophy, color: "text-blue-400" },
+                            { target: "100", label: "Kundenzufriedenheit", icon: Heart, color: "text-rose-400", suffix: "%" }
+                        ].map((stat, idx) => (
+                            <div key={idx} className="group p-10 rounded-[2rem] bg-white/5 border border-white/10 backdrop-blur-xl hover:bg-white/10 transition-all duration-500 relative overflow-hidden" data-tilt>
+                                {/* Glow Effect */}
+                                <div className="absolute -top-20 -left-20 w-40 h-40 bg-accent/20 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+                                <div className="flex flex-col items-center relative z-10">
+                                    <div className={`w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 border border-white/10`}>
+                                        <stat.icon className={`w-8 h-8 ${stat.color}`} />
+                                    </div>
+                                    <div className="text-6xl font-black text-white mb-4 flex items-center justify-center tracking-tighter">
+                                        <span className="counter" data-target={stat.target}>0</span>
+                                        <span className="text-accent">{stat.suffix || "+"}</span>
+                                    </div>
+                                    <p className="text-slate-400 uppercase tracking-[0.2em] text-xs font-bold text-center">{stat.label}</p>
+                                </div>
+
+                                {/* Bottom Accent Line */}
+                                <div className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-transparent via-accent to-transparent w-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
-                            <p className="text-slate-400 uppercase tracking-widest text-sm">Jahre Erfahrung</p>
-                        </div>
-                        <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10" data-tilt>
-                            <div className="text-5xl font-bold text-accent mb-2 flex justify-center items-center">
-                                <span className="counter" data-target="250">0</span><span>+</span>
-                            </div>
-                            <p className="text-slate-400 uppercase tracking-widest text-sm">Projekte in SH</p>
-                        </div>
-                        <div className="p-8 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10" data-tilt>
-                            <div className="text-5xl font-bold text-accent mb-2 flex justify-center items-center">
-                                <span className="counter" data-target="100">0</span><span>%</span>
-                            </div>
-                            <p className="text-slate-400 uppercase tracking-widest text-sm">Kundenzufriedenheit</p>
-                        </div>
+                        ))}
                     </div>
 
                     {/* Liquid Glass Tool */}
-                    <LiquidGlassTool Icon={PaintRoller} className="top-1/2 -translate-y-1/2 left-10 hidden lg:block" size={75} duration={8} />
+                    <div className="opacity-20">
+                        <LiquidGlassTool Icon={PaintRoller} className="top-1/2 -translate-y-1/2 left-10 hidden lg:block" size={75} duration={8} />
+                    </div>
                 </div>
             </Section>
 
             {/* Reviews Section */}
-            <Section className="bg-white" id="reviews">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-4xl font-bold text-center mb-16 text-slate-900">Was unsere <span className="text-accent font-serif italic">Kunden</span> sagen</h2>
+            <Section className="bg-white relative overflow-hidden" id="reviews">
+                <div className="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                    <div className="absolute top-10 left-10 w-64 h-64 bg-accent rounded-full blur-[100px]"></div>
+                    <div className="absolute bottom-10 right-10 w-96 h-96 bg-blue-500 rounded-full blur-[150px]"></div>
+                </div>
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-20">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Kundenstimmen</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Was unsere <span className="text-accent font-serif italic">Kunden</span> sagen</h3>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div className="p-10 bg-slate-50 rounded-2xl relative shadow-lg hover:shadow-xl transition-shadow border border-slate-100" data-aos="fade-up" data-tilt>
-                            <div className="absolute -top-6 -left-4 text-8xl text-accent opacity-20 font-serif">“</div>
-                            <p className="text-slate-700 italic text-lg mb-6 relative z-10">
-                                "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckt."
-                            </p>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 bg-slate-300 rounded-full overflow-hidden">
-                                    <img src="/images/image-19.png" className="w-full h-full object-cover" alt="Kunde" />
+                        {[
+                            {
+                                name: "Familie Müller",
+                                location: "Ratzeburg",
+                                img: "/images/image-19.png",
+                                text: "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckt.",
+                                delay: 0
+                            },
+                            {
+                                name: "Thomas & Sarah",
+                                location: "Mölln",
+                                img: "/images/image-20.png",
+                                text: "Kompetent, freundlich und pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen und sind vom Ergebnis begeistert. Klare Weiterempfehlung!",
+                                delay: 100
+                            }
+                        ].map((review, i) => (
+                            <div key={i} className="glass-panel p-10 rounded-[2.5rem] relative shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border-l-[1px] border-white/40 bg-white/40" data-aos="fade-up" data-aos-delay={review.delay} data-tilt>
+                                <div className="flex gap-1 mb-6">
+                                    {[...Array(5)].map((_, idx) => <Star key={idx} className="w-5 h-5 fill-accent text-accent" />)}
                                 </div>
-                                <div>
-                                    <h4 className="font-bold text-slate-900">Familie Müller</h4>
-                                    <p className="text-xs text-accent uppercase tracking-wider">Ratzeburg</p>
+                                <div className="absolute top-10 right-10 text-8xl text-accent opacity-10 font-serif pointer-events-none">“</div>
+                                <p className="text-slate-700 italic text-xl lg:text-2xl mb-10 relative z-10 leading-relaxed">
+                                    "{review.text}"
+                                </p>
+                                <div className="flex items-center gap-5">
+                                    <div className="w-16 h-16 bg-slate-200 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
+                                        <img src={review.img} className="w-full h-full object-cover" alt={review.name} />
+                                    </div>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 text-lg">{review.name}</h4>
+                                        <p className="text-xs text-accent uppercase tracking-widest font-bold">{review.location}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="p-10 bg-slate-50 rounded-2xl relative shadow-lg hover:shadow-xl transition-shadow border border-slate-100" data-aos="fade-up" data-aos-delay="100" data-tilt>
-                            <div className="absolute -top-6 -left-4 text-8xl text-accent opacity-20 font-serif">“</div>
-                            <p className="text-slate-700 italic text-lg mb-6 relative z-10">
-                                "Kompetent, freundlich und pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen und sind vom Ergebnis begeistert. Klare Weiterempfehlung!"
-                            </p>
-                            <div className="flex items-center gap-4">
-                                <div className="w-12 h-12 bg-slate-300 rounded-full overflow-hidden">
-                                    <img src="/images/image-20.png" className="w-full h-full object-cover" alt="Kunde" />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-slate-900">Thomas & Sarah</h4>
-                                    <p className="text-xs text-accent uppercase tracking-wider">Mölln</p>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </Section>
 
             {/* Projects Grid */}
-            <Section id="projects" className="bg-slate-50">
-                <div className="container mx-auto px-6">
-                    <h2 className="text-4xl font-bold mb-12 text-slate-900">Unsere <span className="text-accent">Projekte</span></h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-[600px] md:h-[500px]">
-                        <div className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-xl cursor-pointer" data-aos="zoom-in">
-                            <img src="/images/image-21.png" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-xl border-b-2 border-accent pb-1">Küchensanierung Ratzeburg</span>
+            <Section id="projects" className="bg-slate-50 relative overflow-hidden">
+                <div className="container mx-auto px-6 relative z-10">
+                    <div className="text-center mb-20">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Referenzen</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Unsere <span className="text-accent font-serif italic">Projekte</span></h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-auto mb-12">
+                        <div
+                            className="lg:col-span-2 lg:row-span-2 relative group overflow-hidden rounded-3xl cursor-pointer h-[400px] md:h-auto"
+                            data-aos="zoom-in"
+                            onClick={() => openGallery(0)}
+                        >
+                            <img src={projectImages[0].img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt="Project" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-10">
+                                <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <p className="text-accent text-sm font-bold uppercase tracking-widest mb-2">{projectImages[0].cat}</p>
+                                    <h4 className="text-white font-bold text-2xl">{projectImages[0].title}</h4>
+                                </div>
                             </div>
                         </div>
-                        <div className="relative group overflow-hidden rounded-xl cursor-pointer" data-aos="zoom-in" data-aos-delay="100">
-                            <img src="/images/image-22.png" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">Badsanierung</span>
+                        {projectImages.slice(1, 5).map((project, i) => (
+                            <div
+                                key={i}
+                                className="relative group overflow-hidden rounded-3xl cursor-pointer h-[200px] md:h-auto"
+                                data-aos="zoom-in"
+                                data-aos-delay={(i + 1) * 100}
+                                onClick={() => openGallery(i + 1)}
+                            >
+                                <img src={project.img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt={project.title} />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+                                    <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                        <p className="text-accent text-[0.6rem] font-bold uppercase tracking-widest mb-1">{project.cat}</p>
+                                        <h4 className="text-white font-bold text-sm">{project.title}</h4>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div className="relative group overflow-hidden rounded-xl cursor-pointer" data-aos="zoom-in" data-aos-delay="200">
-                            <img src="/images/image-23.png" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">Wohnraum Modernisierung</span>
-                            </div>
-                        </div>
-                        <div className="relative group overflow-hidden rounded-xl cursor-pointer" data-aos="zoom-in" data-aos-delay="300">
-                            <img src="/images/image-24.png" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">Flur & Treppe</span>
-                            </div>
-                        </div>
-                        <div className="relative group overflow-hidden rounded-xl cursor-pointer" data-aos="zoom-in" data-aos-delay="400">
-                            <img src="/images/image-25.png" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Project" />
-                            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                <span className="text-white font-bold text-sm">Fassadensanierung</span>
-                            </div>
-                        </div>
+                        ))}
+                    </div>
+
+                    <div className="text-center" data-aos="fade-up">
+                        <button
+                            onClick={() => openGallery(0)}
+                            className="px-10 py-4 rounded-full border border-slate-200 text-slate-600 font-bold hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300 shadow-lg hover:shadow-xl"
+                        >
+                            Alle Referenzen ansehen
+                        </button>
                     </div>
                 </div>
             </Section>
 
+            <ProjectGalleryModal
+                isOpen={isGalleryOpen}
+                onClose={() => setIsGalleryOpen(false)}
+                images={projectImages}
+                initialIndex={selectedProjectIndex}
+            />
+
             {/* FAQ Section */}
             <Section className="bg-white relative">
-                <AnimatedBackground variant="laminate" />
+                <AnimatedBackground variant="modern-aura" />
                 <div className="container mx-auto px-6 max-w-3xl relative z-10">
-                    <h2 className="text-4xl font-bold text-center mb-12 text-slate-900">Häufig gestellte Fragen</h2>
+                    <div className="text-center mb-20">
+                        <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Support</h2>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Häufig gestellte <span className="text-accent font-serif italic">Fragen</span></h3>
+                    </div>
                     <div className="space-y-4">
                         {[
                             { id: 1, q: "Wie lange dauert eine komplette Badsanierung?", a: "In der Regel dauert eine Komplettsanierung eines Badezimmers zwischen 2 und 3 Wochen, abhängig von der Größe und den gewählten Materialien. Wir erstellen Ihnen vorab einen detaillierten Zeitplan." },
                             { id: 2, q: "Arbeiten Sie auch außerhalb von Ratzeburg?", a: "Ja, wir sind in ganz Schleswig-Holstein und Hamburg für Sie tätig. Sprechen Sie uns einfach an!" },
-                            { id: 3, q: "Sind Ihre Angebote wirklich Festpreise?", a: "Ja! Transparenz ist unser oberstes Gebot. Das Angebot, das Sie unterschreiben, ist der Preis, den Sie zahlen – solange sich Ihre Anforderungen während des Baus nicht ändern." }
+                            { id: 3, q: "Sind Ihre Angebote wirklich Festpreise?", a: "Ja! Transparenz ist unser oberstes Gebot. Das Angebot, das Sie unterschreiben, ist der Preis, den Sie zahlen – solange sich Ihre Anforderungen während des Baus nicht ändern." },
+                            { id: 4, q: "Unterstützen Sie auch bei der Materialauswahl und Planung?", a: "Absolut. Wir beraten Sie nicht nur bei der Auswahl hochwertiger und langlebiger Materialien, sondern helfen Ihnen auch, das Beste aus Ihrem Budget herauszuholen. Auf Wunsch koordinieren wir auch den kompletten Einkauf für Sie." },
+                            { id: 5, q: "Muss ich während der Renovierung aus der Wohnung ausziehen?", a: "Bei Teilrenovierungen (z.B. nur Bad oder Küche) können Sie meist wohnen bleiben. Bei einer Kernsanierung ist ein temporärer Auszug ratsam, um Schmutz und Lärm zu entgehen. Wir planen die Phasen so schonend wie möglich." },
+                            { id: 6, q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?", a: "Ja, Sie erhalten eine volle Gewährleistung nach BGB von bis zu 5 Jahren. Qualität ist unser Markenzeichen, daher verwenden wir nur zertifizierte Materialien namhafter Hersteller wie Knauf oder Brillux." }
                         ].map((faq) => (
                             <div key={faq.id} className="border border-slate-200 rounded-lg overflow-hidden">
                                 <button

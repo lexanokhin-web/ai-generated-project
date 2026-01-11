@@ -39,7 +39,7 @@ const About = () => {
                     <div className="relative">
                         <div className="absolute -inset-4 bg-accent/20 rounded-2xl rotate-3"></div>
                         <img
-                            src="/images/image-13.png"
+                            src="/images/image-13.webp"
                             alt="Unser Team bei der Arbeit"
                             className="relative rounded-2xl shadow-xl w-full object-cover h-[500px]"
                         />

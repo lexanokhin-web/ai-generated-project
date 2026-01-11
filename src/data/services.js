@@ -3,7 +3,7 @@ export const services = [
         id: "maurer-putzarbeiten",
         title: "Maurer- & Putzarbeiten",
         subtitle: "Solide Basis für Ihr Zuhause",
-        heroImage: "/images/image-8.png",
+        heroImage: "/images/image-8.webp",
         hook: "Bröckelnder Putz? Feuchte Wände? Wir schaffen Abhilfe – dauerhaft.",
         description: "Ob Fassadensanierung, Kellersanierung oder klassische Putzarbeiten: Wir sorgen für eine gesunde Bausubstanz. Unsere Maurerarbeiten stehen für Stabilität und Langlebigkeit in Ratzeburg und Umgebung.",
         benefits: [
@@ -23,7 +23,7 @@ export const services = [
         id: "maler-schimmelsanierung",
         title: "Maler & Schimmelsanierung",
         subtitle: "Farbe bekennen, Gesundheit schützen",
-        heroImage: "/images/image-9.png",
+        heroImage: "/images/image-9.webp",
         hook: "Schimmel ist mehr als ein optisches Problem. Es ist eine Gefahr für Ihre Gesundheit.",
         description: "Wir bringen nicht nur frische Farbe in Ihr Leben, sondern beseitigen auch Schimmelursachen nachhaltig. Von hochwertigen Lackierarbeiten bis zur zertifizierten Schimmelsanierung sind wir Ihr Partner.",
         benefits: [
@@ -43,7 +43,7 @@ export const services = [
         id: "fliesen-badsanierung",
         title: "Fliesen & Badsanierung",
         subtitle: "Ihre Wellness-Oase zu Hause",
-        heroImage: "/images/image-10.png",
+        heroImage: "/images/image-10.webp",
         hook: "Vom funktionalen Nassraum zum privaten Spa – in nur 2 Wochen.",
         description: "Wir verwandeln alte Bäder in moderne Wohlfühloasen. Egal ob Großformatfliesen, ebenerdige Duschen oder fugenlose Bäder: Wir setzen Ihre Wünsche präzise um.",
         benefits: [
@@ -63,7 +63,7 @@ export const services = [
         id: "trockenbauarbeiten",
         title: "Trockenbauarbeiten",
         subtitle: "Räume neu denken",
-        heroImage: "/images/image-11.png",
+        heroImage: "/images/image-11.webp",
         hook: "Mehr Zimmer? Abgehängte Decken? Trockenbau macht's möglich – schnell und sauber.",
         description: "Mit Trockenbau gestalten wir Ihre Räume flexibel und effizient neu. Trennwände, Deckensysteme oder Dachausbau: Wir schaffen neuen Wohnraum ohne lange Trocknungszeiten.",
         benefits: [
@@ -83,7 +83,7 @@ export const services = [
         id: "bodenbelagsarbeiten",
         title: "Bodenbelagsarbeiten",
         subtitle: "Der Boden, auf dem Sie stehen",
-        heroImage: "/images/image-12.png",
+        heroImage: "/images/image-12.webp",
         hook: "Ein neuer Boden verändert den gesamten Raumcharakter sofort.",
         description: "Ob warmes Parkett, robustes Vinyl oder klassisches Laminat: Wir verlegen Ihren Wunschboden fachgerecht. Inklusive Untergrundvorbereitung und Fußleistenmontage.",
         benefits: [
@@ -103,7 +103,7 @@ export const services = [
         id: "tischler-kuechen",
         title: "Tischler & Küchen",
         subtitle: "Maßarbeit für Ihr Zuhause",
-        heroImage: "/images/image-13.png",
+        heroImage: "/images/image-13.webp",
         hook: "Die Küche ist das Herz des Hauses. Lassen Sie es uns gemeinsam gestalten.",
         description: "Wir montieren nicht nur Türen und Zargen, sondern liefern und bauen Ihre Traumküche ein. Passgenau, inklusive aller Elektrogeräte und Anschlüsse.",
         benefits: [

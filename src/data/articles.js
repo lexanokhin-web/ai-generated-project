@@ -6,12 +6,12 @@ export const articles = [
         date: "2025-05-15",
         author: "Michael Winter",
         category: "Badsanierung",
-        image: "/images/image-26.png",
+        image: "/images/image-26.webp",
         content: `
             <h2>"Was kostet das?" – Die Frage aller Fragen</h2>
             <p>Wenn wir zum ersten Beratungsgespräch kommen, dauert es meist keine fünf Minuten, bis diese Frage fällt. Und wissen Sie was? Das ist absolut verständlich! Niemand kauft gerne die Katze im Sack. Aber ein Bad ist eben kein Auto von der Stange.</p>
             
-            <img src="/images/image-27.png" alt="Detailaufnahme Armaturen" class="float-right w-full md:w-1/2 ml-0 md:ml-6 mb-6 rounded-xl shadow-lg object-cover h-64" />
+            <img src="/images/image-27.webp" alt="Detailaufnahme Armaturen" class="float-right w-full md:w-1/2 ml-0 md:ml-6 mb-6 rounded-xl shadow-lg object-cover h-64" />
             
             <p>Trotzdem wollen wir heute mal Tacheles reden. Wir haben unsere Projekte aus dem letzten Jahr in Ratzeburg und Umgebung analysiert und können Ihnen daher ziemlich genaue Richtwerte geben. Schnallen Sie sich an (oder setzen Sie sich auf den Badewannenrand), hier kommen die Zahlen!</p>
 
@@ -56,12 +56,12 @@ export const articles = [
         date: "2025-05-10",
         author: "Team Winter & Usselmann",
         category: "Ratgeber",
-        image: "/images/image-28.png",
+        image: "/images/image-28.webp",
         content: `
             <h2>"Wann kommen die denn endlich?"</h2>
             <p>Nichts ist frustrierender als Handwerker, die nicht auftauchen, oder Rechnungen, die plötzlich doppelt so hoch sind wie das Angebot. Wir hören diese Geschichten leider oft von Neukunden, die vorher schlechte Erfahrungen gemacht haben.</p>
             
-            <img src="/images/image-29.png" alt="Handwerker im Gespräch mit Kunden" class="float-left w-full md:w-1/2 mr-0 md:mr-6 mb-6 rounded-xl shadow-lg object-cover h-64" />
+            <img src="/images/image-29.webp" alt="Handwerker im Gespräch mit Kunden" class="float-left w-full md:w-1/2 mr-0 md:mr-6 mb-6 rounded-xl shadow-lg object-cover h-64" />
 
             <p>Damit Ihnen das nicht passiert, haben wir eine Checkliste zusammengestellt. Egal ob Sie uns beauftragen oder die Kollegen – achten Sie auf diese Punkte!</p>
 
@@ -102,13 +102,13 @@ export const articles = [
         date: "2025-04-28",
         author: "Michael Winter",
         category: "Sanierung",
-        image: "/images/image-30.png",
+        image: "/images/image-30.webp",
         content: `
             <h2>Fehler Nr. 1: "Das mache ich am Wochenende selbst"</h2>
             <p>Der Klassiker. YouTube-Tutorials sehen so einfach aus. Aber Fliesenlegen oder Elektrik erfordert jahrelange Übung. </p>
             <p><strong>Die Folge:</strong> Schiefe Fugen, undichte Duschen oder (ganz gefährlich) Kabelbrände. Die Reparatur durch den Profi kostet dann oft doppelt so viel wie die direkte Beauftragung.</p>
 
-            <img src="/images/image-31.png" alt="Baustelle mit Werkzeug" class="float-right w-full md:w-2/5 ml-0 md:ml-8 mb-6 rounded-xl shadow-lg object-cover h-80" />
+            <img src="/images/image-31.webp" alt="Baustelle mit Werkzeug" class="float-right w-full md:w-2/5 ml-0 md:ml-8 mb-6 rounded-xl shadow-lg object-cover h-80" />
 
             <h2>Fehler Nr. 2: Am falschen Ende gespart (Material)</h2>
             <p>Billig-Armaturen aus dem Internet sehen auf dem Foto toll aus. Nach einem Jahr wackelt der Griff, und Ersatzteile gibt es nicht. </p>
@@ -136,13 +136,13 @@ export const articles = [
         date: "2025-04-15",
         author: "Team Winter & Usselmann",
         category: "Inspiration",
-        image: "/images/image-32.png",
+        image: "/images/image-32.webp",
         content: `
             <h2>Weg vom "Krankenhaus-Weiß"</h2>
             <p>Jahrelang war Weiß die Farbe der Wahl. Clean, hell, aber auch etwas steril. 2025 sehen wir eine Wende: <strong>Wärme kehrt zurück.</strong></p>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-                <img src="/images/image-26.png" alt="Trendiges Badezimmer Design" class="rounded-xl shadow-md object-cover h-64 w-full" />
+                <img src="/images/image-26.webp" alt="Trendiges Badezimmer Design" class="rounded-xl shadow-md object-cover h-64 w-full" />
                 <div>
                     <h3 class="text-xl font-bold mb-3">Die Trend-Farben</h3>
                     <ul class="list-disc pl-5 space-y-2">

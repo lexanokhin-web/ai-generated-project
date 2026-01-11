@@ -67,22 +67,24 @@ const ArticleDetail = () => {
             </Section>
 
             {/* CTA */}
-            <Section className="bg-slate-50">
-                <div className="bg-slate-900 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
-                    <div className="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 blur-[80px] rounded-full"></div>
-                    <div className="relative z-10">
-                        <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                            Haben Sie Fragen zu diesem Thema?
-                        </h2>
-                        <p className="text-slate-400 mb-8 max-w-xl mx-auto">
-                            Wir beraten Sie gerne persönlich und individuell zu Ihrem Bauvorhaben.
-                        </p>
-                        <Link to="/#contact" className="inline-block px-8 py-3 bg-accent text-white font-bold rounded-lg hover:bg-amber-700 transition-colors">
-                            Kontakt aufnehmen
-                        </Link>
+            <section className="bg-slate-900 py-16 md:py-24">
+                <div className="container mx-auto px-6">
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 md:p-12 text-center relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-accent opacity-10 blur-[80px] rounded-full"></div>
+                        <div className="relative z-10">
+                            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                                Haben Sie Fragen zu diesem Thema?
+                            </h2>
+                            <p className="text-slate-400 mb-8 max-w-xl mx-auto">
+                                Wir beraten Sie gerne persönlich und individuell zu Ihrem Bauvorhaben.
+                            </p>
+                            <Link to="/#contact" className="inline-block px-8 py-3 bg-accent text-white font-bold rounded-lg hover:bg-amber-700 transition-colors">
+                                Kontakt aufnehmen
+                            </Link>
+                        </div>
                     </div>
                 </div>
-            </Section>
+            </section>
         </>
     );
 };

@@ -18,16 +18,16 @@ const Home = () => {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
 
     const projectImages = [
-        { img: "/images/image-21.png", title: "Küchensanierung Ratzeburg", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
-        { img: "/images/bathroom.png", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
-        { img: "/images/kitchen.png", title: "Moderne Loft-Küche", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme и Funktionalität." },
-        { img: "/images/living-room.png", title: "Wohnzimmer Redesign", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
-        { img: "/images/open-plan.png", title: "Open-Plan Living", cat: "Sanierung", desc: "Zusammenführung von Räumen für ein großzügiges Wohngefühl." },
-        { img: "/images/wardrobe.png", title: "Maßgeschneiderter Stauraum", cat: "Tischler", desc: "Individuelle Schranklösungen nach Maß für maximale Platzausnutzung." },
-        { img: "/images/image-22.png", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Zeitloses Design trifft auf Funktionalität в Schleswig-Holstein." },
-        { img: "/images/image-23.png", title: "Wohnraum Design", cat: "Modernisierung", desc: "Kreative Raumkonzepte für Ihr individuelles Wohnerlebnis." },
-        { img: "/images/image-24.png", title: "Eingangsbereich & Treppe", cat: "Innenausbau", desc: "Einladende Gestaltung des Entrées mit langlebigen Materialien." },
-        { img: "/images/image-25.png", title: "Fassadensanierung", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
+        { img: "/images/image-21.webp", title: "Küchensanierung Ratzeburg", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
+        { img: "/images/bathroom.webp", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
+        { img: "/images/kitchen.webp", title: "Moderne Loft-Küche", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme и Funktionalität." },
+        { img: "/images/living-room.webp", title: "Wohnzimmer Redesign", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
+        { img: "/images/open-plan.webp", title: "Open-Plan Living", cat: "Sanierung", desc: "Zusammenführung von Räumen für ein großzügiges Wohngefühl." },
+        { img: "/images/wardrobe.webp", title: "Maßgeschneiderter Stauraum", cat: "Tischler", desc: "Individuelle Schranklösungen nach Maß für maximale Platzausnutzung." },
+        { img: "/images/image-22.webp", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Zeitloses Design trifft auf Funktionalität в Schleswig-Holstein." },
+        { img: "/images/image-23.webp", title: "Wohnraum Design", cat: "Modernisierung", desc: "Kreative Raumkonzepte für Ihr individuelles Wohnerlebnis." },
+        { img: "/images/image-24.webp", title: "Eingangsbereich & Treppe", cat: "Innenausbau", desc: "Einladende Gestaltung des Entrées mit langlebigen Materialien." },
+        { img: "/images/image-25.webp", title: "Fassadensanierung", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
     ];
 
     const openGallery = (index) => {
@@ -101,7 +101,7 @@ const Home = () => {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "Winter & Usselmann GbR",
-        "image": "https://example.com/images/image-1.png", // TODO: Replace with actual domain
+        "image": "https://example.com/images/image-1.webp", // TODO: Replace with actual domain
         "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein.",
         "address": {
             "@type": "PostalAddress",
@@ -163,7 +163,7 @@ const Home = () => {
                 <meta property="og:url" content="https://example.com/" />
                 <meta property="og:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
                 <meta property="og:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein. Qualität, Transparenz und Festpreise." />
-                <meta property="og:image" content="https://example.com/images/image-1.png" />
+                <meta property="og:image" content="https://example.com/images/image-1.webp" />
                 <meta property="og:locale" content="de_DE" />
                 <meta property="og:site_name" content="Winter & Usselmann GbR" />
 
@@ -172,7 +172,7 @@ const Home = () => {
                 <meta property="twitter:url" content="https://example.com/" />
                 <meta property="twitter:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
                 <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein." />
-                <meta property="twitter:image" content="https://example.com/images/image-1.png" />
+                <meta property="twitter:image" content="https://example.com/images/image-1.webp" />
             </Helmet>
 
             <StructuredData data={localBusinessSchema} />
@@ -181,8 +181,8 @@ const Home = () => {
             <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <HeroScene />
-                    <img src="/images/image-1.png" alt="Traumhaus Renovierung Ratzeburg"
-                        className="w-full h-full object-cover animate-subtle-zoom opacity-50" loading="lazy" />
+                    <img src="/images/image-1.webp" alt="Traumhaus Renovierung Ratzeburg"
+                        className="w-full h-full object-cover animate-subtle-zoom opacity-50" loading="lazy" decoding="async" />
                     <div className="absolute inset-0 bg-slate-900/60 mix-blend-multiply"></div>
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent"></div>
                 </div>
@@ -218,8 +218,8 @@ const Home = () => {
                     <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-xs text-white">
                         <div className="flex items-center gap-3 mb-2">
                             <div className="flex -space-x-2">
-                                <img src="/images/image-2.png" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" />
-                                <img src="/images/image-3.png" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" />
+                                <img src="/images/image-2.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" loading="lazy" decoding="async" />
+                                <img src="/images/image-3.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" loading="lazy" decoding="async" />
                             </div>
                             <div className="flex text-accent">★★★★★</div>
                         </div>
@@ -293,7 +293,7 @@ const Home = () => {
                                     </p>
 
                                     <div className="flex items-center gap-6 py-6 border-y border-slate-200/50 my-8">
-                                        <img src="/images/image-4.png" alt="Unterschrift Michael Winter" className="h-16 opacity-80" />
+                                        <img src="/images/image-4.webp" alt="Unterschrift Michael Winter" className="h-16 opacity-80" loading="lazy" decoding="async" />
                                         <div className="h-12 w-px bg-slate-200"></div>
                                         <div>
                                             <p className="font-bold text-slate-900">Michael Winter</p>
@@ -309,7 +309,7 @@ const Home = () => {
                             <div className="relative group" data-aos="zoom-in" data-tilt>
                                 <div className="absolute -inset-4 bg-accent/20 rounded-[2.5rem] blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                                 <div className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl border-8 border-white">
-                                    <img src="/images/image-5.png" alt="Handwerkskunst" className="w-full h-auto object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000" />
+                                    <img src="/images/image-5.webp" alt="Handwerkskunst" className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-1000" loading="lazy" decoding="async" />
                                     <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/40 via-transparent to-transparent"></div>
                                 </div>
 
@@ -322,7 +322,7 @@ const Home = () => {
 
                                 {/* Secondary Overlap Image */}
                                 <div className="absolute -bottom-16 -left-16 w-2/3 z-30 rounded-3xl overflow-hidden shadow-2xl border-4 border-white hidden xl:block" data-aos="fade-up" data-aos-delay="400">
-                                    <img src="/images/image-6.png" alt="Detail" className="w-full h-full object-cover" />
+                                    <img src="/images/image-6.webp" alt="Detail" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                                 </div>
                             </div>
                         </div>
@@ -333,7 +333,7 @@ const Home = () => {
             {/* Services Section */}
             <Section id="services" className="bg-slate-900">
                 <div className="absolute inset-0 z-0">
-                    <img src="/images/image-7.png" className="w-full h-full object-cover opacity-30" alt="Background" />
+                    <img src="/images/image-7.webp" className="w-full h-full object-cover opacity-30" alt="Background" loading="lazy" decoding="async" />
                 </div>
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center max-w-3xl mx-auto mb-20">
@@ -344,16 +344,16 @@ const Home = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {[
-                            { id: "maurer-putzarbeiten", title: "Maurer- & Putzarbeiten", desc: "Fassadensanierungen, Keller, Lichtschächte sowie professionelle Putzarbeiten für Innen- und Außenwände.", img: "/images/image-8.png" },
-                            { id: "maler-schimmelsanierung", title: "Maler & Schimmelsanierung", desc: "Tapezieren, Lackieren, Spachteln und Streichen. Inklusive nachhaltiger und professioneller Schimmelbeseitigung.", img: "/images/image-9.png" },
-                            { id: "fliesen-badsanierung", title: "Fliesen & Badsanierung", desc: "Komplette Badezimmer, Wand- und Bodenfliesen. Inklusive Montage von modernen Glastrennwänden.", img: "/images/image-10.png" },
-                            { id: "trockenbauarbeiten", title: "Trockenbauarbeiten", desc: "Verkleiden von Wänden und Decken, Erstellen von Trennwänden und Vorwandinstallationen für neue Raumkonzepte.", img: "/images/image-11.png" },
-                            { id: "bodenbelagsarbeiten", title: "Bodenbelagsarbeiten", desc: "Verlegung von Laminat, Vinyl, Parkett und Holzdielen. Inklusive Schleifarbeiten und Fußleisten.", img: "/images/image-12.png" },
-                            { id: "tischler-kuechen", title: "Tischler & Küchen", desc: "Montage von Türen und Zargen. Lieferung und fachgerechte Montage von Einbauküchen inklusive Elektrogeräte.", img: "/images/image-13.png" },
+                            { id: "maurer-putzarbeiten", title: "Maurer- & Putzarbeiten", desc: "Fassadensanierungen, Keller, Lichtschächte sowie professionelle Putzarbeiten für Innen- und Außenwände.", img: "/images/image-8.webp" },
+                            { id: "maler-schimmelsanierung", title: "Maler & Schimmelsanierung", desc: "Tapezieren, Lackieren, Spachteln und Streichen. Inklusive nachhaltiger und professioneller Schimmelbeseitigung.", img: "/images/image-9.webp" },
+                            { id: "fliesen-badsanierung", title: "Fliesen & Badsanierung", desc: "Komplette Badezimmer, Wand- und Bodenfliesen. Inklusive Montage von modernen Glastrennwänden.", img: "/images/image-10.webp" },
+                            { id: "trockenbauarbeiten", title: "Trockenbauarbeiten", desc: "Verkleiden von Wänden und Decken, Erstellen von Trennwänden und Vorwandinstallationen für neue Raumkonzepte.", img: "/images/image-11.webp" },
+                            { id: "bodenbelagsarbeiten", title: "Bodenbelagsarbeiten", desc: "Verlegung von Laminat, Vinyl, Parkett und Holzdielen. Inklusive Schleifarbeiten und Fußleisten.", img: "/images/image-12.webp" },
+                            { id: "tischler-kuechen", title: "Tischler & Küchen", desc: "Montage von Türen und Zargen. Lieferung und fachgerechte Montage von Einbauküchen inklusive Elektrogeräte.", img: "/images/image-13.webp" },
                         ].map((service, index) => (
                             <Link to={`/leistungen/${service.id}`} key={index} className="group relative p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all duration-300 shadow-lg shadow-black/20 hover:shadow-accent/20 cursor-pointer" data-aos="fade-up" data-aos-delay={index * 100} data-tilt>
                                 <div className="h-48 mb-6 overflow-hidden rounded-t-2xl -mt-8 -mx-8">
-                                    <img src={service.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={service.title} />
+                                    <img src={service.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={service.title} loading="lazy" decoding="async" />
                                 </div>
                                 <h4 className="text-xl font-bold text-white mb-3">{service.title}</h4>
                                 <p className="text-slate-400 text-sm leading-relaxed">{service.desc}</p>
@@ -373,7 +373,7 @@ const Home = () => {
                 <div className="container mx-auto px-6 relative z-10">
                     <div className="text-center mb-32" data-aos="fade-up">
                         <h2 className="text-sm font-bold text-accent uppercase tracking-[0.4em] mb-4">Ihre Vorteile</h2>
-                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span></h3>
+                        <h3 className="text-4xl md:text-6xl font-bold text-slate-900">Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span></h3>
                         <p className="mt-4 text-slate-500 text-xl max-w-2xl mx-auto">Weil wir Handwerk lieben, Service leben und Räume schaffen, in denen man sich wirklich zu Hause fühlt.</p>
                     </div>
 
@@ -382,25 +382,25 @@ const Home = () => {
                             {
                                 id: "01",
                                 title: "Pünktliche Fertigstellung",
-                                img: "/images/image-14.png",
+                                img: "/images/image-14.webp",
                                 text: "Wir wissen, wie wichtig Ihr Einzugstermin ist. Dank präziser Planung garantieren wir Ihnen eine termingerechte Fertigstellung. В Ratzeburg und Umgebung sind wir bekannt für unsere Verlässlichkeit – Sie können Ihren Umzug sicher planen."
                             },
                             {
                                 id: "02",
                                 title: "Absolute Kostentransparenz",
-                                img: "/images/image-15.png",
+                                img: "/images/image-15.webp",
                                 text: "Bei uns gibt es keine versteckten Kosten. Sie erhalten ein detailliertes Festpreisangebot. Wir kalkulieren ehrlich und nachvollziehbar. Das bedeutet für Sie: Maximale Planungssicherheit für Ihr Budget, von Anfang an."
                             },
                             {
                                 id: "03",
                                 title: "Ein Ansprechpartner",
-                                img: "/images/image-16.png",
+                                img: "/images/image-16.webp",
                                 text: "Schluss mit dem Telefon-Marathon. Wir koordinieren alle Gewerke – Maler, Fliesenleger und Trockenbauer – komplett für Sie. Sie kommunizieren nur mit uns. Wir übernehmen die gesamte Organisation und Logistik Ihres Bauprojekts."
                             },
                             {
                                 id: "04",
                                 title: "Qualität, die bleibt",
-                                img: "/images/image-17.png",
+                                img: "/images/image-17.webp",
                                 text: "Wir verwenden nur Materialien, die wir auch in unserem eigenen Zuhause verbauen würden. Vom ersten Pinselstrich bis zum fertigen Objekt – jeder Schritt unterliegt strengster Qualitätskontrolle."
                             }
                         ].map((reason, idx) => (
@@ -409,7 +409,7 @@ const Home = () => {
                                 <div className="w-full md:w-1/2 group relative" data-aos={idx % 2 === 1 ? "fade-left" : "fade-right"} data-aos-duration="1200">
                                     <div className="absolute -inset-4 bg-accent/10 rounded-[2.5rem] blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                     <div className="relative h-[300px] lg:h-[400px] rounded-[2.5rem] overflow-hidden shadow-2xl">
-                                        <img src={reason.img} alt={reason.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" />
+                                        <img src={reason.img} alt={reason.title} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-1000" loading="lazy" decoding="async" />
                                         <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent"></div>
                                         <div className="absolute top-10 left-10 text-7xl font-black text-white/20 select-none">{reason.id}</div>
                                     </div>
@@ -452,7 +452,7 @@ const Home = () => {
                     <div className="flex flex-col lg:flex-row gap-16 relative">
                         <div className="w-full lg:w-1/2 sticky-container self-start z-20">
                             <div className="h-[400px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl relative bg-slate-900 flex items-center justify-center text-white border-4 border-white">
-                                <img src="/images/image-18.png" className="w-full h-full object-cover opacity-80" alt="Der perfekte Plan" />
+                                <img src="/images/image-18.webp" className="w-full h-full object-cover opacity-80" alt="Der perfekte Plan" loading="lazy" decoding="async" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
                                 <h3 className="absolute bottom-10 left-10 text-3xl font-bold">Der perfekte Plan</h3>
                             </div>
@@ -610,14 +610,14 @@ const Home = () => {
                             {
                                 name: "Familie Müller",
                                 location: "Ratzeburg",
-                                img: "/images/image-19.png",
+                                img: "/images/image-19.webp",
                                 text: "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckt.",
                                 delay: 0
                             },
                             {
                                 name: "Thomas & Sarah",
                                 location: "Mölln",
-                                img: "/images/image-20.png",
+                                img: "/images/image-20.webp",
                                 text: "Kompetent, freundlich und pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen und sind vom Ergebnis begeistert. Klare Weiterempfehlung!",
                                 delay: 100
                             }
@@ -632,7 +632,7 @@ const Home = () => {
                                 </p>
                                 <div className="flex items-center gap-5">
                                     <div className="w-16 h-16 bg-slate-200 rounded-2xl overflow-hidden shadow-lg border-2 border-white">
-                                        <img src={review.img} className="w-full h-full object-cover" alt={review.name} />
+                                        <img src={review.img} className="w-full h-full object-cover" alt={review.name} loading="lazy" decoding="async" />
                                     </div>
                                     <div>
                                         <h4 className="font-bold text-slate-900 text-lg">{review.name}</h4>
@@ -658,7 +658,7 @@ const Home = () => {
                             data-aos="zoom-in"
                             onClick={() => openGallery(0)}
                         >
-                            <img src={projectImages[0].img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt="Project" />
+                            <img src={projectImages[0].img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt="Project" loading="lazy" decoding="async" />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-10">
                                 <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                     <p className="text-accent text-sm font-bold uppercase tracking-widest mb-2">{projectImages[0].cat}</p>
@@ -674,7 +674,7 @@ const Home = () => {
                                 data-aos-delay={(i + 1) * 100}
                                 onClick={() => openGallery(i + 1)}
                             >
-                                <img src={project.img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt={project.title} />
+                                <img src={project.img} className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110" alt={project.title} loading="lazy" decoding="async" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
                                     <div className="translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                                         <p className="text-accent text-[0.6rem] font-bold uppercase tracking-widest mb-1">{project.cat}</p>

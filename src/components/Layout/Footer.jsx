@@ -93,7 +93,7 @@ const Footer = () => {
                     <div>
                         <h4 className="text-xl font-bold text-white">Winter & Usselmann GbR</h4>
                         <p className="text-slate-500 mt-2 text-sm">Bachstraße 36, 23909 Ratzeburg</p>
-                        <p className="text-slate-500 text-sm">Geschäftsführer: Michael Winter</p>
+                        <p className="text-slate-500 text-sm">Geschäftsführer: Michael Winter & Alex Usselmann</p>
                     </div>
                     <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-12 text-sm text-slate-500">
                         <div className="flex flex-col space-y-2">
@@ -102,6 +102,8 @@ const Footer = () => {
                             <Link to="/leistungen/maler-schimmelsanierung" className="hover:text-white transition-colors">Schimmelsanierung</Link>
                             <Link to="/leistungen/trockenbauarbeiten" className="hover:text-white transition-colors">Trockenbau</Link>
                             <Link to="/leistungen/bodenbelagsarbeiten" className="hover:text-white transition-colors">Bodenbeläge</Link>
+                            <Link to="/leistungen/maurer-putzarbeiten" className="hover:text-white transition-colors">Maurer- & Putzarbeiten</Link>
+                            <Link to="/leistungen/tischler-kuechen" className="hover:text-white transition-colors">Tischler & Küchen</Link>
                         </div>
                         <div className="flex flex-col space-y-2">
                             <span className="text-white font-bold mb-2 uppercase tracking-widest text-xs">Rechtliches</span>

@@ -47,10 +47,16 @@ const localBusinessSchema = {
         { "@type": "City", "name": "Ratzeburg" },
         { "@type": "City", "name": "Lübeck" }
     ],
-    "founder": {
-        "@type": "Person",
-        "name": "Michael Winter"
-    },
+    "founder": [
+        {
+            "@type": "Person",
+            "name": "Michael Winter"
+        },
+        {
+            "@type": "Person",
+            "name": "Alex Usselmann"
+        }
+    ],
     "hasOfferCatalog": {
         "@type": "OfferCatalog",
         "name": "Handwerksleistungen",

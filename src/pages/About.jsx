@@ -146,6 +146,16 @@ const About = () => {
                                     <p className="text-slate-500 mt-2 text-sm italic">&quot;Unser Name steht für Zuverlässigkeit и Qualität in jedem Projekt.&quot;</p>
                                 </div>
                             </div>
+                            <div className="flex gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                                <div className="w-16 h-16 rounded-full bg-slate-200 overflow-hidden shrink-0">
+                                    <img src="/images/image-9.webp" alt="Alex Usselmann" className="w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-900">Alex Usselmann</h4>
+                                    <p className="text-sm text-accent font-bold uppercase tracking-wider">Geschäftsführer</p>
+                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Handwerkliche Präzision и Kundenzufriedenheit sind meine höchsten Prioritäten.&quot;</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">

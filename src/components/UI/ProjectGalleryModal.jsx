@@ -51,8 +51,8 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: isMobile ? 0.1 : 0.3 }}
-                className={`fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/98 ${!isMobile ? 'backdrop-blur-xl' : ''} p-4 md:p-10 touch-none`}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 md:p-10 touch-none"
             >
                 {/* Close Button */}
                 <button
@@ -71,29 +71,19 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                 <div className="relative w-full h-full flex items-center justify-center max-w-7xl overflow-hidden">
                     <button
                         onClick={handlePrev}
-                        className="absolute left-0 md:-left-20 z-[110] p-4 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10 hidden md:block"
+                        className="absolute left-2 md:-left-20 z-[110] p-3 md:p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10"
                     >
-                        <ChevronLeft className="w-8 h-8" />
+                        <ChevronLeft className="w-6 h-6 md:w-8 h-8" />
                     </button>
 
                     <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
                         <motion.div
                             key={currentIndex}
-                            drag={isMobile ? "x" : false}
-                            dragConstraints={{ left: 0, right: 0 }}
-                            dragElastic={0.2}
-                            onDragEnd={(e, { offset }) => {
-                                const swipe = Math.abs(offset.x) > 50;
-                                if (swipe) {
-                                    if (offset.x > 0) handlePrev();
-                                    else handleNext();
-                                }
-                            }}
-                            initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9, x: 20 }}
-                            animate={{ opacity: 1, scale: 1, x: 0 }}
-                            exit={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9, x: -20 }}
-                            transition={isMobile ? { duration: 0.15 } : { type: "spring", damping: 25, stiffness: 200 }}
-                            className={`relative w-full h-[70vh] md:h-[80vh] rounded-3xl overflow-hidden ${!isMobile ? 'shadow-2xl' : ''} border border-white/10 cursor-grab active:cursor-grabbing touch-pan-y`}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="relative w-full h-[60vh] md:h-[80vh] rounded-3xl overflow-hidden shadow-2xl border border-white/10"
                         >
                             <img
                                 src={images[currentIndex].img}
@@ -101,11 +91,11 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                                 className="w-full h-full object-cover pointer-events-none"
                             />
                             {/* Title Overlay */}
-                            <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none">
+                            <div className="absolute inset-x-0 bottom-0 p-6 md:p-8 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent pointer-events-none">
                                 <div className="max-w-3xl">
                                     <p className="text-accent text-xs font-bold uppercase tracking-[0.3em] mb-2">{images[currentIndex].cat}</p>
-                                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">{images[currentIndex].title}</h2>
-                                    <p className="text-white/60 text-lg font-light leading-relaxed">{images[currentIndex].desc || "Individuelle Handwerksarbeit in höchster Präзision."}</p>
+                                    <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">{images[currentIndex].title}</h2>
+                                    <p className="text-white/60 text-sm md:text-lg font-light leading-relaxed line-clamp-2 md:line-clamp-none">{images[currentIndex].desc || "Individuelle Handwerksarbeit in höchster Präзision."}</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -113,9 +103,9 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
 
                     <button
                         onClick={handleNext}
-                        className="absolute right-0 md:-right-20 z-[110] p-4 rounded-full bg-white/5 hover:bg-white/10 text-white transition-all border border-white/10 hidden md:block"
+                        className="absolute right-2 md:-right-20 z-[110] p-3 md:p-4 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all border border-white/10"
                     >
-                        <ChevronRight className="w-8 h-8" />
+                        <ChevronRight className="w-6 h-6 md:w-8 h-8" />
                     </button>
                 </div>
 
@@ -125,7 +115,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                         <button
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
-                            className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${currentIndex === idx ? 'border-accent scale-110' : 'border-transparent opacity-40 hover:opacity-100'
+                            className={`relative w-12 h-12 md:w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${currentIndex === idx ? 'border-accent scale-110 shadow-lg' : 'border-transparent opacity-40 hover:opacity-100'
                                 }`}
                         >
                             <img src={img.img} className="w-full h-full object-cover" alt="thumbnail" loading="lazy" />

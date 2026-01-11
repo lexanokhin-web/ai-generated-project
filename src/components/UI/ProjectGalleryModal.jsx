@@ -1,9 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { X, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -41,7 +51,8 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/95 backdrop-blur-xl p-4 md:p-10 touch-none"
+                transition={{ duration: isMobile ? 0.1 : 0.3 }}
+                className={`fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/98 ${!isMobile ? 'backdrop-blur-xl' : ''} p-4 md:p-10 touch-none`}
             >
                 {/* Close Button */}
                 <button
@@ -68,21 +79,21 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                     <div className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden">
                         <motion.div
                             key={currentIndex}
-                            drag="x"
+                            drag={isMobile ? "x" : false}
                             dragConstraints={{ left: 0, right: 0 }}
                             dragElastic={0.2}
-                            onDragEnd={(e, { offset, velocity }) => {
+                            onDragEnd={(e, { offset }) => {
                                 const swipe = Math.abs(offset.x) > 50;
                                 if (swipe) {
                                     if (offset.x > 0) handlePrev();
                                     else handleNext();
                                 }
                             }}
-                            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+                            initial={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9, x: 20 }}
                             animate={{ opacity: 1, scale: 1, x: 0 }}
-                            exit={{ opacity: 0, scale: 0.9, x: -20 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                            className="relative w-full h-[70vh] md:h-[80vh] rounded-3xl overflow-hidden shadow-2xl border border-white/10 cursor-grab active:cursor-grabbing touch-pan-y"
+                            exit={isMobile ? { opacity: 0 } : { opacity: 0, scale: 0.9, x: -20 }}
+                            transition={isMobile ? { duration: 0.15 } : { type: "spring", damping: 25, stiffness: 200 }}
+                            className={`relative w-full h-[70vh] md:h-[80vh] rounded-3xl overflow-hidden ${!isMobile ? 'shadow-2xl' : ''} border border-white/10 cursor-grab active:cursor-grabbing touch-pan-y`}
                         >
                             <img
                                 src={images[currentIndex].img}
@@ -114,10 +125,10 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                         <button
                             key={idx}
                             onClick={() => setCurrentIndex(idx)}
-                            className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${currentIndex === idx ? 'border-accent scale-110 shadow-lg' : 'border-transparent opacity-40 hover:opacity-100'
+                            className={`relative w-16 h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${currentIndex === idx ? 'border-accent scale-110' : 'border-transparent opacity-40 hover:opacity-100'
                                 }`}
                         >
-                            <img src={img.img} className="w-full h-full object-cover" alt="thumbnail" />
+                            <img src={img.img} className="w-full h-full object-cover" alt="thumbnail" loading="lazy" />
                         </button>
                     ))}
                 </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, memo, lazy, Suspense } from 'react';
+import React, { useRef, useState, useEffect, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Float } from '@react-three/drei';
 

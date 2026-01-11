@@ -15,17 +15,8 @@ export default defineConfig({
       }
     },
     cssCodeSplit: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
-    // Увеличиваем лимит предупреждения о размере чанков
     chunkSizeWarningLimit: 500,
   },
-  // Оптимизация для разработки
   optimizeDeps: {
     include: ['react', 'react-dom', 'react-router-dom'],
   },

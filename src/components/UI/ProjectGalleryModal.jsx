@@ -4,16 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
     const [currentIndex, setCurrentIndex] = useState(initialIndex);
-    const [isMobile, setIsMobile] = useState(false);
-
-    useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
-    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -22,7 +12,8 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
         } else {
             document.body.style.overflow = 'auto';
         }
-    }, [isOpen, initialIndex]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isOpen]);
 
     const handleNext = useCallback(() => {
         setCurrentIndex((prev) => (prev + 1) % images.length);

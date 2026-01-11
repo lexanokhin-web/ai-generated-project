@@ -1,5 +1,4 @@
 import React, { memo } from 'react';
-import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import HeroScene from '../3D/HeroScene';
 
@@ -76,7 +75,7 @@ const HeroSection = memo(() => {
                         </div>
                         <div className="flex text-accent">★★★★★</div>
                     </div>
-                    <p className="text-sm font-light">"Endlich Handwerker, die mitdenken. Unser Bad in Ratzeburg ist ein Traum geworden!"</p>
+                    <p className="text-sm font-light">&quot;Endlich Handwerker, die mitdenken. Unser Bad in Ratzeburg ist ein Traum geworden!&quot;</p>
                 </div>
             </div>
         </section>

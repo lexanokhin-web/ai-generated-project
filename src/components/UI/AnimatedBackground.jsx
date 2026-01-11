@@ -2,12 +2,13 @@ import React, { memo, useEffect, useState } from 'react';
 
 // CSS-анимации вместо Framer Motion для лучшей производительности
 const AnimatedBackground = memo(({ variant = 'blobs', className = '' }) => {
-    const [isMobile, setIsMobile] = useState(false);
-    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+    const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
+    const [prefersReducedMotion] = useState(() => typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false);
 
     useEffect(() => {
-        setIsMobile(window.innerWidth < 768);
-        setPrefersReducedMotion(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     // На мобильных или при prefers-reduced-motion — статический фон

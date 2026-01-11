@@ -74,7 +74,7 @@ const ServiceDetail = () => {
                                 <img src={service.heroImage} alt="Detail" className="w-full h-full object-cover" />
                             </div>
                             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl max-w-xs hidden md:block">
-                                <p className="text-accent font-serif italic text-xl">"Qualität ist kein Zufall, sondern das Ergebnis von Erfahrung."</p>
+                                <p className="text-accent font-serif italic text-xl">&quot;Qualität ist kein Zufall, sondern das Ergebnis von Erfahrung.&quot;</p>
                             </div>
                         </div>
                     </div>

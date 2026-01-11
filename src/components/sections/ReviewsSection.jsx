@@ -47,9 +47,9 @@ const ReviewsSection = memo(() => {
                                     <Star key={idx} className="w-4 h-4 md:w-5 md:h-5 fill-accent text-accent" />
                                 ))}
                             </div>
-                            <div className="absolute top-6 md:top-10 right-6 md:right-10 text-6xl md:text-8xl text-accent opacity-10 font-serif pointer-events-none">"</div>
+                            <div className="absolute top-6 md:top-10 right-6 md:right-10 text-6xl md:text-8xl text-accent opacity-10 font-serif pointer-events-none">&quot;</div>
                             <p className="text-slate-700 italic text-lg md:text-xl lg:text-2xl mb-6 md:mb-10 relative z-10 leading-relaxed">
-                                "{review.text}"
+                                &quot;{review.text}&quot;
                             </p>
                             <div className="flex items-center gap-4 md:gap-5">
                                 <div className="w-12 h-12 md:w-16 md:h-16 bg-slate-200 rounded-xl md:rounded-2xl overflow-hidden shadow-lg border-2 border-white">

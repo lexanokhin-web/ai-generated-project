@@ -2,7 +2,7 @@ import React, { memo, useState, useEffect, useCallback } from 'react';
 import Section from '../UI/Section';
 import AnimatedBackground from '../UI/AnimatedBackground';
 
-// Статические данные процесса
+// Statische Prozessdaten
 const STEPS = [
     { id: 1, title: "Beratung & Design", desc: "Wir hören zu. In Ratzeburg und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
     { id: 2, title: "Festpreisangebot", desc: "Sie erhalten ein glasklares Angebot. Wir erklären Ihnen jeden Posten, damit Sie genau wissen, wofür Sie bezahlen." },
@@ -13,7 +13,7 @@ const STEPS = [
 const ProcessSection = memo(() => {
     const [activeStep, setActiveStep] = useState(1);
 
-    // IntersectionObserver для отслеживания активного шага
+    // IntersectionObserver zur Verfolgung des aktiven Schritts
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -75,8 +75,8 @@ const ProcessSection = memo(() => {
                             >
                                 <div className="flex items-start gap-4 md:gap-6">
                                     <div className={`w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center text-lg md:text-2xl font-bold shrink-0 transition-all duration-300 ${activeStep === step.id
-                                            ? 'bg-accent text-white shadow-lg shadow-accent/40 scale-110'
-                                            : 'bg-white border-2 border-slate-200 text-slate-400 group-hover:border-accent group-hover:text-accent'
+                                        ? 'bg-accent text-white shadow-lg shadow-accent/40 scale-110'
+                                        : 'bg-white border-2 border-slate-200 text-slate-400 group-hover:border-accent group-hover:text-accent'
                                         }`}>
                                         {step.id}
                                     </div>

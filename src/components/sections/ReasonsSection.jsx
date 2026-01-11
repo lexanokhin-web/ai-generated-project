@@ -3,7 +3,7 @@ import { ArrowRight, Hammer } from 'lucide-react';
 import Section from '../UI/Section';
 import AnimatedBackground from '../UI/AnimatedBackground';
 
-// Статические данные преимуществ
+// Statische Vorteilsdaten
 const REASONS = [
     {
         id: "01",

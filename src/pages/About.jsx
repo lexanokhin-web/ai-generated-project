@@ -12,14 +12,14 @@ const About = () => {
         <>
             <Helmet>
                 <title>Über Uns | Renovierung Hamburg & Schleswig-Holstein</title>
-                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr Partner für Renovierung и Sanierung in Ratzeburg, Hamburg и Umgebung." />
+                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr Partner für Renovierung und Sanierung in Ratzeburg, Hamburg und Umgebung." />
                 <link rel="canonical" href="https://wintuss.de/uber-uns" />
 
                 {/* OG Tags */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://wintuss.de/uber-uns" />
                 <meta property="og:title" content="Über Uns | Renovierung Hamburg & Schleswig-Holstein" />
-                <meta property="og:description" content="Erfahren Sie mehr über unser Team и нашу философию качества." />
+                <meta property="og:description" content="Erfahren Sie mehr über unser Team und unsere Qualitätsphilosophie." />
                 <meta property="og:image" content="https://wintuss.de/images/og-about.webp" />
             </Helmet>
 
@@ -86,7 +86,7 @@ const About = () => {
                     {[
                         {
                             title: "Qualität",
-                            desc: "Wir verwenden nur hochwertige Materialien и arbeiten mit größter Sorgfalt bishin ins Detail.",
+                            desc: "Wir verwenden nur hochwertige Materialien und arbeiten mit größter Sorgfalt bis ins Detail.",
                             icon: (
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -104,7 +104,7 @@ const About = () => {
                         },
                         {
                             title: "Regionalität",
-                            desc: "Sitz в Ratzeburg. Мы обслуживаем весь регион Schleswig-Holstein и Hamburg с немецкой пунктуальностью.",
+                            desc: "Sitz in Ratzeburg. Wir betreuen die gesamte Region Schleswig-Holstein und Hamburg mit deutscher Pünktlichkeit.",
                             icon: (
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -132,7 +132,7 @@ const About = () => {
                             Die Köpfe hinter <span className="text-accent underline decoration-accent/20">W&U</span>
                         </h2>
                         <p className="text-lg text-slate-600 mb-8 leading-relaxed">
-                            Winter & Usselmann GbR wurde von Michael Winter и seinem Team mit einem klaren Ziel gegründet:
+                            Winter & Usselmann GbR wurde von Michael Winter und seinem Team mit einem klaren Ziel gegründet:
                             Traditionelles Handwerk mit dem Service-Anspruch des 21. Jahrhunderts zu verbinden.
                         </p>
                         <div className="space-y-6">
@@ -143,7 +143,7 @@ const About = () => {
                                 <div>
                                     <h4 className="font-bold text-slate-900">Michael Winter</h4>
                                     <p className="text-sm text-accent font-bold uppercase tracking-wider">Geschäftsführer</p>
-                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Unser Name steht für Zuverlässigkeit и Qualität in jedem Projekt.&quot;</p>
+                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Unser Name steht für Zuverlässigkeit und Qualität in jedem Projekt.&quot;</p>
                                 </div>
                             </div>
                             <div className="flex gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100">
@@ -153,7 +153,7 @@ const About = () => {
                                 <div>
                                     <h4 className="font-bold text-slate-900">Alex Usselmann</h4>
                                     <p className="text-sm text-accent font-bold uppercase tracking-wider">Geschäftsführer</p>
-                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Handwerkliche Präzision и Kundenzufriedenheit sind meine höchsten Prioritäten.&quot;</p>
+                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Handwerkliche Präzision und Kundenzufriedenheit sind meine höchsten Prioritäten.&quot;</p>
                                 </div>
                             </div>
                         </div>
@@ -193,7 +193,7 @@ const About = () => {
                     Bereit für ein <span className="text-accent font-serif italic text-4xl md:text-6xl">Gespräch?</span>
                 </h2>
                 <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
-                    Wir sind keine anonyme Firma. Wir sind Ihre Nachbarn из Ratzeburg и freuen uns auf Ihr Projekt.
+                    Wir sind keine anonyme Firma. Wir sind Ihre Nachbarn aus Ratzeburg und freuen uns auf Ihr Projekt.
                 </p>
                 <Link
                     to="/#contact"

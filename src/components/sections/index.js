@@ -1,4 +1,4 @@
-// Barrel export для всех секций
+// Barrel-Export für alle Sektionen
 export { default as HeroSection } from './HeroSection';
 export { default as MarqueeSection } from './MarqueeSection';
 export { default as AboutSection } from './AboutSection';

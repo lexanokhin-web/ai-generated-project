@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 
-// CSS-анимации вместо Framer Motion для лучшей производительности
+// CSS-Animationen anstelle von Framer Motion für bessere Performance
 const AnimatedBackground = memo(({ variant = 'blobs', className = '' }) => {
     const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' ? window.innerWidth < 768 : false);
     const [prefersReducedMotion] = useState(() => typeof window !== 'undefined' ? window.matchMedia('(prefers-reduced-motion: reduce)').matches : false);
@@ -11,7 +11,7 @@ const AnimatedBackground = memo(({ variant = 'blobs', className = '' }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    // На мобильных или при prefers-reduced-motion — статический фон
+    // Auf Mobilgeräten oder bei prefers-reduced-motion — statischer Hintergrund
     if (isMobile || prefersReducedMotion) {
         return (
             <div className={`absolute inset-0 overflow-hidden pointer-events-none z-0 ${className}`}>
@@ -47,7 +47,7 @@ const AnimatedBackground = memo(({ variant = 'blobs', className = '' }) => {
     if (variant === 'modern-aura') {
         return (
             <div className={`absolute inset-0 overflow-hidden pointer-events-none z-0 bg-white ${className}`}>
-                {/* Статичный noise вместо внешней загрузки */}
+                {/* Statisches Noise anstelle von externem Laden */}
                 <div
                     className="absolute inset-0 opacity-[0.02] mix-blend-overlay"
                     style={{
@@ -55,12 +55,12 @@ const AnimatedBackground = memo(({ variant = 'blobs', className = '' }) => {
                     }}
                 />
 
-                {/* CSS-анимированные blob-элементы */}
+                {/* CSS-animierte Blob-Elemente */}
                 <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-accent/8 rounded-full blur-[100px] animate-aura" />
                 <div className="absolute top-[30%] -right-[10%] w-[40%] h-[40%] bg-blue-400/5 rounded-full blur-[120px] animate-aura animation-delay-2000" />
                 <div className="absolute -bottom-[10%] left-[20%] w-[35%] h-[35%] bg-accent/5 rounded-full blur-[80px] animate-aura animation-delay-4000" />
 
-                {/* Лёгкий overlay вместо тяжёлого backdrop-blur */}
+                {/* Leichtes Overlay anstelle von schwerem Backdrop-Blur */}
                 <div className="absolute inset-0 bg-white/30" />
             </div>
         );

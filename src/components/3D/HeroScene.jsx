@@ -2,13 +2,13 @@ import React, { useRef, useState, useEffect, memo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Float } from '@react-three/drei';
 
-// Мемоизированный компонент частиц для предотвращения лишних перерисовок
+// Memoisierte Partikel-Komponente zur Vermeidung unnötiger Render-Vorgänge
 const Particles = memo(({ count }) => {
     const ref = useRef();
 
     useFrame((state) => {
         if (ref.current) {
-            // Замедленная анимация для экономии ресурсов
+            // Verlangsamte Animation zur Ressourceneinsparung
             ref.current.rotation.y = state.clock.getElapsedTime() * 0.03;
             ref.current.rotation.x = state.clock.getElapsedTime() * 0.01;
         }
@@ -23,7 +23,7 @@ const Particles = memo(({ count }) => {
                 factor={4}
                 saturation={0}
                 fade
-                speed={0.5} // Замедлена скорость для плавности
+                speed={0.5} // Verlangsamte Geschwindigkeit für Laufruhe
             />
         </group>
     );
@@ -31,7 +31,7 @@ const Particles = memo(({ count }) => {
 
 Particles.displayName = 'Particles';
 
-// Основной компонент сцены
+// Hauptkomponente der Szene
 const HeroScene = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [isVisible, setIsVisible] = useState(true);
@@ -46,7 +46,7 @@ const HeroScene = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
-    // Отслеживаем видимость для остановки рендера когда не виден
+    // Verfolgung der Sichtbarkeit, um den Rendervorgang zu stoppen, wenn nicht sichtbar
     useEffect(() => {
         if (!containerRef.current) return;
 
@@ -58,11 +58,11 @@ const HeroScene = () => {
         return () => observer.disconnect();
     }, []);
 
-    // На мобильных устройствах не рендерим 3D — экономия батареи и CPU
+    // Auf Mobilgeräten kein 3D-Rendering — Batterie- und CPU-Einsparung
     if (isMobile) {
         return (
             <div className="absolute inset-0 z-0 pointer-events-none bg-gradient-to-b from-slate-800 to-slate-900">
-                {/* Простой градиент вместо 3D на мобильных */}
+                {/* Einfacher Gradient anstelle von 3D auf Mobilgeräten */}
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent"></div>
             </div>
         );
@@ -74,15 +74,15 @@ const HeroScene = () => {
                 <Canvas
                     camera={{ position: [0, 0, 1] }}
                     gl={{
-                        antialias: false, // Отключаем антиалиасинг для производительности
+                        antialias: false, // Anti-Aliasing für die Leistung deaktivieren
                         powerPreference: "high-performance",
                         alpha: true,
                         stencil: false,
                         depth: false,
                     }}
                     dpr={[1, 1.5]} // Ограничиваем DPR
-                    frameloop="demand" // Рендер только при изменениях
-                    performance={{ min: 0.5 }} // Адаптивная производительность
+                    frameloop="demand" // Rendering nur bei Änderungen
+                    performance={{ min: 0.5 }} // Adaptive Leistung
                 >
                     <ambientLight intensity={0.4} />
                     <Float

@@ -1,4 +1,4 @@
-/* Оптимизированная загрузка шрифтов с font-display: swap */
+/* Optimiertes Laden von Schriftarten mit font-display: swap */
 @font-face {
     font-family: 'Outfit';
     font-style: normal;
@@ -64,7 +64,7 @@
         -webkit-text-stroke: 1px rgba(255, 255, 255, 0.1);
     }
 
-    /* Glassmorphism - оптимизированный без тяжёлого blur */
+    /* Glassmorphism - optimiert ohne schweres blur */
     .glass-panel {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(8px);
@@ -91,7 +91,7 @@
         top: 6rem !important;
     }
 
-    /* Задержки анимации */
+    /* Animationsverzögerungen */
     .animation-delay-2000 {
         animation-delay: 2s;
     }
@@ -101,7 +101,7 @@
     }
 }
 
-/* CSS анимации вместо Framer Motion */
+/* CSS Animationen anstelle von Framer Motion */
 @keyframes blob {
 
     0%,
@@ -142,7 +142,7 @@
     will-change: transform, opacity;
 }
 
-/* Отключаем анимации для пользователей с prefers-reduced-motion */
+/* Deaktivieren von Animationen für Benutzer mit prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
 
     .animate-blob,
@@ -158,7 +158,7 @@
 
     .glass-panel,
     .glass-panel-dark {
-        /* На мобильных убираем blur для производительности */
+        /* Auf Mobilgeräten entfernen wir den Blur für die Leistung */
         backdrop-filter: none;
         -webkit-backdrop-filter: none;
         background: rgba(255, 255, 255, 0.9);

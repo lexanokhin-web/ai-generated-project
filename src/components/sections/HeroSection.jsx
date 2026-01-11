@@ -75,7 +75,7 @@ const HeroSection = memo(() => {
                         </div>
                         <div className="flex text-accent">★★★★★</div>
                     </div>
-                    <p className="text-sm font-light">&quot;Endlich Handwerker из Norddeutschland, die mitdenken. Unser Bad in Hamburg ist ein Traum geworden!&quot;</p>
+                    <p className="text-sm font-light">&quot;Endlich Handwerker aus Norddeutschland, die mitdenken. Unser Bad in Hamburg ist ein Traum geworden!&quot;</p>
                 </div>
             </div>
         </section>

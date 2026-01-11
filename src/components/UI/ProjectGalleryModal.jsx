@@ -86,7 +86,7 @@ const ProjectGalleryModal = ({ isOpen, onClose, images, initialIndex = 0 }) => {
                                 <div className="max-w-3xl">
                                     <p className="text-accent text-xs font-bold uppercase tracking-[0.3em] mb-2">{images[currentIndex].cat}</p>
                                     <h2 className="text-2xl md:text-4xl font-bold text-white mb-2">{images[currentIndex].title}</h2>
-                                    <p className="text-white/60 text-sm md:text-lg font-light leading-relaxed line-clamp-2 md:line-clamp-none">{images[currentIndex].desc || "Individuelle Handwerksarbeit in höchster Präзision."}</p>
+                                    <p className="text-white/60 text-sm md:text-lg font-light leading-relaxed line-clamp-2 md:line-clamp-none">{"Individuelle Handwerksarbeit in höchster Präzision."}</p>
                                 </div>
                             </div>
                         </motion.div>

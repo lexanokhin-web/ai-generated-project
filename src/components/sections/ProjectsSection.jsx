@@ -2,7 +2,7 @@ import React, { memo, useState, useCallback } from 'react';
 import Section from '../UI/Section';
 import ProjectGalleryModal from '../UI/ProjectGalleryModal';
 
-// Статический массив проектов
+// Statisches Projekt-Array
 const PROJECT_IMAGES = [
     { img: "/images/image-21.webp", title: "Küchensanierung Ratzeburg", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
     { img: "/images/bathroom.webp", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
@@ -40,7 +40,7 @@ const ProjectsSection = memo(() => {
                         </h3>
                     </div>
 
-                    {/* Project Grid - упрощённый для мобильных */}
+                    {/* Projekt-Grid — vereinfacht für Mobilgeräte */}
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 h-auto mb-8 md:mb-12">
                         {/* Главный проект - 2x2 на десктопе */}
                         <div
@@ -63,7 +63,7 @@ const ProjectsSection = memo(() => {
                             </div>
                         </div>
 
-                        {/* Остальные проекты */}
+                        {/* Restliche Projekte */}
                         {PROJECT_IMAGES.slice(1, 5).map((project, i) => (
                             <div
                                 key={i}

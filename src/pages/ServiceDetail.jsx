@@ -77,7 +77,7 @@ const ServiceDetail = () => {
         <>
             <Helmet>
                 <title>{`${service.title} | Ratzeburg, Hamburg & Schleswig-Holstein`}</title>
-                <meta name="description" content={`${service.hook} ${service.description} Ihr Partner für ${service.title} in Ratzeburg, Hamburg и ganz Schleswig-Holstein.`} />
+                <meta name="description" content={`${service.hook} ${service.description} Ihr Partner für ${service.title} in Ratzeburg, Hamburg und ganz Schleswig-Holstein.`} />
                 <link rel="canonical" href={`https://wintuss.de/leistungen/${service.id}`} />
 
                 {/* OG Tags */}

@@ -18,7 +18,7 @@ const Blog = lazy(() => import('./pages/Blog'));
 const ArticleDetail = lazy(() => import('./pages/ArticleDetail'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Loading fallback для lazy-loaded компонентов
+// Loading fallback für lazy-loaded Komponenten
 const PageLoader = () => (
     <div className="min-h-screen flex items-center justify-center bg-slate-50">
         <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin"></div>
@@ -27,15 +27,15 @@ const PageLoader = () => (
 
 function App() {
     useEffect(() => {
-        // Определяем мобильное устройство для условной инициализации
+        // Bestimmen des Mobilgeräts für die bedingte Initialisierung
         const isMobile = window.innerWidth < 768;
 
         AOS.init({
-            duration: isMobile ? 600 : 800, // Быстрее на мобильных
-            once: true, // Анимация только один раз — экономия ресурсов
+            duration: isMobile ? 600 : 800, // Schneller auf Mobilgeräten
+            once: true, // Animation nur einmal — Ressourceneinsparung
             offset: 50,
-            mirror: false, // Убираем зеркальную анимацию
-            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches, // Учитываем пользовательские настройки
+            mirror: false, // Keine gespiegelten Animationen
+            disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches, // Berücksichtigung der Benutzereinstellungen
             easing: 'ease-out-cubic',
         });
     }, []);

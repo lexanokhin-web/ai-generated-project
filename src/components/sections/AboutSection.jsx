@@ -28,7 +28,7 @@ const AboutSection = memo(() => {
 
                             <div className="space-y-4 md:space-y-6 text-slate-600 text-base md:text-lg lg:text-xl leading-relaxed font-light">
                                 <p>
-                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Ratzeburg, Hamburg и Region, aber es passt nicht mehr ganz zu Ihrem Leben.
+                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Ratzeburg, Hamburg und Region, aber es passt nicht mehr ganz zu Ihrem Leben.
                                     Das Bad ist veraltet, der Boden knarrt, oder Sie brauchen einfach mehr Platz.
                                 </p>
                                 <p>

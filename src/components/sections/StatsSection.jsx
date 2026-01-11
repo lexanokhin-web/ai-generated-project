@@ -2,7 +2,7 @@ import React, { memo, useEffect } from 'react';
 import { Calendar, Trophy, Heart } from 'lucide-react';
 import Section from '../UI/Section';
 
-// Статические данные статистики
+// Statische Statistikdaten
 const STATS = [
     { target: 15, label: "Jahre Erfahrung", Icon: Calendar, color: "text-accent" },
     { target: 250, label: "Projekte in SH", Icon: Trophy, color: "text-blue-400" },
@@ -54,7 +54,7 @@ const StatsSection = memo(() => {
                             key={idx}
                             className="group p-6 md:p-10 rounded-2xl md:rounded-[2rem] bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-500 relative overflow-hidden"
                         >
-                            {/* Glow Effect - только на десктопах */}
+                            {/* Glow Effect - nur auf Desktop */}
                             <div className="absolute -top-20 -left-20 w-40 h-40 bg-accent/20 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 hidden md:block" />
 
                             <div className="flex flex-col items-center relative z-10">

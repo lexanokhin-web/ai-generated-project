@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 
-// Статический массив брендов — не пересоздаётся при каждом рендере
+// Statisches Array der Marken — wird nicht bei jedem Rendern neu erstellt
 const BRANDS = [
     "BOSCH Professional", "MAKITA", "KNAUF", "STO", "BRILLUX", "WÜRTH", "FESTOOL",
     "METABO", "LIEBHERR", "GROHE", "VIESSMANN", "SCHÜCO", "HANSA", "CAPAROL", "WEBER"

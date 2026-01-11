@@ -3,7 +3,7 @@ import { CheckCircle } from 'lucide-react';
 import Section from '../UI/Section';
 import AnimatedBackground from '../UI/AnimatedBackground';
 
-// Статические данные сравнения
+// Statische Vergleichsdaten
 const COMPARISON_DATA = [
     { feature: "Schutz & Sauberkeit", us: "Kompletter Schutz & tägliche Reinigung", them: "Baustaub & Risiko für Möbel" },
     { feature: "Materialqualität", us: "Nur Marken (Brillux, Knauf, etc.)", them: "Billig-Baustoffe & No-Name" },

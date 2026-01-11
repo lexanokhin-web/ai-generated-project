@@ -8,11 +8,11 @@ const ScrollToHashElement = () => {
         const hash = location.hash;
 
         if (hash) {
-            // Увеличенная задержка для lazy-loaded компонентов
+            // Erhöhte Verzögerung für lazy-loaded Komponenten
             const scrollToElement = () => {
                 const element = document.querySelector(hash);
                 if (element) {
-                    // Учитываем высоту navbar (примерно 80px)
+                    // Berücksichtigung der Navbar-Höhe (ca. 80px)
                     const navbarHeight = 80;
                     const elementPosition = element.getBoundingClientRect().top;
                     const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
@@ -22,12 +22,12 @@ const ScrollToHashElement = () => {
                         behavior: 'smooth'
                     });
                 } else {
-                    // Если элемент ещё не отрендерен, пробуем снова
+                    // Wenn das Element noch nicht gerendert ist, erneut versuchen
                     setTimeout(scrollToElement, 200);
                 }
             };
 
-            // Начальная задержка для lazy loading
+            // Anfängliche Verzögerung für Lazy Loading
             setTimeout(scrollToElement, 300);
         } else {
             // If no hash, scroll to top

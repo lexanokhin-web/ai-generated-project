@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import StructuredData from '../components/SEO/StructuredData';
 
-// Секции страницы
+// Seitenabschnitte
 import {
     HeroSection,
     MarqueeSection,
@@ -17,13 +17,13 @@ import {
     FAQSection
 } from '../components/sections';
 
-// Schema.org данные для Local Business
+// Schema.org Daten für Local Business
 const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Winter & Usselmann GbR",
     "image": "https://wintuss.de/images/logo.webp",
-    "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung и Innenausbau in Ratzeburg, Hamburg и ganz Schleswig-Holstein.",
+    "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg, Hamburg und ganz Schleswig-Holstein.",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bachstraße 36",
@@ -76,7 +76,7 @@ const Home = memo(() => {
         <>
             <Helmet>
                 <title>Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein</title>
-                <meta name="description" content="Spezialist für Renovierung и Sanierung in Ratzeburg, Hamburg и ganz Schleswig-Holstein. Badsanierung, Bodenbeläge & Innenausbau zum Festpreis." />
+                <meta name="description" content="Spezialist für Renovierung und Sanierung in Ratzeburg, Hamburg und ganz Schleswig-Holstein. Badsanierung, Bodenbeläge & Innenausbau zum Festpreis." />
                 <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Hamburg, Handwerker Schleswig-Holstein, Badsanierung, Malerarbeiten, Trockenbau, Winter Usselmann" />
 
                 <link rel="canonical" href="https://wintuss.de/" />
@@ -85,7 +85,7 @@ const Home = memo(() => {
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://wintuss.de/" />
                 <meta property="og:title" content="Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein" />
-                <meta property="og:description" content="Ihr Partner für Renovierung и Sanierung in Ratzeburg, Hamburg и ganz Schleswig-Holstein. Qualität & Festpreise." />
+                <meta property="og:description" content="Ihr Partner für Renovierung und Sanierung in Ratzeburg, Hamburg und ganz Schleswig-Holstein. Qualität & Festpreise." />
                 <meta property="og:image" content="https://wintuss.de/images/image-1.webp" />
                 <meta property="og:locale" content="de_DE" />
                 <meta property="og:site_name" content="Winter & Usselmann GbR" />
@@ -94,13 +94,13 @@ const Home = memo(() => {
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://wintuss.de/" />
                 <meta property="twitter:title" content="Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein" />
-                <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung и Innenausbau in Ratzeburg, Hamburg и Schleswig-Holstein." />
+                <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg, Hamburg und Schleswig-Holstein." />
                 <meta property="twitter:image" content="https://wintuss.de/images/image-1.webp" />
             </Helmet>
 
             <StructuredData data={localBusinessSchema} />
 
-            {/* Секции страницы — каждая мемоизирована и оптимизирована */}
+            {/* Seitenabschnitte — jeder ist memoisiert und optimiert */}
             <HeroSection />
             <MarqueeSection />
             <AboutSection />

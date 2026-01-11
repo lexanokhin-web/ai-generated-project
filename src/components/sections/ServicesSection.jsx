@@ -4,7 +4,7 @@ import { Hammer, Wrench } from 'lucide-react';
 import Section from '../UI/Section';
 import LiquidGlassTool from '../UI/LiquidGlassTool';
 
-// Статический массив услуг
+// Statisches Array der Leistungen
 const SERVICES = [
     { id: "maurer-putzarbeiten", title: "Maurer- & Putzarbeiten", desc: "Fassadensanierungen, Keller, Lichtschächte sowie professionelle Putzarbeiten für Innen- und Außenwände.", img: "/images/image-8.webp" },
     { id: "maler-schimmelsanierung", title: "Maler & Schimmelsanierung", desc: "Tapezieren, Lackieren, Spachteln und Streichen. Inklusive nachhaltiger und professioneller Schimmelbeseitigung.", img: "/images/image-9.webp" },

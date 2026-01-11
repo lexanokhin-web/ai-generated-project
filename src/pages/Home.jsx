@@ -23,7 +23,7 @@ const localBusinessSchema = {
     "@type": "LocalBusiness",
     "name": "Winter & Usselmann GbR",
     "image": "https://wintuss.de/images/logo.webp",
-    "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein.",
+    "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung и Innenausbau in Ratzeburg, Hamburg и ganz Schleswig-Holstein.",
     "address": {
         "@type": "PostalAddress",
         "streetAddress": "Bachstraße 36",
@@ -37,13 +37,15 @@ const localBusinessSchema = {
         "latitude": 53.7044,
         "longitude": 10.7614
     },
-    "url": "https://example.com",
+    "url": "https://wintuss.de",
     "telephone": "+4915141389442",
     "email": "info@wintuss.de",
     "priceRange": "€€",
     "areaServed": [
+        { "@type": "State", "name": "Schleswig-Holstein" },
+        { "@type": "City", "name": "Hamburg" },
         { "@type": "City", "name": "Ratzeburg" },
-        { "@type": "State", "name": "Schleswig-Holstein" }
+        { "@type": "City", "name": "Lübeck" }
     ],
     "founder": {
         "@type": "Person",
@@ -67,17 +69,17 @@ const Home = memo(() => {
     return (
         <>
             <Helmet>
-                <title>Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR</title>
-                <meta name="description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein. Qualität, Transparenz und Festpreise." />
-                <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Schleswig-Holstein, Handwerker Ratzeburg, Badsanierung, Malerarbeiten, Trockenbau, Bodenverlegung" />
+                <title>Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein</title>
+                <meta name="description" content="Spezialist für Renovierung и Sanierung in Ratzeburg, Hamburg и ganz Schleswig-Holstein. Badsanierung, Bodenbeläge & Innenausbau zum Festpreis." />
+                <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Hamburg, Handwerker Schleswig-Holstein, Badsanierung, Malerarbeiten, Trockenbau, Winter Usselmann" />
 
                 <link rel="canonical" href="https://wintuss.de/" />
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://wintuss.de/" />
-                <meta property="og:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
-                <meta property="og:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein. Qualität, Transparenz und Festpreise." />
+                <meta property="og:title" content="Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein" />
+                <meta property="og:description" content="Ihr Partner für Renovierung и Sanierung in Ratzeburg, Hamburg и ganz Schleswig-Holstein. Qualität & Festpreise." />
                 <meta property="og:image" content="https://wintuss.de/images/image-1.webp" />
                 <meta property="og:locale" content="de_DE" />
                 <meta property="og:site_name" content="Winter & Usselmann GbR" />
@@ -85,8 +87,8 @@ const Home = memo(() => {
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
                 <meta property="twitter:url" content="https://wintuss.de/" />
-                <meta property="twitter:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
-                <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein." />
+                <meta property="twitter:title" content="Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein" />
+                <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung и Innenausbau in Ratzeburg, Hamburg и Schleswig-Holstein." />
                 <meta property="twitter:image" content="https://wintuss.de/images/image-1.webp" />
             </Helmet>
 

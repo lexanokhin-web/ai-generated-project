@@ -1,6 +1,7 @@
 import React, { memo, useState, useCallback } from 'react';
 import Section from '../UI/Section';
 import AnimatedBackground from '../UI/AnimatedBackground';
+import StructuredData from '../SEO/StructuredData';
 
 // Статические данные FAQ
 const FAQ_DATA = [
@@ -9,8 +10,22 @@ const FAQ_DATA = [
     { id: 3, q: "Sind Ihre Angebote wirklich Festpreise?", a: "Ja! Transparenz ist unser oberstes Gebot. Das Angebot, das Sie unterschreiben, ist der Preis, den Sie zahlen – solange sich Ihre Anforderungen während des Baus nicht ändern." },
     { id: 4, q: "Unterstützen Sie auch bei der Materialauswahl und Planung?", a: "Absolut. Wir beraten Sie nicht nur bei der Auswahl hochwertiger und langlebiger Materialien, sondern helfen Ihnen auch, das Beste aus Ihrem Budget herauszuholen." },
     { id: 5, q: "Muss ich während der Renovierung aus der Wohnung ausziehen?", a: "Bei Teilrenovierungen (z.B. nur Bad oder Küche) können Sie meist wohnen bleiben. Bei einer Kernsanierung ist ein temporärer Auszug ratsam." },
-    { id: 6, q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?", a: "Ja, Sie erhalten eine volle Gewährleistung nach BGB von bis zu 5 Jahren. Qualität ist unser Markenzeichen." }
+    { id: 6, q: "Gibt es eine Garantie auf die ausgeführных Arbeiten?", a: "Ja, Sie erhalten eine volle Gewährleistung nach BGB von bis zu 5 Jahren. Qualität ist unser Markenzeichen." }
 ];
+
+// FAQ Schema Data
+const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ_DATA.map(item => ({
+        "@type": "Question",
+        "name": item.q,
+        "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.a
+        }
+    }))
+};
 
 const FAQSection = memo(() => {
     const [activeFaq, setActiveFaq] = useState(null);
@@ -21,6 +36,7 @@ const FAQSection = memo(() => {
 
     return (
         <Section className="bg-white relative">
+            <StructuredData data={faqSchema} />
             <AnimatedBackground variant="modern-aura" />
 
             <div className="container mx-auto px-6 max-w-3xl relative z-10">

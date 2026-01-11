@@ -8,13 +8,19 @@ const REVIEWS = [
         name: "Familie Müller",
         location: "Ratzeburg",
         img: "/images/image-19.webp",
-        text: "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckt."
+        text: "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckт."
+    },
+    {
+        name: "Marc Jensen",
+        location: "Hamburg-Eppendorf",
+        img: "/images/image-10.webp",
+        text: "Hervorragende Arbeit bei unserem Altbau in Hamburg. Pünktlich, sauber и fachlich absolut top. Wir sind sehr zufrieden!"
     },
     {
         name: "Thomas & Sarah",
         location: "Mölln",
         img: "/images/image-20.webp",
-        text: "Kompetent, freundlich und pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen und sind vom Ergebnis begeistert. Klare Weiterempfehlung!"
+        text: "Kompetent, freundlich и pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen и sind vom Ergebnis begeistert."
     }
 ];
 

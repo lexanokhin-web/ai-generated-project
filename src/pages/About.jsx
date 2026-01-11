@@ -11,14 +11,14 @@ const About = () => {
     return (
         <>
             <Helmet>
-                <title>Über Uns | Winter & Usselmann GbR Ratzeburg</title>
-                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr zuverlässiger Partner für Renovierung и Sanierung in Ratzeburg. Traditionelle Handwerkskunst trifft Moderne." />
+                <title>Über Uns | Renovierung Hamburg & Schleswig-Holstein</title>
+                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr Partner für Renovierung и Sanierung in Ratzeburg, Hamburg и Umgebung." />
                 <link rel="canonical" href="https://wintuss.de/uber-uns" />
 
                 {/* OG Tags */}
                 <meta property="og:type" content="website" />
                 <meta property="og:url" content="https://wintuss.de/uber-uns" />
-                <meta property="og:title" content="Über Uns | Winter & Usselmann GbR Ratzeburg" />
+                <meta property="og:title" content="Über Uns | Renovierung Hamburg & Schleswig-Holstein" />
                 <meta property="og:description" content="Erfahren Sie mehr über unser Team и нашу философию качества." />
                 <meta property="og:image" content="https://wintuss.de/images/og-about.webp" />
             </Helmet>
@@ -75,10 +75,10 @@ const About = () => {
             <Section className="bg-slate-50">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-                        Unsere <span className="text-accent">Werte</span>
+                        Wofür wir <span className="text-accent underline decoration-accent/20 underline-offset-8">stehen</span>
                     </h2>
                     <p className="text-slate-600 max-w-2xl mx-auto">
-                        Was uns antreibt und worauf Sie sich verlassen können.
+                        Unsere Philosophie ist einfach: Handwerkliche Perfektion gepaart mit moderner Kommunikation.
                     </p>
                 </div>
 
@@ -86,7 +86,7 @@ const About = () => {
                     {[
                         {
                             title: "Qualität",
-                            desc: "Wir verwenden nur hochwertige Materialien und arbeiten mit größter Sorgfalt.",
+                            desc: "Wir verwenden nur hochwertige Materialien и arbeiten mit größter Sorgfalt bishin ins Detail.",
                             icon: (
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
@@ -95,7 +95,7 @@ const About = () => {
                         },
                         {
                             title: "Transparenz",
-                            desc: "Keine versteckten Kosten. Wir kommunizieren offen und ehrlich.",
+                            desc: "Klare Angebote ohne versteckte Kosten. Wir kommunizieren jeden Schritt Ihres Projekts.",
                             icon: (
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.013 8.013 0 01-5.45-2.125L3 21v-4.53A7.962 7.962 0 011 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" />
@@ -103,39 +103,93 @@ const About = () => {
                             )
                         },
                         {
-                            title: "Zuverlässigkeit",
-                            desc: "Termintreue ist für uns selbstverständlich. Wir halten, was wir versprechen.",
+                            title: "Regionalität",
+                            desc: "Sitz в Ratzeburg. Мы обслуживаем весь регион Schleswig-Holstein и Hamburg с немецкой пунктуальностью.",
                             icon: (
                                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
                             )
                         }
                     ].map((value, index) => (
-                        <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center hover:-translate-y-2 transition-transform duration-300">
-                            <div className="w-16 h-16 bg-accent/10 text-accent rounded-full flex items-center justify-center mx-auto mb-6">
+                        <div key={index} className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 group hover:border-accent/30 transition-all duration-300">
+                            <div className="w-16 h-16 bg-accent/10 text-accent rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                                 {value.icon}
                             </div>
                             <h3 className="text-xl font-bold text-slate-900 mb-3">{value.title}</h3>
-                            <p className="text-slate-600">{value.desc}</p>
+                            <p className="text-slate-600 leading-relaxed">{value.desc}</p>
                         </div>
                     ))}
                 </div>
             </Section>
 
+            {/* Team Section - CRITICAL FOR E-E-A-T */}
+            <Section className="bg-white">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
+                            Die Köpfe hinter <span className="text-accent underline decoration-accent/20">W&U</span>
+                        </h2>
+                        <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                            Winter & Usselmann GbR wurde von Michael Winter и seinem Team mit einem klaren Ziel gegründet:
+                            Traditionelles Handwerk mit dem Service-Anspruch des 21. Jahrhunderts zu verbinden.
+                        </p>
+                        <div className="space-y-6">
+                            <div className="flex gap-4 p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                                <div className="w-16 h-16 rounded-full bg-slate-200 overflow-hidden shrink-0">
+                                    <img src="/images/image-10.webp" alt="Michael Winter" className="w-full h-full object-cover" />
+                                </div>
+                                <div>
+                                    <h4 className="font-bold text-slate-900">Michael Winter</h4>
+                                    <p className="text-sm text-accent font-bold uppercase tracking-wider">Geschäftsführer</p>
+                                    <p className="text-slate-500 mt-2 text-sm italic">&quot;Unser Name steht für Zuverlässigkeit и Qualität in jedem Projekt.&quot;</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <img src="/images/image-11.webp" alt="Teamarbeit" className="rounded-2xl shadow-lg h-64 w-full object-cover" />
+                        <img src="/images/image-12.webp" alt="Projektbesprechung" className="rounded-2xl shadow-lg h-64 w-full object-cover translate-y-8" />
+                    </div>
+                </div>
+            </Section>
+
+            {/* Authority Section - Partners & Certifications */}
+            <Section className="bg-slate-50">
+                <div className="container mx-auto">
+                    <div className="text-center mb-12">
+                        <p className="text-accent font-bold uppercase tracking-[0.2em] text-sm mb-4">Autorität & Vertrauen</p>
+                        <h2 className="text-3xl font-bold text-slate-900">Unsere Partner & Standards</h2>
+                    </div>
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 grayscale opacity-60">
+                        {["BOSCH", "KNAUF", "STO", "BRILLUX", "WÜRTH", "SCHÜCO", "GROHE", "VIESSMANN", "CAPAROL", "WEBER", "MAKITA", "LIEBHERR"].map((partner) => (
+                            <div key={partner} className="flex items-center justify-center p-8 bg-white rounded-xl shadow-sm border border-slate-100 group-hover:grayscale-0 transition-all duration-300">
+                                <span className="font-black text-slate-400 text-xl tracking-tighter">{partner}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </Section>
+
             {/* CTA */}
-            <Section className="bg-slate-900 text-white text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                    Lernen Sie uns <span className="text-accent italic">persönlich</span> kennen
+            <Section className="bg-slate-900 text-white text-center rounded-t-[3rem] relative z-10">
+                <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-accent rounded-full flex items-center justify-center shadow-2xl">
+                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.013 8.013 0 01-5.45-2.125L3 21v-4.53A7.962 7.962 0 011 12c0-4.418 3.582-8 8-8s8 3.582 8 8z" />
+                    </svg>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-bold mb-6 pt-8">
+                    Bereit für ein <span className="text-accent font-serif italic text-4xl md:text-6xl">Gespräch?</span>
                 </h2>
-                <p className="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
-                    Wir kommen gerne zu Ihnen, um Ihr Projekt vor Ort zu besprechen. Unverbindlich und kostenlos.
+                <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+                    Wir sind keine anonyme Firma. Wir sind Ihre Nachbarn из Ratzeburg и freuen uns auf Ihr Projekt.
                 </p>
                 <Link
                     to="/#contact"
-                    className="inline-block px-8 py-4 bg-accent text-white font-bold rounded-lg shadow-lg hover:bg-amber-700 transition-colors"
+                    className="inline-block px-10 py-5 bg-accent text-white font-bold rounded-full shadow-lg hover:shadow-accent/40 hover:-translate-y-1 transition-all duration-300"
                 >
-                    Termin vereinbaren
+                    Erstberatung anfordern
                 </Link>
             </Section>
         </>

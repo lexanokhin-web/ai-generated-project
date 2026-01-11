@@ -25,7 +25,7 @@ const HeroSection = memo(() => {
                         className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider mb-6"
                         data-aos="fade-down"
                     >
-                        Handwerkskunst in Ratzeburg & Umgebung
+                        Handwerkskunst in Ratzeburg, Hamburg & SH
                     </span>
                     <h1
                         className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-6 md:mb-8"
@@ -75,7 +75,7 @@ const HeroSection = memo(() => {
                         </div>
                         <div className="flex text-accent">★★★★★</div>
                     </div>
-                    <p className="text-sm font-light">&quot;Endlich Handwerker, die mitdenken. Unser Bad in Ratzeburg ist ein Traum geworden!&quot;</p>
+                    <p className="text-sm font-light">&quot;Endlich Handwerker из Norddeutschland, die mitdenken. Unser Bad in Hamburg ist ein Traum geworden!&quot;</p>
                 </div>
             </div>
         </section>

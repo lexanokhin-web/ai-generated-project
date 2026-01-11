@@ -41,7 +41,34 @@ const ArticleDetail = () => {
             }
         },
         "datePublished": article.date,
-        "description": article.excerpt
+        "description": article.excerpt,
+        "inLanguage": "de-DE"
+    };
+
+    // Breadcrumb Schema
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Startseite",
+                "item": "https://wintuss.de/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Ratgeber",
+                "item": "https://wintuss.de/ratgeber"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": article.title,
+                "item": `https://wintuss.de/ratgeber/${article.id}`
+            }
+        ]
     };
 
     return (
@@ -60,6 +87,7 @@ const ArticleDetail = () => {
             </Helmet>
 
             <StructuredData data={articleSchema} />
+            <StructuredData data={breadcrumbSchema} />
 
             {/* Hero Image */}
             <div className="relative h-[50vh] min-h-[400px]">

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import StructuredData from '../components/SEO/StructuredData';
 import Section from '../components/UI/Section';
 import { articles } from '../data/articles';
 
@@ -21,12 +22,44 @@ const ArticleDetail = () => {
         );
     }
 
+    // Article Schema Data
+    const articleSchema = {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": article.title,
+        "image": `https://wintuss.de${article.image}`,
+        "author": {
+            "@type": "Person",
+            "name": article.author
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Winter & Usselmann GbR",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://wintuss.de/images/logo.webp"
+            }
+        },
+        "datePublished": article.date,
+        "description": article.excerpt
+    };
+
     return (
         <>
             <Helmet>
                 <title>{`${article.title} | Ratgeber Winter & Usselmann`}</title>
                 <meta name="description" content={article.excerpt} />
+                <link rel="canonical" href={`https://wintuss.de/ratgeber/${article.id}`} />
+
+                {/* OG Tags */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://wintuss.de/ratgeber/${article.id}`} />
+                <meta property="og:title" content={`${article.title} | Ratgeber Winter & Usselmann`} />
+                <meta property="og:description" content={article.excerpt} />
+                <meta property="og:image" content={`https://wintuss.de${article.image}`} />
             </Helmet>
+
+            <StructuredData data={articleSchema} />
 
             {/* Hero Image */}
             <div className="relative h-[50vh] min-h-[400px]">

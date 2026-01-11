@@ -12,8 +12,16 @@ const Blog = () => {
     return (
         <>
             <Helmet>
-                <title>Ratgeber & News | Winter & Usselmann GbR</title>
-                <meta name="description" content="Tipps, Tricks und Neuigkeiten rund um Renovierung, Sanierung und Handwerk in Ratzeburg." />
+                <title>Ratgeber & News | Renovierung Ratzeburg | Winter & Usselmann GbR</title>
+                <meta name="description" content="Wertvolle Tipps, aktuelle Trends und Neuigkeiten rund um Renovierung, Sanierung и Handwerk in Ratzeburg und Schleswig-Holstein." />
+                <link rel="canonical" href="https://wintuss.de/ratgeber" />
+
+                {/* OG Tags */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://wintuss.de/ratgeber" />
+                <meta property="og:title" content="Ratgeber & Handwerker-News | Winter & Usselmann GbR" />
+                <meta property="og:description" content="Alles über Sanierung, Kosten и Trends in Ratzeburg." />
+                <meta property="og:image" content="https://wintuss.de/images/og-blog.webp" />
             </Helmet>
 
             <div className="pt-24 pb-12 bg-slate-900 text-center">

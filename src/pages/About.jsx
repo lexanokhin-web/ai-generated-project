@@ -11,8 +11,16 @@ const About = () => {
     return (
         <>
             <Helmet>
-                <title>Über Uns | Winter & Usselmann GbR</title>
-                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr zuverlässiger Partner für Renovierung und Sanierung in Ratzeburg und Umgebung." />
+                <title>Über Uns | Winter & Usselmann GbR Ratzeburg</title>
+                <meta name="description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr zuverlässiger Partner für Renovierung и Sanierung in Ratzeburg. Traditionelle Handwerkskunst trifft Moderne." />
+                <link rel="canonical" href="https://wintuss.de/uber-uns" />
+
+                {/* OG Tags */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://wintuss.de/uber-uns" />
+                <meta property="og:title" content="Über Uns | Winter & Usselmann GbR Ratzeburg" />
+                <meta property="og:description" content="Erfahren Sie mehr über unser Team и нашу философию качества." />
+                <meta property="og:image" content="https://wintuss.de/images/og-about.webp" />
             </Helmet>
 
             {/* Hero Section */}

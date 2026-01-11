@@ -1,12 +1,5 @@
-# robots.txt for Winter & Usselmann GbR
-# Allow all search engines to crawl the site
-
 User-agent: *
-Allow: /
+Disallow: /
 
-# Sitemap location
-# TODO: Replace example.com with your actual domain
-Sitemap: https://example.com/sitemap.xml
-
-# Crawl delay (optional, helps prevent server overload)
-Crawl-delay: 1
+# Sitemap Location (Disabled temporarily)
+# Sitemap: https://wintuss.de/sitemap.xml

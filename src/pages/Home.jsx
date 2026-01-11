@@ -22,7 +22,7 @@ const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Winter & Usselmann GbR",
-    "image": "https://example.com/images/image-1.webp",
+    "image": "https://wintuss.de/images/logo.webp",
     "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein.",
     "address": {
         "@type": "PostalAddress",
@@ -71,23 +71,23 @@ const Home = memo(() => {
                 <meta name="description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein. Qualität, Transparenz und Festpreise." />
                 <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Schleswig-Holstein, Handwerker Ratzeburg, Badsanierung, Malerarbeiten, Trockenbau, Bodenverlegung" />
 
-                <link rel="canonical" href="https://example.com/" />
+                <link rel="canonical" href="https://wintuss.de/" />
 
                 {/* Open Graph / Facebook */}
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://example.com/" />
+                <meta property="og:url" content="https://wintuss.de/" />
                 <meta property="og:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
                 <meta property="og:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein. Qualität, Transparenz und Festpreise." />
-                <meta property="og:image" content="https://example.com/images/image-1.webp" />
+                <meta property="og:image" content="https://wintuss.de/images/image-1.webp" />
                 <meta property="og:locale" content="de_DE" />
                 <meta property="og:site_name" content="Winter & Usselmann GbR" />
 
                 {/* Twitter */}
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content="https://example.com/" />
+                <meta property="twitter:url" content="https://wintuss.de/" />
                 <meta property="twitter:title" content="Renovierung Ratzeburg & Schleswig-Holstein | Winter & Usselmann GbR" />
                 <meta property="twitter:description" content="Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg und ganz Schleswig-Holstein." />
-                <meta property="twitter:image" content="https://example.com/images/image-1.webp" />
+                <meta property="twitter:image" content="https://wintuss.de/images/image-1.webp" />
             </Helmet>
 
             <StructuredData data={localBusinessSchema} />

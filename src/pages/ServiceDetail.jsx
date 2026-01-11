@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import StructuredData from '../components/SEO/StructuredData';
 import { services } from '../data/services';
 import Section from '../components/UI/Section';
 
@@ -23,12 +24,45 @@ const ServiceDetail = () => {
         );
     }
 
+    // Service Schema Data
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": service.title,
+        "description": service.description,
+        "provider": {
+            "@type": "LocalBusiness",
+            "name": "Winter & Usselmann GbR",
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Bachstraße 36",
+                "addressLocality": "Ratzeburg",
+                "postalCode": "23909",
+                "addressCountry": "DE"
+            }
+        },
+        "areaServed": {
+            "@type": "State",
+            "name": "Schleswig-Holstein"
+        }
+    };
+
     return (
         <>
             <Helmet>
                 <title>{`${service.title} Ratzeburg | Winter & Usselmann GbR`}</title>
                 <meta name="description" content={`${service.hook} ${service.description} Ihr Experte in Ratzeburg.`} />
+                <link rel="canonical" href={`https://wintuss.de/leistungen/${service.id}`} />
+
+                {/* OG Tags */}
+                <meta property="og:type" content="article" />
+                <meta property="og:url" content={`https://wintuss.de/leistungen/${service.id}`} />
+                <meta property="og:title" content={`${service.title} Ratzeburg | Winter & Usselmann GbR`} />
+                <meta property="og:description" content={service.subtitle} />
+                <meta property="og:image" content={`https://wintuss.de${service.heroImage}`} />
             </Helmet>
+
+            <StructuredData data={serviceSchema} />
 
             {/* Hero */}
             <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">

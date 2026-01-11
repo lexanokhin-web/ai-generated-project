@@ -70,8 +70,8 @@ const HeroSection = memo(() => {
                 <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-xs text-white">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="flex -space-x-2">
-                            <img src="/images/image-2.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" loading="lazy" decoding="async" />
-                            <img src="/images/image-3.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde" loading="lazy" decoding="async" />
+                            <img src="/images/image-2.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Zufriedener Kunde Renovierung Ratzeburg" loading="lazy" decoding="async" />
+                            <img src="/images/image-3.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde Badsanierung Schleswig-Holstein" loading="lazy" decoding="async" />
                         </div>
                         <div className="flex text-accent">★★★★★</div>
                     </div>

@@ -50,7 +50,7 @@ const Datenschutz = () => {
                             <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
                                 <p className="font-bold text-slate-900">Winter & Usselmann GbR</p>
                                 <p className="text-slate-600">
-                                    Bachstraße 36<br />
+                                    Jägerstraße 24a<br />
                                     23909 Ratzeburg<br />
                                     Deutschland
                                 </p>

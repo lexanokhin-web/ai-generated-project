@@ -26,7 +26,7 @@ const localBusinessSchema = {
     "description": "Ihr zuverlässiger Partner für Renovierung, Sanierung und Innenausbau in Ratzeburg, Hamburg und ganz Schleswig-Holstein.",
     "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Bachstraße 36",
+        "streetAddress": "Jägerstraße 24a",
         "addressLocality": "Ratzeburg",
         "postalCode": "23909",
         "addressCountry": "DE",
@@ -34,8 +34,8 @@ const localBusinessSchema = {
     },
     "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 53.7044,
-        "longitude": 10.7614
+        "latitude": 53.7024,
+        "longitude": 10.7628
     },
     "url": "https://wintuss.de",
     "telephone": "+4915141389442",

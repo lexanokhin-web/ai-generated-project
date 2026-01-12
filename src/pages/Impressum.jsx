@@ -26,7 +26,7 @@ const Impressum = () => {
                         <h2 className="text-2xl font-bold text-slate-900 border-b border-slate-100 pb-2">Anbieterkennzeichnung</h2>
                         <p className="font-bold text-slate-900 text-lg">Winter & Usselmann GbR</p>
                         <p>
-                            Bachstraße 36<br />
+                            Jägerstraße 24a<br />
                             23909 Ratzeburg<br />
                             Deutschland
                         </p>

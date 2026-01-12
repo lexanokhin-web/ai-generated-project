@@ -50,7 +50,7 @@
 
 3. **Google My Business**
    - Создайте профиль компании
-   - Укажите адрес: Bachstraße 36, 23909 Ratzeburg
+   - Укажите адрес: Jägerstraße 24a, 23909 Ratzeburg
    - Добавьте фотографии работ
    - Подтвердите владение
 
@@ -97,8 +97,8 @@
 
 ## Важные координаты
 
-- Latitude: 53.7044
-- Longitude: 10.7614
+- Latitude: 53.7024
+- Longitude: 10.7628
 - Регион: DE-SH (Schleswig-Holstein)
 - Город: Ratzeburg
 - Индекс: 23909

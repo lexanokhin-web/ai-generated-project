@@ -93,7 +93,7 @@ const Footer = () => {
                 <div className="border-t border-slate-800 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
                     <div>
                         <h4 className="text-xl font-bold text-white">Winter & Usselmann GbR</h4>
-                        <p className="text-slate-500 mt-2 text-sm">Bachstraße 36, 23909 Ratzeburg</p>
+                        <p className="text-slate-500 mt-2 text-sm">Jägerstraße 24a, 23909 Ratzeburg</p>
                         <p className="text-slate-500 text-sm">Geschäftsführer: Michael Winter</p>
                     </div>
                     <div className="flex space-x-6 text-sm text-slate-500">

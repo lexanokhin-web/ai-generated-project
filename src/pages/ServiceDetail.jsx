@@ -35,7 +35,7 @@ const ServiceDetail = () => {
             "name": "Winter & Usselmann GbR",
             "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Bachstraße 36",
+                "streetAddress": "Jägerstraße 24a",
                 "addressLocality": "Ratzeburg",
                 "postalCode": "23909",
                 "addressCountry": "DE"

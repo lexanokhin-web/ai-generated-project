@@ -21,6 +21,12 @@ const REVIEWS = [
         location: "Mölln",
         img: "/images/image-20.webp",
         text: "Kompetent, freundlich und pünktlich. Wir haben unser komplettes Erdgeschoss sanieren lassen und sind vom Ergebnis begeistert."
+    },
+    {
+        name: "Lukas Weber",
+        location: "Lüneburg",
+        img: "/images/image-36.webp",
+        text: "Herausragende Organisation bei der Asbestsanierung und den anschließenden Elektroarbeiten. Alles aus einer Hand zu haben, hat uns viel Stress erspart."
     }
 ];
 

@@ -66,7 +66,10 @@ const localBusinessSchema = {
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fliesen & Badsanierung" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Trockenbauarbeiten" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bodenbelagsarbeiten" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tischler & Küchen" } }
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Tischler & Küchen" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Elektroarbeiten" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Heizungsarbeiten" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Asbestsanierung" } }
         ]
     }
 };

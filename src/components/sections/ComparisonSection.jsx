@@ -5,10 +5,10 @@ import AnimatedBackground from '../UI/AnimatedBackground';
 
 // Statische Vergleichsdaten
 const COMPARISON_DATA = [
-    { feature: "Schutz & Sauberkeit", us: "Kompletter Schutz & tägliche Reinigung", them: "Baustaub & Risiko für Möbel" },
-    { feature: "Materialqualität", us: "Nur Marken (Brillux, Knauf, etc.)", them: "Billig-Baustoffe & No-Name" },
-    { feature: "Präzisions-Finale", us: "Perfekte Kanten & Fugen", them: "Unsaubere Ecken & Übergänge" },
-    { feature: "Gewährleistung", us: "Volle Garantie auf alle Arbeiten", them: "Schwierige Haftung bei Mängeln" }
+    { feature: "Schutz & Sauberkeit", us: "Kompletter Schutz & tägliche Reinigung", negation: "Kein", them: "Baustaub & Risiko für Möbel" },
+    { feature: "Materialqualität", us: "Nur Marken (Brillux, Knauf, etc.)", negation: "Keine", them: "Billig-Baustoffe & No-Name-Produkte" },
+    { feature: "Präzisions-Finale", us: "Perfekte Kanten & Fugen", negation: "Keine", them: "unsauberen Ecken & Übergänge" },
+    { feature: "Gewährleistung", us: "Volle Garantie auf alle Arbeiten", negation: "Keine", them: "schwierige Haftung bei Mängeln" }
 ];
 
 const ComparisonSection = memo(() => {
@@ -42,7 +42,9 @@ const ComparisonSection = memo(() => {
                                         <CheckCircle className="inline w-5 h-5 mr-2" />
                                         {row.us}
                                     </td>
-                                    <td className="p-6 text-slate-500">✘ {row.them}</td>
+                                    <td className="p-6 text-slate-500">
+                                        <span className="text-red-500 font-bold mr-1">{row.negation}</span> {row.them}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
@@ -69,8 +71,8 @@ const ComparisonSection = memo(() => {
                                 </div>
                                 <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 opacity-60">
                                     <p className="text-slate-400 text-[0.65rem] font-bold uppercase mb-1">Einzelbeauftragung</p>
-                                    <div className="flex items-start text-slate-500 text-sm">
-                                        <span className="mr-2 shrink-0">✘</span>
+                                    <div className="flex items-start text-slate-500 text-sm font-medium">
+                                        <span className="text-red-500 font-bold mr-1">{row.negation}</span>
                                         <span>{row.them}</span>
                                     </div>
                                 </div>

@@ -3,16 +3,7 @@ import { Link } from 'react-router-dom';
 import { Hammer, Wrench } from 'lucide-react';
 import Section from '../UI/Section';
 import LiquidGlassTool from '../UI/LiquidGlassTool';
-
-// Statisches Array der Leistungen
-const SERVICES = [
-    { id: "maurer-putzarbeiten", title: "Maurer- & Putzarbeiten", desc: "Fassadensanierungen, Keller, Lichtschächte sowie professionelle Putzarbeiten für Innen- und Außenwände.", img: "/images/image-8.webp" },
-    { id: "maler-schimmelsanierung", title: "Maler & Schimmelsanierung", desc: "Tapezieren, Lackieren, Spachteln und Streichen. Inklusive nachhaltiger und professioneller Schimmelbeseitigung.", img: "/images/image-9.webp" },
-    { id: "fliesen-badsanierung", title: "Fliesen & Badsanierung", desc: "Komplette Badezimmer, Wand- und Bodenfliesen. Inklusive Montage von modernen Glastrennwänden.", img: "/images/image-10.webp" },
-    { id: "trockenbauarbeiten", title: "Trockenbauarbeiten", desc: "Verkleiden von Wänden und Decken, Erstellen von Trennwänden und Vorwandinstallationen für neue Raumkonzepte.", img: "/images/image-11.webp" },
-    { id: "bodenbelagsarbeiten", title: "Bodenbelagsarbeiten", desc: "Verlegung von Laminat, Vinyl, Parkett und Holzdielen. Inklusive Schleifarbeiten und Fußleisten.", img: "/images/image-12.webp" },
-    { id: "tischler-kuechen", title: "Tischler & Küchen", desc: "Montage von Türen und Zargen. Lieferung und fachgerechte Montage von Einbauküchen inklusive Elektrogeräte.", img: "/images/image-13.webp" },
-];
+import { services } from '../../data/services';
 
 const ServicesSection = memo(() => {
     return (
@@ -39,7 +30,7 @@ const ServicesSection = memo(() => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    {SERVICES.map((service, index) => (
+                    {services.map((service, index) => (
                         <Link
                             to={`/leistungen/${service.id}`}
                             key={service.id}
@@ -49,7 +40,7 @@ const ServicesSection = memo(() => {
                         >
                             <div className="h-40 md:h-48 mb-4 md:mb-6 overflow-hidden rounded-t-2xl -mt-6 md:-mt-8 -mx-6 md:-mx-8">
                                 <img
-                                    src={service.img}
+                                    src={service.heroImage}
                                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                     alt={service.title}
                                     loading="lazy"
@@ -57,7 +48,7 @@ const ServicesSection = memo(() => {
                                 />
                             </div>
                             <h4 className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3">{service.title}</h4>
-                            <p className="text-slate-400 text-sm leading-relaxed">{service.desc}</p>
+                            <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">{service.description}</p>
                         </Link>
                     ))}
                 </div>

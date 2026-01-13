@@ -7,7 +7,7 @@ import AnimatedBackground from '../UI/AnimatedBackground';
 const REASONS = [
     {
         id: "01",
-        title: "Pünktliche Fertigstellung",
+        title: "Pünktlich und termingerecht",
         img: "/images/image-14.webp",
         text: "Wir wissen, wie wichtig Ihr Einzugstermin ist. Dank präziser Planung garantieren wir Ihnen eine termingerechte Fertigstellung."
     },

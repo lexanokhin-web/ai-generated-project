@@ -4,7 +4,7 @@ import AnimatedBackground from '../UI/AnimatedBackground';
 
 // Statische Prozessdaten
 const STEPS = [
-    { id: 1, title: "Beratung & Design", desc: "Wir hören zu. In Ratzeburg und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
+    { id: 1, title: "Beratung & Designauswahl", desc: "Wir hören zu. In Ratzeburg und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
     { id: 2, title: "Festpreisangebot", desc: "Sie erhalten ein glasklares Angebot. Wir erklären Ihnen jeden Posten, damit Sie genau wissen, wofür Sie bezahlen." },
     { id: 3, title: "Umsetzung", desc: "Lehnen Sie sich zurück. Unsere Profis arbeiten sauber, schnell und diskret. Wir halten Sie proaktiv auf dem Laufenden." },
     { id: 4, title: "Fertigstellung & Übergabe", desc: "Ihr neues Zuhause wartet. Wir übergeben besenrein und gehen jeden Winkel mit Ihnen durch. Erst wenn Sie zufrieden sind, sind wir es auch." }
@@ -42,7 +42,7 @@ const ProcessSection = memo(() => {
                 <div className="text-center mb-16 md:mb-24">
                     <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Der Prozess</h2>
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900">
-                        Ihr Weg zum <span className="text-accent font-serif italic">Traumhaus</span>
+                        Ihr Weg zur <span className="text-accent font-serif italic">schönen Wohnung</span>
                     </h3>
                     <p className="text-slate-500 mt-4 text-base md:text-lg">In 4 einfachen Schritten zum Ziel</p>
                 </div>

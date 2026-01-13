@@ -21,7 +21,7 @@ export const services = [
     },
     {
         id: "maler-schimmelsanierung",
-        title: "Maler & Schimmelsanierung",
+        title: "Maler Lackierarbeiten & Schimmelsanierung",
         subtitle: "Farbe bekennen, Gesundheit schützen",
         heroImage: "/images/image-9.webp",
         hook: "Schimmel ist mehr als ein optisches Problem. Es ist eine Gefahr für Ihre Gesundheit.",
@@ -117,6 +117,66 @@ export const services = [
             { title: "Aufmaß", desc: "Millimetergenaues Messen vor Ort." },
             { title: "Lieferung", desc: "Termingerechte Anlieferung aller Komponenten." },
             { title: "Montage", desc: "Fachgerechter Einbau durch unsere Tischler." }
+        ]
+    },
+    {
+        id: "elektroarbeiten",
+        title: "Elektroarbeiten",
+        subtitle: "Sicher & modern vernetzt",
+        heroImage: "/images/image-33.webp",
+        hook: "Moderne Elektroinstallationen für Sicherheit und Komfort in Ihrem Zuhause.",
+        description: "Planung und fachgerechte Ausführung von Elektroinstallationen. Verkabelung, Steckdosen, Beleuchtung sowie Modernisierung bestehender Anlagen.",
+        benefits: [
+            "Fachgerechte Ausführung nach DIN-Normen",
+            "Smarte Beleuchtungskonzepte",
+            "Sicherheitsbeleuchtung & Bewegungsmelder",
+            "Modernisierung alter Schaltanlagen"
+        ],
+        process: [
+            { title: "Bedarfsanalyse", desc: "Wir prüfen Ihre vorhandene Installation und planen die Erweiterung." },
+            { title: "Installation", desc: "Sichere Verlegung von Leitungen und Montage aller Komponenten." },
+            { title: "Prüfung", desc: "VDE-Abnahme und ausgiebige Funktionskontrolle." },
+            { title: "Inbetriebnahme", desc: "Einweisung in neue Systeme und Übergabe." }
+        ]
+    },
+    {
+        id: "heizungsarbeiten",
+        title: "Heizungsarbeiten",
+        subtitle: "Effiziente Wärme & Komfort",
+        heroImage: "/images/image-34.webp",
+        hook: "Optimieren Sie Ihren Energieverbrauch mit modernster Heizungstechnik.",
+        description: "Installation, Wartung und Modernisierung von Heizungsanlagen. Effiziente Lösungen für Neubau und Sanierung inklusive Anschlüssen und Inbetriebnahme.",
+        benefits: [
+            "Senkung der Energiekosten durch moderne Technik",
+            "Regelmäßige Wartung für längere Lebensdauer",
+            "Beratung zu erneuerbaren Energien",
+            "Notdienst bei Heizungsausfällen"
+        ],
+        process: [
+            { title: "Beratung", desc: "Wahl des passenden Heizsystems für Ihre Bedürfnisse." },
+            { title: "Demontage", desc: "Fachgerechter Ausbau und Entsorgung der Altanlage." },
+            { title: "Montage", desc: "Einbau der neuen Heizung und Abgleich der Systeme." },
+            { title: "Wartung", desc: "Einweisung in die Steuerung und Wartungsplan-Erstellung." }
+        ]
+    },
+    {
+        id: "asbestsanierung",
+        title: "Asbestsanierung",
+        subtitle: "Sicherheit durch Kompetenz",
+        heroImage: "/images/image-35.webp",
+        hook: "Schutz für Mensch und Immobilie durch zertifizierte Asbest-Entfernung.",
+        description: "Fachgerechte Entfernung und Entsorgung asbestbeschädigter Materialien im Rahmen von Wohnungs- und Gebäudesanierungen. Sicherheit und gesetzliche Vorschriften inklusive.",
+        benefits: [
+            "Zertifizierter Fachbetrieb für Asbestsanierung",
+            "Vollständige Staubfreihaltung während der Arbeit",
+            "Rechtssichere Entsorgungsnachweise",
+            "Umfassender Gesundheitsschutz"
+        ],
+        process: [
+            { title: "Probenahme", desc: "Analyse verdächtiger Materialien im Labor." },
+            { title: "Abschottung", desc: "Einrichtung von Schleusen und Unterdruckbereichen." },
+            { title: "Sanierung", desc: "Kontrollierte Entfernung unter strengsten Schutzauflagen." },
+            { title: "Freigabe", desc: "Endreinigung und messtechnische Freigabe der Räume." }
         ]
     }
 ];

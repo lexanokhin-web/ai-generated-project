@@ -5,8 +5,8 @@ import Section from '../UI/Section';
 // Statische Statistikdaten
 const STATS = [
     { target: 15, label: "Jahre Erfahrung", Icon: Calendar, color: "text-accent" },
-    { target: 250, label: "Projekte in SH", Icon: Trophy, color: "text-blue-400" },
-    { target: 100, label: "Kundenzufriedenheit", Icon: Heart, color: "text-rose-400", suffix: "%" }
+    { target: 700, label: "Projekte in SH", Icon: Trophy, color: "text-blue-400" },
+    { target: 90, label: "Kundenzufriedenheit", Icon: Heart, color: "text-rose-400", prefix: "Über ", suffix: "%" }
 ];
 
 const StatsSection = memo(() => {
@@ -61,7 +61,12 @@ const StatsSection = memo(() => {
                                 <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-white/5 flex items-center justify-center mb-4 md:mb-6 group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 border border-white/10`}>
                                     <stat.Icon className={`w-6 h-6 md:w-8 md:h-8 ${stat.color}`} />
                                 </div>
-                                <div className="text-4xl md:text-6xl font-black text-white mb-2 md:mb-4 flex items-center justify-center tracking-tighter">
+                                <div className="text-4xl md:text-6xl font-black text-white mb-2 md:mb-4 flex items-baseline justify-center tracking-tighter">
+                                    {stat.prefix && (
+                                        <span className="text-accent text-xl md:text-2xl font-bold mr-2 tracking-normal self-center">
+                                            {stat.prefix}
+                                        </span>
+                                    )}
                                     <span className="counter" data-target={stat.target}>0</span>
                                     <span className="text-accent">{stat.suffix || "+"}</span>
                                 </div>

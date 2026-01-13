@@ -80,7 +80,7 @@ const Home = memo(() => {
             <Helmet>
                 <title>Renovierung & Sanierung | Ratzeburg, Hamburg & Schleswig-Holstein</title>
                 <meta name="description" content="Spezialist für Renovierung und Sanierung in Ratzeburg, Hamburg und ganz Schleswig-Holstein. Badsanierung, Bodenbeläge & Innenausbau zum Festpreis." />
-                <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Hamburg, Handwerker Schleswig-Holstein, Badsanierung, Malerarbeiten, Trockenbau, Winter Usselmann" />
+                <meta name="keywords" content="Renovierung Ratzeburg, Sanierung Hamburg, Handwerker Schleswig-Holstein, Badsanierung, Malerarbeiten, Trockenbau, Elektroarbeiten, Heizungsarbeiten, Asbestsanierung, Winter Usselmann" />
 
                 <link rel="canonical" href="https://wintuss.de/" />
 

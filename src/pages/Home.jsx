@@ -14,7 +14,8 @@ import {
     StatsSection,
     ReviewsSection,
     ProjectsSection,
-    FAQSection
+    FAQSection,
+    CalculatorSection
 } from '../components/sections';
 
 // Schema.org Daten für Local Business
@@ -115,6 +116,7 @@ const Home = memo(() => {
             <ReviewsSection />
             <ProjectsSection />
             <FAQSection />
+            <CalculatorSection />
         </>
     );
 });

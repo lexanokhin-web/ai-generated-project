@@ -123,7 +123,7 @@ const ExtrasStep = memo(({ selectedExtras, areaDetails, onToggle, calculation })
             {/* Skip Note */}
             <div className="max-w-3xl mx-auto text-center">
                 <p className="text-sm text-slate-400">
-                    Sie müssen keine Zusatzleistungen auswählen. Klicken Sie auf "Weiter", um fortzufahren.
+                    Sie müssen keine Zusatzleistungen auswählen. Klicken Sie auf &quot;Weiter&quot;, um fortzufahren.
                 </p>
             </div>
         </div>

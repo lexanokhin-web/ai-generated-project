@@ -297,19 +297,27 @@ export const useCalculator = () => {
 
     // Prüfen ob Schritt abgeschlossen ist
     const isStepComplete = useCallback((step) => {
+        // Zuerst prüfen ob alle vorherigen Schritte abgeschlossen sind
+        const step1Complete = propertyType !== null;
+        const step2Complete = areaDetails.totalArea > 0 && areaDetails.roomCount > 0;
+        const step3Complete = selectedServices.length > 0;
+        const step4Complete = materialClass !== null;
+
         switch (step) {
             case 1:
-                return propertyType !== null;
+                return step1Complete;
             case 2:
-                return areaDetails.totalArea > 0 && areaDetails.roomCount > 0;
+                return step1Complete && step2Complete;
             case 3:
-                return selectedServices.length > 0;
+                return step1Complete && step2Complete && step3Complete;
             case 4:
-                return materialClass !== null;
+                return step1Complete && step2Complete && step3Complete && step4Complete;
             case 5:
-                return true; // Extras sind optional
+                // Extras sind optional, aber vorherige Schritte müssen abgeschlossen sein
+                return step1Complete && step2Complete && step3Complete && step4Complete;
             case 6:
-                return true;
+                // Alle vorherigen Schritte müssen abgeschlossen sein
+                return step1Complete && step2Complete && step3Complete && step4Complete;
             default:
                 return false;
         }

@@ -75,6 +75,7 @@ const CostCalculator = memo(() => {
                     <MaterialClassStep
                         selectedClass={materialClass}
                         onSelect={setMaterialClass}
+                        selectedServices={selectedServices}
                     />
                 );
             case 5:

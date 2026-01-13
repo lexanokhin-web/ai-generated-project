@@ -1,5 +1,5 @@
 import React, { memo, useState, useCallback } from 'react';
-import { servicesPricing, getAveragePrice } from '../../../data/calculatorPricing';
+import { servicesPricing } from '../../../data/calculatorPricing';
 
 /**
  * Schritt 3: Auswahl der Dienstleistungen
@@ -33,6 +33,11 @@ const ServicesStep = memo(({
 
             if (service?.category === 'bathroom') {
                 defaultQty = areaDetails.bathroomArea || areaDetails.bathroomCount * 8;
+            }
+
+            // Nicht hinzufügen wenn Menge 0 ist
+            if (defaultQty <= 0) {
+                return;
             }
 
             onAddService(serviceId, subOptionId, defaultQty, {});
@@ -69,8 +74,6 @@ const ServicesStep = memo(({
                 {servicesPricing.map((service) => {
                     const isSelected = isServiceSelected(service.id);
                     const isExpanded = expandedService === service.id;
-                    const avgLabor = getAveragePrice(service.laborMin, service.laborMax);
-                    const avgMaterial = getAveragePrice(service.materialMin, service.materialMax);
                     const hasSubOptions = service.subOptions && service.subOptions.length > 0;
                     const hasPackages = service.packages && service.packages.length > 0;
 
@@ -127,6 +130,19 @@ const ServicesStep = memo(({
                             {/* Expanded Content */}
                             {isExpanded && (
                                 <div className="px-5 pb-5 border-t border-slate-100 pt-4 space-y-4">
+                                    {/* Warnung für Bad-Services ohne Badezimmer */}
+                                    {service.category === 'bathroom' && areaDetails.bathroomCount === 0 && (
+                                        <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
+                                            <span className="text-xl">⚠️</span>
+                                            <div>
+                                                <p className="font-medium text-amber-800">Kein Badezimmer angegeben</p>
+                                                <p className="text-sm text-amber-600">
+                                                    Bitte gehen Sie zurück zu Schritt 2 und geben Sie die Anzahl der Badezimmer an.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )}
+
                                     {/* Suboptions (für normale Services) */}
                                     {hasSubOptions && !hasPackages && (
                                         <div className="space-y-2">

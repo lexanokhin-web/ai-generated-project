@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import { propertyTypes, materialClasses, servicesPricing, additionalOptions } from '../../../data/calculatorPricing';
+import { propertyTypes, materialClasses, servicesPricing } from '../../../data/calculatorPricing';
 
 /**
  * Schritt 6: Zusammenfassung und PDF-Export
@@ -7,7 +7,6 @@ import { propertyTypes, materialClasses, servicesPricing, additionalOptions } fr
 const SummaryStep = memo(({
     propertyType,
     areaDetails,
-    selectedServices,
     materialClass,
     selectedExtras,
     calculation,
@@ -22,13 +21,13 @@ const SummaryStep = memo(({
         return new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(value);
     };
 
-    const getPropertyTypeName = () => {
+    const getPropertyTypeName = useCallback(() => {
         return propertyTypes.find(t => t.id === propertyType)?.name || '-';
-    };
+    }, [propertyType]);
 
-    const getMaterialClassName = () => {
+    const getMaterialClassName = useCallback(() => {
         return materialClasses.find(c => c.id === materialClass)?.name || '-';
-    };
+    }, [materialClass]);
 
     // PDF generieren
     const generatePDF = useCallback(async () => {
@@ -73,9 +72,9 @@ const SummaryStep = memo(({
             const objectData = [
                 ['Objekttyp:', getPropertyTypeName()],
                 ['Wohnfläche:', `${areaDetails.totalArea} m²`],
-                ['Räume:', `${areaDetails.roomCount}`],
+                ['Räume:', `${areaDetails.roomCount} `],
                 ['Deckenhöhe:', `${areaDetails.ceilingHeight} m`],
-                ['Badezimmer:', `${areaDetails.bathroomCount}`],
+                ['Badezimmer:', `${areaDetails.bathroomCount} `],
             ];
 
             objectData.forEach(([label, value]) => {
@@ -112,11 +111,11 @@ const SummaryStep = memo(({
                 }
 
                 const itemText = item.itemName
-                    ? `${item.serviceName} - ${item.itemName}`
+                    ? `${item.serviceName} - ${item.itemName} `
                     : item.serviceName;
 
                 doc.text(itemText, 25, y);
-                doc.text(`${item.quantity} ${item.unit}`, 120, y);
+                doc.text(`${item.quantity} ${item.unit} `, 120, y);
                 doc.text(formatCurrency(item.totalCost), 160, y, { align: 'right' });
                 y += 6;
             });
@@ -166,7 +165,7 @@ const SummaryStep = memo(({
             if (calculation.discount > 0) {
                 doc.setTextColor(0, 128, 0);
                 doc.text('Mengenrabatt:', 25, y);
-                doc.text(`-${formatCurrency(calculation.discount)}`, 160, y, { align: 'right' });
+                doc.text(`- ${formatCurrency(calculation.discount)} `, 160, y, { align: 'right' });
                 doc.setTextColor(0, 0, 0);
                 y += 6;
             }
@@ -185,7 +184,7 @@ const SummaryStep = memo(({
 
             doc.setFontSize(10);
             doc.setFont('helvetica', 'normal');
-            doc.text(`Preisspanne: ${formatCurrency(calculation.priceMin)} - ${formatCurrency(calculation.priceMax)}`, 25, y);
+            doc.text(`Preisspanne: ${formatCurrency(calculation.priceMin)} - ${formatCurrency(calculation.priceMax)} `, 25, y);
             y += 15;
 
             // Hinweis
@@ -204,7 +203,7 @@ const SummaryStep = memo(({
                 month: 'long',
                 day: 'numeric'
             });
-            doc.text(`Erstellt am: ${datum}`, 20, 285);
+            doc.text(`Erstellt am: ${datum} `, 20, 285);
 
             // PDF speichern
             doc.save(`Kostenvoranschlag_${datum.replace(/\s/g, '_')}.pdf`);
@@ -215,7 +214,7 @@ const SummaryStep = memo(({
         } finally {
             setIsGeneratingPdf(false);
         }
-    }, [propertyType, areaDetails, materialClass, selectedExtras, calculation]);
+    }, [areaDetails, selectedExtras, calculation, getMaterialClassName, getPropertyTypeName]);
 
     return (
         <div className="space-y-8">

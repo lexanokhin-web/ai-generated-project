@@ -1,10 +1,111 @@
-import React, { memo } from 'react';
-import { materialClasses } from '../../../data/calculatorPricing';
+import React, { memo, useMemo } from 'react';
+import { materialClasses, servicesPricing } from '../../../data/calculatorPricing';
+
+// Beispiele für Materialklassen nach Service-Kategorie
+const materialExamplesMapping = {
+    walls: {
+        economy: 'Kalk-Zement-Putz, Standardgips',
+        standard: 'Marken-Spachtel, Qualitätsputz',
+        premium: 'Lehm-Feinputz, Akustikputz',
+        luxury: 'Stucco, Tadelakt, Designputz'
+    },
+    surfaces: {
+        economy: 'Dispersionsfarbe, Raufaser',
+        standard: 'Latexfarbe, Vliestapete',
+        premium: 'Silikonharzfarbe, Designtapete',
+        luxury: 'Kalkfarbe, Stofftapete, Goldakzente'
+    },
+    bathroom: {
+        economy: 'Standard-Fliesen, Keramik-WC',
+        standard: 'Design-Fliesen, Markenarmaturen',
+        premium: 'Feinsteinzeug, Regendusche',
+        luxury: 'Naturstein, Unterputz-Armaturen'
+    },
+    construction: {
+        economy: 'Standard-Gipskarton',
+        standard: 'Knauf-Platten, F30-Schutz',
+        premium: 'Akustikplatten, Brandschutz F90',
+        luxury: 'Design-Decken, Lichtvouten'
+    },
+    flooring: {
+        economy: 'Laminat, PVC-Boden',
+        standard: 'Vinyl-Design, Click-Parkett',
+        premium: 'Echtholz-Parkett, Feinsteinzeug',
+        luxury: 'Massivholz, Naturstein, Marmor'
+    },
+    furniture: {
+        economy: 'IKEA-Küche, Standardtüren',
+        standard: 'Nobilia, CPL-Türen',
+        premium: 'Nolte, Massivholztüren',
+        luxury: 'Poggenpohl, Designertüren'
+    },
+    electrical: {
+        economy: 'Standard-Schalter, LED-Spots',
+        standard: 'Busch-Jaeger, Dimmer',
+        premium: 'Jung, Smart-Home-Basis',
+        luxury: 'Gira Esprit, KNX-System'
+    },
+    heating: {
+        economy: 'Standard-Heizkörper',
+        standard: 'Designheizkörper, Thermostate',
+        premium: 'Fußbodenheizung, Smart-Thermostat',
+        luxury: 'Wandheizung, Naturstein-Heizung'
+    },
+    special: {
+        economy: 'Fachgerechte Entsorgung',
+        standard: 'Zertifizierte Sanierung',
+        premium: 'Vollschutz, Luftreinigung',
+        luxury: 'Komplettsanierung, Garantie'
+    }
+};
+
+// Generische Fallback-Beispiele
+const defaultExamples = {
+    economy: 'Standard-Materialien',
+    standard: 'Markenprodukte',
+    premium: 'Hochwertige Materialien',
+    luxury: 'Exklusive Materialien'
+};
 
 /**
  * Schritt 4: Auswahl der Materialklasse
  */
-const MaterialClassStep = memo(({ selectedClass, onSelect }) => {
+const MaterialClassStep = memo(({ selectedClass, onSelect, selectedServices = [] }) => {
+
+    // Dynamische Beispiele basierend auf ausgewählten Services
+    const getDynamicExamples = useMemo(() => {
+        return (materialClassId) => {
+            if (!selectedServices || selectedServices.length === 0) {
+                return defaultExamples[materialClassId] || '';
+            }
+
+            // Sammle alle Kategorien der ausgewählten Services
+            const selectedCategories = new Set();
+            selectedServices.forEach(({ serviceId }) => {
+                const service = servicesPricing.find(s => s.id === serviceId);
+                if (service?.category) {
+                    selectedCategories.add(service.category);
+                }
+            });
+
+            // Sammle passende Beispiele
+            const examples = [];
+            selectedCategories.forEach(category => {
+                const categoryExamples = materialExamplesMapping[category];
+                if (categoryExamples && categoryExamples[materialClassId]) {
+                    // Nur erste 2-3 Wörter nehmen
+                    const words = categoryExamples[materialClassId].split(',')[0].trim();
+                    if (!examples.includes(words)) {
+                        examples.push(words);
+                    }
+                }
+            });
+
+            // Max 3-5 Begriffe, durch Komma getrennt
+            return examples.slice(0, 4).join(', ') || defaultExamples[materialClassId];
+        };
+    }, [selectedServices]);
+
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -24,6 +125,9 @@ const MaterialClassStep = memo(({ selectedClass, onSelect }) => {
 
                     // Visual indicators
                     const qualityStars = index + 2; // 2-5 stars
+
+                    // Dynamische Beispiele
+                    const examples = getDynamicExamples(material.id);
 
                     return (
                         <button
@@ -81,9 +185,9 @@ const MaterialClassStep = memo(({ selectedClass, onSelect }) => {
                                 {material.description}
                             </p>
 
-                            {/* Examples */}
+                            {/* Dynamic Examples */}
                             <p className="text-xs text-slate-400 mb-4">
-                                <strong>Beispiele:</strong> {material.examples}
+                                <strong>Beispiele:</strong> {examples}
                             </p>
 
                             {/* Price Impact */}
@@ -184,3 +288,4 @@ const MaterialClassStep = memo(({ selectedClass, onSelect }) => {
 MaterialClassStep.displayName = 'MaterialClassStep';
 
 export default MaterialClassStep;
+

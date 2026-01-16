@@ -1,8 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { services } from '../data/services';
 
 const Footer = () => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitResult, setSubmitResult] = useState(null); // 'success', 'error', or null
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsSubmitting(true);
+        setSubmitResult(null);
+
+        const formData = new FormData(event.target);
+        formData.append("access_key", "cb12ff43-05c0-4c52-b98c-e7648ff67914");
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setSubmitResult('success');
+                event.target.reset();
+            } else {
+                setSubmitResult('error');
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setSubmitResult('error');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <footer id="contact" className="bg-slate-900 text-slate-300 relative pt-24 pb-10 overflow-hidden">
             {/* Background accents */}
@@ -54,39 +87,108 @@ const Footer = () => {
                     </div>
 
                     {/* Contact Form Card */}
-                    <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl">
-                        <form className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                                <div className="space-y-1">
-                                    <label className="text-sm font-medium text-slate-400">Vorname</label>
-                                    <input type="text"
-                                        className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
-                                        placeholder="Max" />
+                    <div className="bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl shadow-2xl relative overflow-hidden">
+                        {submitResult === 'success' ? (
+                            <div className="h-full flex flex-col items-center justify-center text-center py-12 animate-in fade-in zoom-in duration-500">
+                                <div className="w-20 h-20 bg-green-500/20 text-green-500 rounded-full flex items-center justify-center mb-6">
+                                    <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 className="text-2xl font-bold text-white mb-2">Vielen Dank!</h3>
+                                <p className="text-slate-400">Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.</p>
+                                <button
+                                    onClick={() => setSubmitResult(null)}
+                                    className="mt-8 text-sm text-accent hover:underline"
+                                >
+                                    Weitere Nachricht senden
+                                </button>
+                            </div>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <label className="text-sm font-medium text-slate-400">Vorname</label>
+                                        <input
+                                            type="text"
+                                            name="first_name"
+                                            required
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
+                                            placeholder="Max"
+                                        />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label className="text-sm font-medium text-slate-400">Nachname</label>
+                                        <input
+                                            type="text"
+                                            name="last_name"
+                                            required
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
+                                            placeholder="Mustermann"
+                                        />
+                                    </div>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <label className="text-sm font-medium text-slate-400">Email Adresse</label>
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            required
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
+                                            placeholder="max@beispiel.de"
+                                        />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <label className="text-sm font-medium text-slate-400">Telefonnummer (optional)</label>
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
+                                            placeholder="0151 12345678"
+                                        />
+                                    </div>
                                 </div>
                                 <div className="space-y-1">
-                                    <label className="text-sm font-medium text-slate-400">Nachname</label>
-                                    <input type="text"
+                                    <label className="text-sm font-medium text-slate-400">Nachricht</label>
+                                    <textarea
+                                        name="message"
+                                        required
+                                        rows="4"
                                         className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
-                                        placeholder="Mustermann" />
+                                        placeholder="Erzählen Sie uns von Ihrem Projekt..."
+                                    ></textarea>
                                 </div>
-                            </div>
-                            <div className="space-y-1">
-                                <label className="text-sm font-medium text-slate-400">Email Adresse</label>
-                                <input type="email"
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
-                                    placeholder="max@beispiel.de" />
-                            </div>
-                            <div className="space-y-1">
-                                <label className="text-sm font-medium text-slate-400">Nachricht</label>
-                                <textarea rows="4"
-                                    className="w-full bg-slate-800 border border-slate-700 rounded-lg p-3 text-white focus:outline-none focus:border-accent transition-colors"
-                                    placeholder="Erzählen Sie uns von Ihrem Projekt..."></textarea>
-                            </div>
-                            <button type="button"
-                                className="w-full py-4 bg-accent text-white font-bold rounded-lg shadow-lg hover:bg-amber-700 transition-colors">
-                                Anfrage Senden
-                            </button>
-                        </form>
+
+                                {submitResult === 'error' && (
+                                    <div className="p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-500 text-sm flex items-center gap-2">
+                                        <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.
+                                    </div>
+                                )}
+
+                                <button
+                                    type="submit"
+                                    disabled={isSubmitting}
+                                    className={`w-full py-4 font-bold rounded-lg shadow-lg hover:bg-amber-700 transition-all flex items-center justify-center gap-2 ${isSubmitting ? 'bg-slate-700 cursor-not-allowed text-slate-400' : 'bg-accent text-white'
+                                        }`}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <svg className="animate-spin h-5 w-5 text-accent" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Wird gesendet...
+                                        </>
+                                    ) : (
+                                        'Anfrage Senden'
+                                    )}
+                                </button>
+                            </form>
+                        )}
                     </div>
                 </div>
 

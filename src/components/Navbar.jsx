@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import Modal from './UI/Modal'
+import ContactModalForm from './UI/ContactModalForm'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
@@ -25,10 +28,12 @@ const Navbar = () => {
 
                     {/* CTA */}
                     <div className="hidden lg:block">
-                        <a href="/#contact"
-                            className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:-translate-y-0.5 transition-all duration-300">
+                        <button
+                            onClick={() => setIsModalOpen(true)}
+                            className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:-translate-y-0.5 transition-all duration-300"
+                        >
                             Kostenlos Beraten Lassen
-                        </a>
+                        </button>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -51,11 +56,26 @@ const Navbar = () => {
                     <a href="/#projects" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Projekte &amp; Referenzen</a>
                     <a href="/#calculator" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Kostenrechner</a>
                     <a href="/#contact" className="text-sm font-medium hover:text-accent transition-colors" onClick={() => setIsOpen(false)}>Kontakt</a>
-                    <a href="/#contact" className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 text-center" onClick={() => setIsOpen(false)}>
+                    <button
+                        onClick={() => {
+                            setIsOpen(false);
+                            setIsModalOpen(true);
+                        }}
+                        className="px-6 py-3 bg-accent text-white font-bold text-sm rounded-full shadow-lg shadow-accent/30 text-center"
+                    >
                         Kostenlos Beraten Lassen
-                    </a>
+                    </button>
                 </div>
             )}
+
+            {/* Contact Modal */}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                title="Kostenlose Erstberatung"
+            >
+                <ContactModalForm />
+            </Modal>
         </header>
     )
 }

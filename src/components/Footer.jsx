@@ -1,40 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { services } from '../data/services';
+import { useContactForm } from '../hooks/useContactForm';
 
 const Footer = () => {
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [submitResult, setSubmitResult] = useState(null); // 'success', 'error', or null
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setIsSubmitting(true);
-        setSubmitResult(null);
-
-        const formData = new FormData(event.target);
-        formData.append("access_key", "cb12ff43-05c0-4c52-b98c-e7648ff67914");
-
-        try {
-            const response = await fetch("https://api.web3forms.com/submit", {
-                method: "POST",
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                setSubmitResult('success');
-                event.target.reset();
-            } else {
-                setSubmitResult('error');
-            }
-        } catch (error) {
-            console.error("Form submission error:", error);
-            setSubmitResult('error');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    const { isSubmitting, submitResult, handleSubmit, resetStatus } = useContactForm();
 
     return (
         <footer id="contact" className="bg-slate-900 text-slate-300 relative pt-24 pb-10 overflow-hidden">
@@ -98,7 +68,7 @@ const Footer = () => {
                                 <h3 className="text-2xl font-bold text-white mb-2">Vielen Dank!</h3>
                                 <p className="text-slate-400">Ihre Nachricht wurde erfolgreich gesendet. Wir melden uns in Kürze bei Ihnen.</p>
                                 <button
-                                    onClick={() => setSubmitResult(null)}
+                                    onClick={resetStatus}
                                     className="mt-8 text-sm text-accent hover:underline"
                                 >
                                     Weitere Nachricht senden

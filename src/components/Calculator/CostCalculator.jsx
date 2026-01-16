@@ -175,9 +175,9 @@ const CostCalculator = memo(() => {
                 )}
             </div>
 
-            {/* Mobile Price Bar (not on summary) */}
-            {currentStep < 6 && (
-                <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-lg z-50">
+            {/* Mobile Price Bar (shown after interaction starts) */}
+            {currentStep < 6 && (currentStep > 1 || propertyType !== null) && (
+                <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-lg z-50 animate-in slide-in-from-bottom duration-300">
                     <PriceDisplay calculation={calculation} isCompact={true} />
                 </div>
             )}

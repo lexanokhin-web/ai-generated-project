@@ -4,16 +4,16 @@ import ProjectGalleryModal from '../UI/ProjectGalleryModal';
 
 // Statisches Projekt-Array
 const PROJECT_IMAGES = [
-    { img: "/images/image-21.webp", title: "Badezimmermodernisierung", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
-    { img: "/images/bathroom.webp", title: "Wohnzimmer Redesign", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
-    { img: "/images/kitchen.webp", title: "Balkonrenovierung", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme und Funktionalität." },
-    { img: "/images/living-room.webp", title: "Badezimmer-Renovierung", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
-    { img: "/images/open-plan.webp", title: "Open-Plan Living", cat: "Sanierung", desc: "Zusammenführung von Räumen für ein großzügiges Wohngefühl." },
-    { img: "/images/wardrobe.webp", title: "Maßgeschneiderter Stauraum", cat: "Tischler", desc: "Individuelle Schranklösungen nach Maß für maximale Platzausnutzung." },
-    { img: "/images/image-22.webp", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Zeitloses Design trifft auf Funktionalität in Schleswig-Holstein." },
-    { img: "/images/image-23.webp", title: "Wohnraum Design", cat: "Modernisierung", desc: "Kreative Raumkonzepte für Ihr individuelles Wohnerlebnis." },
-    { img: "/images/image-24.webp", title: "Eingangsbereich & Treppe", cat: "Innenausbau", desc: "Einladende Gestaltung des Entrées mit langlebigen Materialien." },
-    { img: "/images/image-25.webp", title: "Montage von Schutzschaltern", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
+    { img: "/images/image-21.webp", title: "Badezimmermodernisierung", cat: "Sanierung", desc: "Komplette Neuerstellung eines barrierefreien und modernen Badezimmers." },
+    { img: "/images/bathroom.webp", title: "Wohnzimmer Redesign", cat: "Innenausbau", desc: "Exklusive Wandgestaltung und Bodenerneuerung für ein wohnliches Ambiente." },
+    { img: "/images/kitchen.webp", title: "Balkonrenovierung", cat: "Außenbau", desc: "Fachgerechte Betonsanierung und Belagserneuerung für Außenbereiche." },
+    { img: "/images/living-room.webp", title: "Badezimmer-Renovierung", cat: "Modernisierung", desc: "Vollständige Sanierung von Fliesen und Sanitäranlagen aus einer Hand." },
+    { img: "/images/open-plan.webp", title: "Open-Plan Living", cat: "Innenausbau", desc: "Zusammenführung von Wohnbereichen durch präzise Trockenbauarbeiten." },
+    { img: "/images/wardrobe.webp", title: "Maßgeschneiderter Stauraum", cat: "Tischlerarbeiten", desc: "Individuell gefertigte Einbauschränke für maximale Platzeffizienz." },
+    { img: "/images/image-22.webp", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit Fokus auf Design und Funktionalität." },
+    { img: "/images/image-23.webp", title: "Wohnraum Design", cat: "Modernisierung", desc: "Stilvolle Renovierung von Wohnräumen mit hochwertigen Materialien." },
+    { img: "/images/image-24.webp", title: "Badsanierung", cat: "Sanierung", desc: "Professionelle Badezimmererneuerung inklusive Elektrik und Sanitär." },
+    { img: "/images/image-25.webp", title: "Montage von Schutzschaltern", cat: "Elektroarbeiten", desc: "Fachliche Installation moderner Elektro-Sicherheitssysteme." },
 ];
 
 const ProjectsSection = memo(() => {

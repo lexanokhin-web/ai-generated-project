@@ -4,7 +4,7 @@ import ProjectGalleryModal from '../UI/ProjectGalleryModal';
 
 // Statisches Projekt-Array
 const PROJECT_IMAGES = [
-    { img: "/images/image-21.webp", title: "Küchensanierung Ratzeburg", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
+    { img: "/images/image-21.webp", title: "Küchensanierung Lübeck", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
     { img: "/images/bathroom.webp", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
     { img: "/images/kitchen.webp", title: "Moderne Loft-Küche", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme und Funktionalität." },
     { img: "/images/living-room.webp", title: "Wohnzimmer Redesign", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },

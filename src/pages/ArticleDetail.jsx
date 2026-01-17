@@ -27,7 +27,7 @@ const ArticleDetail = () => {
         "@context": "https://schema.org",
         "@type": "Article",
         "headline": article.title,
-        "image": `https://wintuss.de${article.image}`,
+        "image": `https://www.wintuss.de${article.image}`,
         "author": {
             "@type": "Person",
             "name": article.author
@@ -37,7 +37,7 @@ const ArticleDetail = () => {
             "name": "Winter & Usselmann GbR",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://wintuss.de/images/logo.webp"
+                "url": "https://www.wintuss.de/images/logo.webp"
             }
         },
         "datePublished": article.date,
@@ -54,19 +54,19 @@ const ArticleDetail = () => {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Startseite",
-                "item": "https://wintuss.de/"
+                "item": "https://www.wintuss.de/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Ratgeber",
-                "item": "https://wintuss.de/ratgeber"
+                "item": "https://www.wintuss.de/ratgeber"
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "name": article.title,
-                "item": `https://wintuss.de/ratgeber/${article.id}`
+                "item": `https://www.wintuss.de/ratgeber/${article.id}`
             }
         ]
     };
@@ -76,14 +76,14 @@ const ArticleDetail = () => {
             <Helmet>
                 <title>{`${article.title} | Ratgeber Winter & Usselmann`}</title>
                 <meta name="description" content={article.excerpt} />
-                <link rel="canonical" href={`https://wintuss.de/ratgeber/${article.id}`} />
+                <link rel="canonical" href={`https://www.wintuss.de/ratgeber/${article.id}`} />
 
                 {/* OG Tags */}
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={`https://wintuss.de/ratgeber/${article.id}`} />
+                <meta property="og:url" content={`https://www.wintuss.de/ratgeber/${article.id}`} />
                 <meta property="og:title" content={`${article.title} | Ratgeber Winter & Usselmann`} />
                 <meta property="og:description" content={article.excerpt} />
-                <meta property="og:image" content={`https://wintuss.de${article.image}`} />
+                <meta property="og:image" content={`https://www.wintuss.de${article.image}`} />
             </Helmet>
 
             <StructuredData data={articleSchema} />

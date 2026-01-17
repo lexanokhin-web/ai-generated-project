@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from './UI/Modal'
 import ContactModalForm from './UI/ContactModalForm'
+import { useModal } from '../context/ModalContext'
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false)
-    const [isModalOpen, setIsModalOpen] = useState(false)
+    const { isContactModalOpen, openContactModal, closeContactModal } = useModal()
 
     return (
         <header className="fixed top-0 left-0 w-full z-50 transition-all duration-300" id="navbar">
@@ -29,7 +30,7 @@ const Navbar = () => {
                     {/* CTA */}
                     <div className="hidden lg:block">
                         <button
-                            onClick={() => setIsModalOpen(true)}
+                            onClick={openContactModal}
                             className="px-6 py-2.5 bg-accent text-white font-semibold text-sm rounded-full shadow-lg shadow-accent/30 hover:shadow-accent/50 hover:-translate-y-0.5 transition-all duration-300"
                         >
                             Kostenlos Beraten Lassen
@@ -59,7 +60,7 @@ const Navbar = () => {
                     <button
                         onClick={() => {
                             setIsOpen(false);
-                            setIsModalOpen(true);
+                            openContactModal();
                         }}
                         className="px-6 py-3 bg-accent text-white font-bold text-sm rounded-full shadow-lg shadow-accent/30 text-center"
                     >
@@ -70,8 +71,8 @@ const Navbar = () => {
 
             {/* Contact Modal */}
             <Modal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
+                isOpen={isContactModalOpen}
+                onClose={closeContactModal}
                 title="Kostenlose Erstberatung"
             >
                 <ContactModalForm />

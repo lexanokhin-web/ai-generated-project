@@ -56,19 +56,19 @@ const ServiceDetail = () => {
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Startseite",
-                "item": "https://wintuss.de/"
+                "item": "https://www.wintuss.de/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Leistungen",
-                "item": "https://wintuss.de/#services"
+                "item": "https://www.wintuss.de/#services"
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "name": service.title,
-                "item": `https://wintuss.de/leistungen/${service.id}`
+                "item": `https://www.wintuss.de/leistungen/${service.id}`
             }
         ]
     };
@@ -76,16 +76,16 @@ const ServiceDetail = () => {
     return (
         <>
             <Helmet>
-                <title>{`${service.title} | Ratzeburg, Hamburg & Schleswig-Holstein`}</title>
-                <meta name="description" content={`${service.hook} ${service.description} Ihr Partner für ${service.title} in Ratzeburg, Hamburg und ganz Schleswig-Holstein.`} />
-                <link rel="canonical" href={`https://wintuss.de/leistungen/${service.id}`} />
+                <title>{`${service.title} | Lübeck, Hamburg & Schleswig-Holstein`}</title>
+                <meta name="description" content={`${service.hook} ${service.description} Ihr Partner für ${service.title} in Lübeck, Hamburg und ganz Schleswig-Holstein.`} />
+                <link rel="canonical" href={`https://www.wintuss.de/leistungen/${service.id}`} />
 
                 {/* OG Tags */}
                 <meta property="og:type" content="article" />
-                <meta property="og:url" content={`https://wintuss.de/leistungen/${service.id}`} />
-                <meta property="og:title" content={`${service.title} | Ratzeburg, Hamburg & SH`} />
+                <meta property="og:url" content={`https://www.wintuss.de/leistungen/${service.id}`} />
+                <meta property="og:title" content={`${service.title} | Lübeck, Hamburg & SH`} />
                 <meta property="og:description" content={service.subtitle} />
-                <meta property="og:image" content={`https://wintuss.de${service.heroImage}`} />
+                <meta property="og:image" content={`https://www.wintuss.de${service.heroImage}`} />
             </Helmet>
 
             <StructuredData data={serviceSchema} />

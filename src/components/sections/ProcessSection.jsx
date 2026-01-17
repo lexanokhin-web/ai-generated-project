@@ -4,7 +4,7 @@ import AnimatedBackground from '../UI/AnimatedBackground';
 
 // Statische Prozessdaten
 const STEPS = [
-    { id: 1, title: "Beratung & Designauswahl", desc: "Wir hören zu. In Ratzeburg und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
+    { id: 1, title: "Beratung & Designauswahl", desc: "Wir hören zu. In Lübeck und Umgebung kommen wir gerne zu Ihnen, um Ihre Wünsche vor Ort zu besprechen und ein Konzept zu entwickeln." },
     { id: 2, title: "Festpreisangebot", desc: "Sie erhalten ein glasklares Angebot. Wir erklären Ihnen jeden Posten, damit Sie genau wissen, wofür Sie bezahlen." },
     { id: 3, title: "Umsetzung", desc: "Lehnen Sie sich zurück. Unsere Profis arbeiten sauber, schnell und diskret. Wir halten Sie proaktiv auf dem Laufenden." },
     { id: 4, title: "Fertigstellung & Übergabe", desc: "Ihr neues Zuhause wartet. Wir übergeben besenrein und gehen jeden Winkel mit Ihnen durch. Erst wenn Sie zufrieden sind, sind wir es auch." }

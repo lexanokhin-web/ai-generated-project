@@ -1,5 +1,5 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# Sitemap Location (Disabled temporarily)
-# Sitemap: https://wintuss.de/sitemap.xml
+# Sitemap Location
+Sitemap: https://www.wintuss.de/sitemap.xml

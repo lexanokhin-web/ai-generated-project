@@ -1,15 +1,17 @@
 import React, { memo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import HeroScene from '../3D/HeroScene';
+import { useModal } from '../../context/ModalContext';
 
 const HeroSection = memo(() => {
+    const { openContactModal } = useModal();
     return (
         <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
             <div className="absolute inset-0 z-0">
                 <HeroScene />
                 <img
                     src="/images/image-1.webp"
-                    alt="Traumhaus Renovierung Ratzeburg"
+                    alt="Traumhaus Renovierung Lübeck"
                     className="w-full h-full object-cover animate-subtle-zoom opacity-50"
                     loading="eager"
                     decoding="async"
@@ -25,7 +27,7 @@ const HeroSection = memo(() => {
                         className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider mb-6"
                         data-aos="fade-down"
                     >
-                        Handwerkskunst in Ratzeburg, Hamburg & SH
+                        Handwerkskunst in Lübeck, Hamburg & SH
                     </span>
                     <h1
                         className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-6 md:mb-8"
@@ -48,12 +50,12 @@ const HeroSection = memo(() => {
                         data-aos="fade-up"
                         data-aos-delay="300"
                     >
-                        <a
-                            href="#contact"
+                        <button
+                            onClick={openContactModal}
                             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-accent text-white font-bold rounded-full shadow-[0_0_20px_rgba(217,119,6,0.4)] hover:shadow-[0_0_30px_rgba(217,119,6,0.6)] hover:scale-105 transition-all duration-300 text-sm sm:text-base"
                         >
                             Kostenloses Angebot anfordern
-                        </a>
+                        </button>
                         <a
                             href="#services"
                             className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-semibold rounded-full hover:bg-white/20 transition-all duration-300 group flex items-center justify-center gap-2 text-sm sm:text-base"
@@ -70,7 +72,7 @@ const HeroSection = memo(() => {
                 <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-xs text-white">
                     <div className="flex items-center gap-3 mb-2">
                         <div className="flex -space-x-2">
-                            <img src="/images/image-2.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Zufriedener Kunde Renovierung Ratzeburg" loading="lazy" decoding="async" />
+                            <img src="/images/image-2.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Zufriedener Kunde Renovierung Lübeck" loading="lazy" decoding="async" />
                             <img src="/images/image-3.webp" className="w-10 h-10 rounded-full border-2 border-white object-cover" alt="Kunde Badsanierung Schleswig-Holstein" loading="lazy" decoding="async" />
                         </div>
                         <div className="flex text-accent">★★★★★</div>

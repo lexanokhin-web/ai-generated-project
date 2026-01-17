@@ -11,7 +11,7 @@ const Impressum = () => {
         <>
             <Helmet>
                 <title>Impressum | Winter & Usselmann GbR</title>
-                <meta name="description" content="Impressum der Winter & Usselmann GbR - Ihr Partner für Renovierung und Sanierung in Ratzeburg." />
+                <meta name="description" content="Impressum der Winter & Usselmann GbR - Ihr Partner für Renovierung und Sanierung in Lübeck." />
             </Helmet>
 
             <div className="pt-24 pb-12 bg-slate-900 text-center">

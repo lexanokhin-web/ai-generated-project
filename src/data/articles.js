@@ -1,7 +1,7 @@
 export const articles = [
     {
-        id: "kosten-badsanierung-ratzeburg-2025",
-        title: "Was kostet eine Badsanierung in Ratzeburg wirklich? (Preise 2025)",
+        id: "kosten-badsanierung-luebeck-2025",
+        title: "Was kostet eine Badsanierung in Lübeck wirklich? (Preise 2025)",
         excerpt: "Hand aufs Herz: Was kostet ein neues Bad? Wir packen die Zahlen auf den Tisch – vom Budget-Bad bis zur Wellness-Oase. Keine versteckten Kosten, nur Klartext.",
         date: "2025-05-15",
         author: "Michael Winter",
@@ -13,7 +13,7 @@ export const articles = [
             
             <img src="/images/image-27.webp" alt="Detailaufnahme Armaturen" class="float-right w-full md:w-1/2 ml-0 md:ml-6 mb-6 rounded-xl shadow-lg object-cover h-64" />
             
-            <p>Trotzdem wollen wir heute mal Tacheles reden. Wir haben unsere Projekte aus dem letzten Jahr in Ratzeburg und Umgebung analysiert und können Ihnen daher ziemlich genaue Richtwerte geben. Schnallen Sie sich an (oder setzen Sie sich auf den Badewannenrand), hier kommen die Zahlen!</p>
+            <p>Trotzdem wollen wir heute mal Tacheles reden. Wir haben unsere Projekte aus dem letzten Jahr in Lübeck und Umgebung analysiert und können Ihnen daher ziemlich genaue Richtwerte geben. Schnallen Sie sich an (oder setzen Sie sich auf den Badewannenrand), hier kommen die Zahlen!</p>
 
             <div class="bg-slate-100 p-6 rounded-xl my-8 border-l-4 border-accent clear-both">
                 <h3 class="text-xl font-bold mb-2">💡 Kurz & Knapp: Die Faustformel</h3>
@@ -30,7 +30,7 @@ export const articles = [
             <p><em>Perfekt für: Mietwohnungen oder das Gästebad.</em></p>
 
             <h2>Variante 2: Der "Wohlfühl-Standard" (Budget: 15.000€ - 25.000€)</h2>
-            <p>Das ist unser Bestseller in Ratzeburg. Wir entkernen den Raum komplett (ja, es wird staubig, aber wir kleben alles gut ab!). Neue Leitungen, neue Elektrik, neue Abdichtung.</p>
+            <p>Das ist unser Bestseller in Lübeck. Wir entkernen den Raum komplett (ja, es wird staubig, aber wir kleben alles gut ab!). Neue Leitungen, neue Elektrik, neue Abdichtung.</p>
             <p><strong>Was Sie hierfür bekommen:</strong></p>
             <ul class="list-disc pl-6 space-y-2 my-4">
                 <li>Bodengleiche Dusche (nie wieder stolpern!).</li>
@@ -50,7 +50,7 @@ export const articles = [
         `
     },
     {
-        id: "handwerker-finden-ratzeburg-tipps",
+        id: "handwerker-finden-luebeck-tipps",
         title: "Handwerker-Checkliste: So finden Sie den richtigen Partner für Ihre Sanierung",
         excerpt: "Horrorgeschichten über Handwerker gibt es genug. Damit Ihr Projekt ein Traum und kein Albtraum wird, haben wir eine Checkliste erstellt. Worauf Sie achten müssen.",
         date: "2025-05-10",
@@ -80,7 +80,7 @@ export const articles = [
             <p><strong>Unser Tipp:</strong> Testen Sie die Kommunikation. Stellen Sie Rückfragen zum Angebot. Ein guter Handwerker nimmt sich Zeit für Erklärungen.</p>
 
             <h2>3. Referenzen aus der Region</h2>
-            <p>Papier ist geduldig. Fragen Sie nach echten Projekten. "Haben Sie so etwas schon mal in Ratzeburg gemacht?" Ein stolzer Handwerker zeigt Ihnen gerne Fotos oder nennt Referenzobjekte.</p>
+            <p>Papier ist geduldig. Fragen Sie nach echten Projekten. "Haben Sie so etwas schon mal in Lübeck gemacht?" Ein stolzer Handwerker zeigt Ihnen gerne Fotos oder nennt Referenzobjekte.</p>
 
             <div class="bg-amber-50 p-6 rounded-xl my-8 border-l-4 border-amber-500">
                 <h3 class="text-xl font-bold mb-2 text-amber-900">🚩 Red Flags (Warnsignale)</h3>

@@ -6,7 +6,7 @@ import Section from '../UI/Section';
 const REVIEWS = [
     {
         name: "Familie Müller",
-        location: "Ratzeburg",
+        location: "Lübeck",
         img: "/images/image-19.webp",
         text: "Endlich eine Firma, die hält, was sie verspricht. Die Badsanierung lief wie am Schnürchen. Besonders die Sauberkeit auf der Baustelle hat uns beeindruckt."
     },

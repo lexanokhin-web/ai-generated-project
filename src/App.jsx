@@ -6,6 +6,7 @@ import 'aos/dist/aos.css';
 // Components (always loaded)
 import ScrollToHashElement from './components/ScrollToHashElement';
 import MainLayout from './components/Layout/MainLayout';
+import { ModalProvider } from './context/ModalContext';
 
 // Pages (lazy loaded)
 const Home = lazy(() => import('./pages/Home'));
@@ -41,24 +42,26 @@ function App() {
     }, []);
 
     return (
-        <Router>
-            <ScrollToHashElement />
-            <Suspense fallback={<PageLoader />}>
-                <Routes>
-                    <Route path="/" element={<MainLayout />}>
-                        <Route index element={<Home />} />
-                        <Route path="uber-uns" element={<About />} />
-                        <Route path="leistungen/:id" element={<ServiceDetail />} />
-                        <Route path="ratgeber" element={<Blog />} />
-                        <Route path="ratgeber/:id" element={<ArticleDetail />} />
-                        <Route path="impressum" element={<Impressum />} />
-                        <Route path="datenschutz" element={<Datenschutz />} />
-                        <Route path="agb" element={<AGB />} />
-                        <Route path="*" element={<NotFound />} />
-                    </Route>
-                </Routes>
-            </Suspense>
-        </Router>
+        <ModalProvider>
+            <Router>
+                <ScrollToHashElement />
+                <Suspense fallback={<PageLoader />}>
+                    <Routes>
+                        <Route path="/" element={<MainLayout />}>
+                            <Route index element={<Home />} />
+                            <Route path="uber-uns" element={<About />} />
+                            <Route path="leistungen/:id" element={<ServiceDetail />} />
+                            <Route path="ratgeber" element={<Blog />} />
+                            <Route path="ratgeber/:id" element={<ArticleDetail />} />
+                            <Route path="impressum" element={<Impressum />} />
+                            <Route path="datenschutz" element={<Datenschutz />} />
+                            <Route path="agb" element={<AGB />} />
+                            <Route path="*" element={<NotFound />} />
+                        </Route>
+                    </Routes>
+                </Suspense>
+            </Router>
+        </ModalProvider>
     );
 }
 

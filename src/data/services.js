@@ -5,7 +5,7 @@ export const services = [
         subtitle: "Solide Basis für Ihr Zuhause",
         heroImage: "/images/image-8.webp",
         hook: "Bröckelnder Putz? Feuchte Wände? Wir schaffen Abhilfe – dauerhaft.",
-        description: "Ob Fassadensanierung, Kellersanierung oder klassische Putzarbeiten: Wir sorgen für eine gesunde Bausubstanz. Unsere Maurerarbeiten stehen für Stabilität und Langlebigkeit in Ratzeburg und Umgebung.",
+        description: "Ob Fassadensanierung, Kellersanierung oder klassische Putzarbeiten: Wir sorgen für eine gesunde Bausubstanz. Unsere Maurerarbeiten stehen für Stabilität und Langlebigkeit in Lübeck und Umgebung.",
         benefits: [
             "Werterhalt Ihrer Immobilie durch professionelle Sanierung",
             "Besseres Raumklima durch atmungsaktive Putze",

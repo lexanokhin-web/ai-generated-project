@@ -28,7 +28,7 @@ const AboutSection = memo(() => {
 
                             <div className="space-y-4 md:space-y-6 text-slate-600 text-base md:text-lg lg:text-xl leading-relaxed font-light">
                                 <p>
-                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Ratzeburg, Hamburg und Region, aber es passt nicht mehr ganz zu Ihrem Leben.
+                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Lübeck, Hamburg und Region, aber es passt nicht mehr ganz zu Ihrem Leben.
                                     Das Bad ist veraltet, der Boden knarrt, oder Sie brauchen einfach mehr Platz.
                                 </p>
                                 <p>
@@ -66,7 +66,7 @@ const AboutSection = memo(() => {
                             {/* Floating Sticker - только на MD+ */}
                             <div className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-28 h-28 md:w-40 md:h-40 bg-accent rounded-full flex items-center justify-center text-white font-bold text-center p-4 md:p-6 shadow-2xl z-20 rotate-12 group-hover:rotate-0 transition-transform duration-500 hidden sm:flex">
                                 <div className="text-xs md:text-sm uppercase tracking-widest leading-tight">
-                                    Meister<br />Qualität<br /><span className="text-[0.5rem] md:text-[0.6rem] font-medium opacity-80">Ratzeburg, HH & SH</span>
+                                    Meister<br />Qualität<br /><span className="text-[0.5rem] md:text-[0.6rem] font-medium opacity-80">Lübeck, HH & SH</span>
                                 </div>
                             </div>
 

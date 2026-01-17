@@ -1,21 +1,19 @@
 # SEO Setup Instructions
 
-## Файлы для замены перед деплоем
-
-Когда у вас будет доменное имя, замените `https://example.com` на ваш реальный домен в следующих файлах:
+## Файлы с настроенным SEO
+На данный момент сайт настроен на домен `https://www.wintuss.de`.
 
 ### 1. public/sitemap.xml
-Заменить все вхождения `https://example.com` на ваш домен.
+Все ссылки обновлены на `https://www.wintuss.de/`.
 
 ### 2. public/robots.txt
-Заменить `Sitemap: https://example.com/sitemap.xml` на ваш домен.
+Указан путь: `Sitemap: https://www.wintuss.de/sitemap.xml`.
 
-### 3. src/pages/Home.jsx
-В объекте `localBusinessSchema` и метатегах Helmet:
-- `"url": "https://example.com"`
-- `"image": "https://example.com/images/image-1.png"`
-- `<link rel="canonical" href="https://example.com/" />`
-- Все Open Graph и Twitter meta tags с `https://example.com`
+### 3. Метатеги и Schema.org (Home.jsx, About.jsx и др.)
+- `"url": "https://www.wintuss.de"`
+- `"image": "https://www.wintuss.de/images/image-1.webp"`
+- `<link rel="canonical" href="https://www.wintuss.de/" />`
+- Все Open Graph и Twitter теги настроены на `https://www.wintuss.de`
 
 ## Favicon (Опционально)
 
@@ -42,7 +40,7 @@
 
 1. **Google Search Console**
    - Зарегистрируйте сайт
-   - Отправьте sitemap: `https://ваш-домен.com/sitemap.xml`
+   - Отправьте sitemap: `https://www.wintuss.de/sitemap.xml`
 
 2. **Bing Webmaster Tools**
    - Зарегистрируйте сайт
@@ -75,30 +73,28 @@
 ✅ Описательные meta descriptions
 ✅ Структурированные данные services
 
-## Локальное SEO
-
-Для лучшего ранжирования в Ratzeburg и Schleswig-Holstein:
+Для лучшего ранжирования в Lübeck и Schleswig-Holstein:
 
 1. Используйте ключевые слова:
-   - "Renovierung Ratzeburg"
-   - "Handwerker Ratzeburg"
+   - "Renovierung Lübeck"
+   - "Handwerker Lübeck"
    - "Badsanierung Schleswig-Holstein"
-   - "Sanierung Ratzeburg"
+   - "Sanierung Lübeck"
 
 2. Создайте контент:
-   - Статьи в блоге про проекты в Ratzeburg
+   - Статьи в блоге про проекты в Lübeck
    - Case studies местных работ
-   - Отзывы клиентов из региона
+   - Отзывы клиентов из региона (Lübeck, Hamburg)
 
 3. Внешние ссылки:
    - Местные справочники
    - Строительные порталы
    - Партнерские сайты
 
-## Важные координаты
+## Важные координаты (Lübeck)
 
-- Latitude: 53.7024
-- Longitude: 10.7628
+- Latitude: 53.8655
+- Longitude: 10.6866
 - Регион: DE-SH (Schleswig-Holstein)
-- Город: Ratzeburg
-- Индекс: 23909
+- Город: Lübeck (Центральный фокус SEO)
+- Адрес офиса: Jägerstraße 24a, 23909 Ratzeburg (Для юридических данных)

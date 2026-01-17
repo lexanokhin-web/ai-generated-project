@@ -4,16 +4,16 @@ import ProjectGalleryModal from '../UI/ProjectGalleryModal';
 
 // Statisches Projekt-Array
 const PROJECT_IMAGES = [
-    { img: "/images/image-21.webp", title: "Küchensanierung Lübeck", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
-    { img: "/images/bathroom.webp", title: "Exklusives Bad-Design", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
-    { img: "/images/kitchen.webp", title: "Moderne Loft-Küche", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme und Funktionalität." },
-    { img: "/images/living-room.webp", title: "Wohnzimmer Redesign", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
+    { img: "/images/image-21.webp", title: "Badezimmermodernisierung", cat: "Renovierung", desc: "Komplette Neugestaltung einer modernen Küche mit hochwertigen Oberflächen." },
+    { img: "/images/bathroom.webp", title: "Wohnzimmer Redesign", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit großformatigen Fliesen und moderner Lichttechnik." },
+    { img: "/images/kitchen.webp", title: "Balkonrenovierung", cat: "Innenausbau", desc: "Offenes Küchenkonzept mit industriellem Charme und Funktionalität." },
+    { img: "/images/living-room.webp", title: "Badezimmer-Renovierung", cat: "Modernisierung", desc: "Hochwertige Wandgestaltung und Bodenverlegung für ein neues Lebensgefühl." },
     { img: "/images/open-plan.webp", title: "Open-Plan Living", cat: "Sanierung", desc: "Zusammenführung von Räumen für ein großzügiges Wohngefühl." },
     { img: "/images/wardrobe.webp", title: "Maßgeschneiderter Stauraum", cat: "Tischler", desc: "Individuelle Schranklösungen nach Maß für maximale Platzausnutzung." },
     { img: "/images/image-22.webp", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Zeitloses Design trifft auf Funktionalität in Schleswig-Holstein." },
     { img: "/images/image-23.webp", title: "Wohnraum Design", cat: "Modernisierung", desc: "Kreative Raumkonzepte für Ihr individuelles Wohnerlebnis." },
     { img: "/images/image-24.webp", title: "Eingangsbereich & Treppe", cat: "Innenausbau", desc: "Einladende Gestaltung des Entrées mit langlebigen Materialien." },
-    { img: "/images/image-25.webp", title: "Fassadensanierung", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
+    { img: "/images/image-25.webp", title: "Montage von Schutzschaltern", cat: "Außenbau", desc: "Schutz und Ästhetik für die Gebäudehülle durch modernste Putzsysteme." },
 ];
 
 const ProjectsSection = memo(() => {

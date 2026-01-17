@@ -12,6 +12,7 @@ const Datenschutz = () => {
             <Helmet>
                 <title>Datenschutzerklärung | Winter & Usselmann GbR</title>
                 <meta name="description" content="Datenschutzerklärung der Winter & Usselmann GbR." />
+                <link rel="canonical" href="https://www.wintuss.de/datenschutz" />
             </Helmet>
 
             <div className="pt-24 pb-12 bg-slate-900 text-center">

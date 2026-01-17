@@ -35,8 +35,8 @@ const localBusinessSchema = {
     },
     "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 53.7024,
-        "longitude": 10.7628
+        "latitude": 53.8655,
+        "longitude": 10.6866
     },
     "url": "https://www.wintuss.de",
     "telephone": "+4915141389442",

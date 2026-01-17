@@ -42,8 +42,9 @@ const ServiceDetail = () => {
             }
         },
         "areaServed": [
-            { "@type": "State", "name": "Schleswig-Holstein" },
-            { "@type": "City", "name": "Hamburg" }
+            { "@type": "City", "name": "Lübeck" },
+            { "@type": "City", "name": "Hamburg" },
+            { "@type": "State", "name": "Schleswig-Holstein" }
         ]
     };
 
@@ -86,6 +87,15 @@ const ServiceDetail = () => {
                 <meta property="og:title" content={`${service.title} | Lübeck, Hamburg & SH`} />
                 <meta property="og:description" content={service.subtitle} />
                 <meta property="og:image" content={`https://www.wintuss.de${service.heroImage}`} />
+                <meta property="og:locale" content="de_DE" />
+                <meta property="og:site_name" content="Winter & Usselmann GbR" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content={`https://www.wintuss.de/leistungen/${service.id}`} />
+                <meta property="twitter:title" content={`${service.title} | Lübeck, Hamburg & SH`} />
+                <meta property="twitter:description" content={service.subtitle} />
+                <meta property="twitter:image" content={`https://www.wintuss.de${service.heroImage}`} />
             </Helmet>
 
             <StructuredData data={serviceSchema} />

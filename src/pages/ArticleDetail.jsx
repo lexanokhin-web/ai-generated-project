@@ -84,6 +84,15 @@ const ArticleDetail = () => {
                 <meta property="og:title" content={`${article.title} | Ratgeber Winter & Usselmann`} />
                 <meta property="og:description" content={article.excerpt} />
                 <meta property="og:image" content={`https://www.wintuss.de${article.image}`} />
+                <meta property="og:locale" content="de_DE" />
+                <meta property="og:site_name" content="Winter & Usselmann GbR" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content={`https://www.wintuss.de/ratgeber/${article.id}`} />
+                <meta property="twitter:title" content={`${article.title} | Ratgeber Winter & Usselmann`} />
+                <meta property="twitter:description" content={article.excerpt} />
+                <meta property="twitter:image" content={`https://www.wintuss.de${article.image}`} />
             </Helmet>
 
             <StructuredData data={articleSchema} />

@@ -21,7 +21,16 @@ const Blog = () => {
                 <meta property="og:url" content="https://www.wintuss.de/ratgeber" />
                 <meta property="og:title" content="Ratgeber & Handwerker-News | Winter & Usselmann GbR" />
                 <meta property="og:description" content="Alles über Sanierung, Kosten und Trends in Lübeck, Hamburg und Schleswig-Holstein." />
-                <meta property="og:image" content="https://www.wintuss.de/images/og-blog.webp" />
+                <meta property="og:image" content="https://www.wintuss.de/images/image-1.webp" />
+                <meta property="og:locale" content="de_DE" />
+                <meta property="og:site_name" content="Winter & Usselmann GbR" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://www.wintuss.de/ratgeber" />
+                <meta property="twitter:title" content="Ratgeber & Handwerker-News | Winter & Usselmann GbR" />
+                <meta property="twitter:description" content="Wertvolle Tipps, aktuelle Trends und Neuigkeiten rund um Renovierung in Lübeck, Hamburg und SH." />
+                <meta property="twitter:image" content="https://www.wintuss.de/images/image-1.webp" />
             </Helmet>
 
             <div className="pt-24 pb-12 bg-slate-900 text-center">

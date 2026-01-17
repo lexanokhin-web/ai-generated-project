@@ -20,7 +20,16 @@ const About = () => {
                 <meta property="og:url" content="https://www.wintuss.de/uber-uns" />
                 <meta property="og:title" content="Über Uns | Renovierung Hamburg & Schleswig-Holstein" />
                 <meta property="og:description" content="Erfahren Sie mehr über unser Team und unsere Qualitätsphilosophie." />
-                <meta property="og:image" content="https://www.wintuss.de/images/og-about.webp" />
+                <meta property="og:image" content="https://www.wintuss.de/images/image-1.webp" />
+                <meta property="og:locale" content="de_DE" />
+                <meta property="og:site_name" content="Winter & Usselmann GbR" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://www.wintuss.de/uber-uns" />
+                <meta property="twitter:title" content="Über Uns | Renovierung Hamburg & Schleswig-Holstein" />
+                <meta property="twitter:description" content="Erfahren Sie mehr über Winter & Usselmann GbR - Ihr Partner für Renovierung und Sanierung." />
+                <meta property="twitter:image" content="https://www.wintuss.de/images/image-1.webp" />
             </Helmet>
 
             {/* Hero Section */}

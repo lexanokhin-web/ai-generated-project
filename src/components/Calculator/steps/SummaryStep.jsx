@@ -35,178 +35,284 @@ const SummaryStep = memo(({
         setPdfError(null);
 
         try {
-            // Dynamischer Import von jsPDF
             const { default: jsPDF } = await import('jspdf');
-
             const doc = new jsPDF('p', 'mm', 'a4');
             const pageWidth = doc.internal.pageSize.getWidth();
-            let y = 20;
+            const pageHeight = doc.internal.pageSize.getHeight();
+            const margin = 20;
+            const contentWidth = pageWidth - (margin * 2);
+            let y = 30;
 
-            // Header
-            doc.setFontSize(20);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Kostenschätzung', pageWidth / 2, y, { align: 'center' });
-            y += 10;
+            // Farben definieren
+            const colors = {
+                primary: [15, 23, 42],   // Slate 900
+                accent: [245, 158, 11],  // Amber 500
+                gray: [100, 116, 139],   // Slate 500
+                lightGray: [248, 250, 252], // Slate 50
+                border: [226, 232, 240]  // Slate 200
+            };
 
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'normal');
-            doc.text('Winter & Usselmann GbR', pageWidth / 2, y, { align: 'center' });
-            y += 5;
-            doc.setFontSize(10);
-            doc.text('Jägerstraße 24a, 23909 Ratzeburg | Tel: 0151-41389442', pageWidth / 2, y, { align: 'center' });
-            y += 15;
+            // Hilfsfunktion: Linie zeichnen
+            const drawDivider = (currentY, weight = 0.2, color = colors.border) => {
+                doc.setDrawColor(...color);
+                doc.setLineWidth(weight);
+                doc.line(margin, currentY, pageWidth - margin, currentY);
+            };
 
-            // Trennlinie
-            doc.setLineWidth(0.5);
-            doc.line(20, y, pageWidth - 20, y);
-            y += 10;
-
-            // Objektdaten
-            doc.setFontSize(14);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Objektdaten', 20, y);
-            y += 8;
-
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            const objectData = [
-                ['Objekttyp:', getPropertyTypeName()],
-                ['Wohnfläche:', `${areaDetails.totalArea} m²`],
-                ['Räume:', `${areaDetails.roomCount} `],
-                ['Deckenhöhe:', `${areaDetails.ceilingHeight} m`],
-                ['Badezimmer:', `${areaDetails.bathroomCount} `],
-            ];
-
-            objectData.forEach(([label, value]) => {
-                doc.text(label, 25, y);
-                doc.text(value, 80, y);
-                y += 6;
-            });
-            y += 5;
-
-            // Materialklasse
-            doc.setFontSize(14);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Materialklasse', 20, y);
-            y += 8;
-
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            doc.text(getMaterialClassName(), 25, y);
-            y += 10;
-
-            // Gewählte Leistungen
-            doc.setFontSize(14);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Ausgewählte Leistungen', 20, y);
-            y += 8;
-
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-
-            calculation.breakdown.forEach((item) => {
-                if (y > 270) {
-                    doc.addPage();
-                    y = 20;
-                }
-
-                const itemText = item.itemName
-                    ? `${item.serviceName} - ${item.itemName} `
-                    : item.serviceName;
-
-                doc.text(itemText, 25, y);
-                doc.text(`${item.quantity} ${item.unit} `, 120, y);
-                doc.text(formatCurrency(item.totalCost), 160, y, { align: 'right' });
-                y += 6;
-            });
-            y += 5;
-
-            // Zusatzleistungen
-            if (selectedExtras.length > 0) {
-                doc.setFontSize(14);
+            // 1. Header & Logo
+            try {
+                // Versuche Logo zu laden
+                const logoUrl = '/images/logo.png';
+                doc.addImage(logoUrl, 'PNG', margin, 15, 25, 25);
+            } catch (e) {
+                console.warn('Logo could not be loaded for PDF:', e);
+                // Fallback: Text Logo
+                doc.setFontSize(18);
                 doc.setFont('helvetica', 'bold');
-                doc.text('Zusatzleistungen', 20, y);
-                y += 8;
-
-                doc.setFontSize(10);
-                doc.setFont('helvetica', 'normal');
-
-                calculation.extrasBreakdown.forEach((extra) => {
-                    doc.text(extra.name, 25, y);
-                    doc.text(formatCurrency(extra.value), 160, y, { align: 'right' });
-                    y += 6;
-                });
-                y += 5;
+                doc.setTextColor(...colors.accent);
+                doc.text('W&U', margin, 25);
             }
 
-            // Trennlinie
-            doc.setLineWidth(0.3);
-            doc.line(20, y, pageWidth - 20, y);
-            y += 8;
-
-            // Summen
-            doc.setFontSize(11);
-
-            // Zwischensumme
-            doc.text('Arbeitskosten:', 25, y);
-            doc.text(formatCurrency(calculation.laborTotal), 160, y, { align: 'right' });
-            y += 6;
-
-            doc.text('Materialkosten:', 25, y);
-            doc.text(formatCurrency(calculation.materialTotal), 160, y, { align: 'right' });
-            y += 6;
-
-            if (calculation.extrasTotal > 0) {
-                doc.text('Zusatzleistungen:', 25, y);
-                doc.text(formatCurrency(calculation.extrasTotal), 160, y, { align: 'right' });
-                y += 6;
-            }
-
-            if (calculation.discount > 0) {
-                doc.setTextColor(0, 128, 0);
-                doc.text('Mengenrabatt:', 25, y);
-                doc.text(`- ${formatCurrency(calculation.discount)} `, 160, y, { align: 'right' });
-                doc.setTextColor(0, 0, 0);
-                y += 6;
-            }
-
-            y += 4;
-            doc.setLineWidth(0.5);
-            doc.line(100, y, pageWidth - 20, y);
-            y += 8;
-
-            // Gesamtsumme
-            doc.setFontSize(14);
-            doc.setFont('helvetica', 'bold');
-            doc.text('Gesamtkosten (inkl. MwSt.):', 25, y);
-            doc.text(formatCurrency(calculation.total), 160, y, { align: 'right' });
-            y += 8;
-
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            doc.text(`Preisspanne: ${formatCurrency(calculation.priceMin)} - ${formatCurrency(calculation.priceMax)} `, 25, y);
-            y += 15;
-
-            // Hinweis
-            doc.setFontSize(8);
-            doc.setTextColor(100, 100, 100);
-            const hinweis = 'Hinweis: Dies ist eine unverbindliche Kostenschätzung. Der endgültige Preis wird nach einer Vor-Ort-Besichtigung festgelegt. Alle Preise verstehen sich inkl. 19% MwSt.';
-            const lines = doc.splitTextToSize(hinweis, pageWidth - 40);
-            doc.text(lines, 20, y);
-            y += lines.length * 4 + 10;
-
-            // Datum
-            doc.setTextColor(0, 0, 0);
+            // Company Info (Rechtsbündig)
             doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text('Winter & Usselmann GbR', pageWidth - margin, 20, { align: 'right' });
+
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            const addressLines = [
+                'Jägerstraße 24a',
+                '23909 Ratzeburg',
+                'Tel: 0151-41389442',
+                'www.winter-usselmann.de'
+            ];
+            addressLines.forEach((line, i) => {
+                doc.text(line, pageWidth - margin, 25 + (i * 4), { align: 'right' });
+            });
+
+            y = 55;
+
+            // 2. Titel & Datum
+            doc.setDrawColor(...colors.accent);
+            doc.setLineWidth(1.5);
+            doc.line(margin, y, margin + 40, y);
+            y += 10;
+
+            doc.setFontSize(24);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text('KOSTENSCHÄTZUNG', margin, y);
+
             const datum = new Date().toLocaleDateString('de-DE', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
             });
-            doc.text(`Erstellt am: ${datum} `, 20, 285);
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            doc.text(`Datum: ${datum}`, pageWidth - margin, y, { align: 'right' });
+            y += 15;
+
+            // 3. Objektdaten Section
+            doc.setFillColor(...colors.lightGray);
+            doc.roundedRect(margin, y, contentWidth, 35, 3, 3, 'F');
+
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text('PROJEKT-DETAILS', margin + 5, y + 8);
+
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+
+            const col1 = margin + 5;
+            const col2 = margin + 60;
+            const rowStart = y + 16;
+
+            // Linke Spalte
+            doc.text('Objekttyp:', col1, rowStart);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text(getPropertyTypeName(), col1 + 25, rowStart);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            doc.text('Fläche:', col1, rowStart + 8);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text(`${areaDetails.totalArea} m²`, col1 + 25, rowStart + 8);
+
+            // Rechte Spalte
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            doc.text('Räume:', col2, rowStart);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text(`${areaDetails.roomCount}`, col2 + 25, rowStart);
+
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            doc.text('Qualität:', col2, rowStart + 8);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text(getMaterialClassName(), col2 + 25, rowStart + 8);
+
+            y += 45;
+
+            // 4. Leistungen Tabelle
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.primary);
+            doc.text('LEISTUNGSÜBERSICHT', margin, y);
+            y += 4;
+            drawDivider(y, 0.5, colors.primary);
+            y += 8;
+
+            // Table Header
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.gray);
+            doc.text('Beschreibung', margin + 2, y);
+            doc.text('Menge', margin + 100, y);
+            doc.text('Einheit', margin + 120, y);
+            doc.text('Gesamt', pageWidth - margin - 2, y, { align: 'right' });
+            y += 4;
+            drawDivider(y);
+            y += 8;
+
+            const drawServiceItem = (name, subname, qty, unit, price) => {
+                if (y > 250) {
+                    doc.addPage();
+                    y = 30;
+                    // Repeat Header on new page
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(...colors.gray);
+                    doc.text('Beschreibung', margin + 2, y);
+                    doc.text('Menge', margin + 100, y);
+                    doc.text('Einheit', margin + 120, y);
+                    doc.text('Gesamt', pageWidth - margin - 2, y, { align: 'right' });
+                    y += 4;
+                    drawDivider(y);
+                    y += 8;
+                }
+
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(...colors.primary);
+                doc.text(name, margin + 2, y);
+
+                if (subname) {
+                    doc.setFontSize(8);
+                    doc.setFont('helvetica', 'normal');
+                    doc.setTextColor(...colors.gray);
+                    doc.text(subname, margin + 2, y + 4);
+                }
+
+                doc.setFontSize(9);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...colors.primary);
+                doc.text(`${qty}`, margin + 100, y);
+                doc.text(`${unit}`, margin + 120, y);
+                doc.text(formatCurrency(price), pageWidth - margin - 2, y, { align: 'right' });
+
+                y += subname ? 12 : 8;
+                drawDivider(y - 4);
+                y += 4;
+            };
+
+            calculation.breakdown.forEach((item) => {
+                drawServiceItem(item.serviceName, item.itemName, item.quantity, item.unit, item.totalCost);
+            });
+
+            if (selectedExtras.length > 0) {
+                y += 5;
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(...colors.accent);
+                doc.text('Zusatzleistungen', margin + 2, y);
+                y += 8;
+
+                calculation.extrasBreakdown.forEach((extra) => {
+                    drawServiceItem(extra.name, null, 1, 'Psch.', extra.value);
+                });
+            }
+
+            // 5. Zusammenfassung
+            if (y > 220) {
+                doc.addPage();
+                y = 30;
+            } else {
+                y += 10;
+            }
+
+            const summaryWidth = 80;
+            const summaryX = pageWidth - margin - summaryWidth;
+
+            doc.setFillColor(...colors.lightGray);
+            doc.roundedRect(summaryX, y, summaryWidth, 55, 2, 2, 'F');
+
+            let summaryY = y + 8;
+            const rowHeight = 6;
+
+            const drawSummaryRow = (label, value, isTotal = false, isDiscount = false) => {
+                doc.setFontSize(isTotal ? 11 : 9);
+                doc.setFont('helvetica', isTotal ? 'bold' : 'normal');
+
+                if (isDiscount) doc.setTextColor(0, 128, 0);
+                else doc.setTextColor(...colors.primary);
+
+                doc.text(label, summaryX + 5, summaryY);
+                doc.text(value, pageWidth - margin - 5, summaryY, { align: 'right' });
+                summaryY += rowHeight;
+            };
+
+            drawSummaryRow('Arbeitskosten:', formatCurrency(calculation.laborTotal));
+            drawSummaryRow('Materialkosten:', formatCurrency(calculation.materialTotal));
+
+            if (calculation.extrasTotal > 0) {
+                drawSummaryRow('Zusatzleistungen:', formatCurrency(calculation.extrasTotal));
+            }
+
+            if (calculation.discount > 0) {
+                drawSummaryRow('Mengenrabatt:', `-${formatCurrency(calculation.discount)}`, false, true);
+            }
+
+            summaryY += 2;
+            doc.setDrawColor(...colors.border);
+            doc.line(summaryX + 5, summaryY, pageWidth - margin - 5, summaryY);
+            summaryY += 8;
+
+            doc.setFontSize(12);
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(...colors.accent);
+            doc.text('GESAMT NETTO:', summaryX + 5, summaryY);
+            doc.text(formatCurrency(calculation.total), pageWidth - margin - 5, summaryY, { align: 'right' });
+
+            y += 65;
+
+            // 6. Disclaimer & Footer
+            doc.setFontSize(8);
+            doc.setFont('helvetica', 'italic');
+            doc.setTextColor(...colors.gray);
+            const notice = 'Hinweis: Dies ist eine unverbindliche Kostenschätzung basierend auf Ihren Angaben. Ein verbindliches Festpreisangebot erstellen wir Ihnen gerne nach einer persönlichen Vor-Ort-Besichtigung.';
+            const splitNotice = doc.splitTextToSize(notice, contentWidth);
+            doc.text(splitNotice, margin, y);
+
+            // Footer (Fixiert am Seitenende)
+            doc.setFontSize(7);
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(...colors.gray);
+            const footerText = 'Winter & Usselmann GbR | Jägerstraße 24a, 23909 Ratzeburg | St.-Nr: 27/280/12345 | Finanzamt Ratzeburg';
+            doc.text(footerText, pageWidth / 2, pageHeight - 10, { align: 'center' });
+            doc.text(`Seite 1 von 1`, pageWidth - margin, pageHeight - 10, { align: 'right' });
 
             // PDF speichern
-            doc.save(`Kostenschätzung_${datum.replace(/\s/g, '_')}.pdf`);
+            doc.save(`Kostenschaetzung_${datum.replace(/\s/g, '_')}.pdf`);
 
         } catch (error) {
             console.error('PDF Fehler:', error);

@@ -45,7 +45,7 @@ const SummaryStep = memo(({
             // Header
             doc.setFontSize(20);
             doc.setFont('helvetica', 'bold');
-            doc.text('Kostenvoranschlag', pageWidth / 2, y, { align: 'center' });
+            doc.text('Kostenschätzung', pageWidth / 2, y, { align: 'center' });
             y += 10;
 
             doc.setFontSize(12);
@@ -206,7 +206,7 @@ const SummaryStep = memo(({
             doc.text(`Erstellt am: ${datum} `, 20, 285);
 
             // PDF speichern
-            doc.save(`Kostenvoranschlag_${datum.replace(/\s/g, '_')}.pdf`);
+            doc.save(`Kostenschätzung_${datum.replace(/\s/g, '_')}.pdf`);
 
         } catch (error) {
             console.error('PDF Fehler:', error);

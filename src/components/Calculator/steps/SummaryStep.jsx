@@ -208,7 +208,8 @@ const SummaryStep = memo(({
             let currentPage = 1;
             let currentCarriage = 0; // Übertrag
             const offerNo = `A-${Math.floor(100 + Math.random() * 900)}`;
-            const projectNo = `P-${Math.floor(1000 + Math.random() * 9000)}`;
+            const customerNo = `10${Math.floor(100 + Math.random() * 900)}`;
+            const projectNo = `P-${String(Math.floor(Math.random() * 99999)).padStart(5, '0')}`;
 
             // Dynamic Title Logic
             const uniqueServiceIds = [...new Set(selectedServices.map(s => s.serviceId))];
@@ -224,7 +225,7 @@ const SummaryStep = memo(({
             const formatNum = (num) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
 
             // Hilfsfunktion: Footer zeichnen
-            const drawFooter = (pageNum) => {
+            const drawFooter = () => {
                 doc.setFontSize(7);
                 doc.setFont('helvetica', 'normal');
                 doc.setTextColor(...colors.gray);
@@ -240,7 +241,6 @@ const SummaryStep = memo(({
                 doc.text('IBAN  DE95 2305 2750 0081 9208 11', margin + 90, footerY + 4);
                 doc.text('BIC    NOLADE21RZB', margin + 90, footerY + 8);
 
-                doc.text(`Seite ${pageNum}`, pageWidth - margin, footerY + 4, { align: 'right' });
                 doc.setDrawColor(...colors.lightGray);
                 doc.line(margin, footerY - 5, pageWidth - margin, footerY - 5);
             };
@@ -248,8 +248,10 @@ const SummaryStep = memo(({
             // Hilfsfunktion: Header zeichnen
             const drawHeader = (pageNum) => {
                 // Logo rechts oben
+                const logoWidth = pageNum === 1 ? 65 : 50;
+                const logoHeight = pageNum === 1 ? 26 : 20;
                 try {
-                    doc.addImage('/images/logo.png', 'PNG', pageWidth - margin - 50, 10, 50, 20);
+                    doc.addImage('/images/logo.png', 'PNG', pageWidth - margin - logoWidth, 10, logoWidth, logoHeight);
                 } catch {
                     console.warn('Logo could not be loaded in PDF');
                 }
@@ -260,7 +262,7 @@ const SummaryStep = memo(({
                     doc.setFont('helvetica', 'normal');
                     doc.setTextColor(...colors.primary);
                     const rightX = pageWidth - margin;
-                    let companyY = 32;
+                    let companyY = 40; // Erhöht von 32 wegen größerem Logo
                     doc.text('Winter & Usselmann GbR', rightX, companyY, { align: 'right' });
                     doc.text('Jägerstraße 24a', rightX, companyY + 4, { align: 'right' });
                     doc.text('23909 Ratzeburg', rightX, companyY + 8, { align: 'right' });
@@ -294,13 +296,22 @@ const SummaryStep = memo(({
 
                     doc.setFont('helvetica', 'normal');
                     doc.text('Kunde', pageWidth - 70, 100);
-                    doc.text('10088', pageWidth - 70, 105);
+                    doc.text(customerNo, pageWidth - 70, 105);
                     doc.text('Projekt', pageWidth - 50, 100);
                     doc.text(`${projectNo}`, pageWidth - 50, 105);
                     doc.text('Datum', pageWidth - margin, 100, { align: 'right' });
                     doc.text(new Date().toLocaleDateString('de-DE'), pageWidth - margin, 105, { align: 'right' });
 
-                    y = 130; // Startposition Content auf Seite 1
+                    // Einleitungstext
+                    doc.setFontSize(10);
+                    const introText = [
+                        'Sehr geehrte Damen und Herren,',
+                        'wir freuen uns, dass Sie sich von der Qualität unserer Arbeit überzeugen möchten.',
+                        'Im Anhang übersenden wir Ihnen dazu unser Angebot. Dieses lautet wie folgt:'
+                    ];
+                    doc.text(introText, margin, 118);
+
+                    y = 140; // Startposition Content auf Seite 1
                 } else {
                     // FOLGESEITEN: Kompakter Header
                     doc.setFontSize(10);
@@ -346,7 +357,7 @@ const SummaryStep = memo(({
                     doc.text('Übertrag auf nächste Seite:', pageWidth - margin - 25, pageHeight - 25, { align: 'right' });
                     doc.text(`${formatNum(currentCarriage)}`, pageWidth - margin - 2, pageHeight - 25, { align: 'right' });
 
-                    drawFooter(currentPage);
+                    drawFooter();
                     doc.addPage();
                     currentPage++;
                     drawHeader(currentPage);
@@ -535,7 +546,17 @@ const SummaryStep = memo(({
                 y += 8;
             });
 
-            drawFooter(currentPage);
+            drawFooter();
+
+            // POST-PROCESSING: "Seite X von Y" hinzufügen
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.setFontSize(7);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...colors.gray);
+                doc.text(`Seite ${i} von ${totalPages}`, pageWidth - margin, pageHeight - 8, { align: 'right' });
+            }
 
             doc.save(`Angebot_Winter_Usselmann_${new Date().toISOString().split('T')[0]}.pdf`);
 

@@ -351,11 +351,12 @@ const SummaryStep = memo(({
             };
 
             const checkPageBreak = (neededHeight) => {
-                if (y + neededHeight > pageHeight - 35) {
+                if (y + neededHeight > pageHeight - 25) {
                     // Abschluss Übertrag auf alter Seite
                     doc.setFont('helvetica', 'bold');
-                    doc.text('Übertrag auf nächste Seite:', pageWidth - margin - 25, pageHeight - 25, { align: 'right' });
-                    doc.text(`${formatNum(currentCarriage)}`, pageWidth - margin - 2, pageHeight - 25, { align: 'right' });
+                    doc.setFontSize(9);
+                    doc.text('Übertrag auf nächste Seite:', pageWidth - margin - 25, pageHeight - 22, { align: 'right' });
+                    doc.text(`${formatNum(currentCarriage)}`, pageWidth - margin - 2, pageHeight - 22, { align: 'right' });
 
                     drawFooter();
                     doc.addPage();
@@ -374,7 +375,18 @@ const SummaryStep = memo(({
                 const catNum = catIdx + 1;
                 let categorySum = 0;
 
-                checkPageBreak(15);
+                // Orphan protection: Check if header AND first item fit
+                const firstPos = cat.positions[0];
+                let headerCheckH = 15;
+                if (firstPos) {
+                    // Set font settings to match actual description rendering for accurate height calculation
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(8.5);
+                    const firstDescLines = doc.splitTextToSize(firstPos.description.join('\n'), contentWidth - 85);
+                    headerCheckH += 12 + (firstDescLines.length * 4);
+                }
+                checkPageBreak(headerCheckH);
+
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(10);
                 doc.setTextColor(...colors.primary);
@@ -385,7 +397,7 @@ const SummaryStep = memo(({
                 cat.positions.forEach((pos, posIdx) => {
                     const posNum = `${catNum}.${posIdx + 1}.`;
                     const descriptionLines = doc.splitTextToSize(pos.description.join('\n'), contentWidth - 85);
-                    const neededH = 15 + (descriptionLines.length * 4);
+                    const neededH = 12 + (descriptionLines.length * 4); // Tighter fit
 
                     checkPageBreak(neededH);
 

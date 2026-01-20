@@ -366,6 +366,7 @@ const SummaryStep = memo(({
                 checkPageBreak(15);
                 doc.setFont('helvetica', 'bold');
                 doc.setFontSize(10);
+                doc.setTextColor(...colors.primary);
                 doc.text(`${catNum}.`, margin + 2, y);
                 doc.text(cat.name || cat.category, margin + 48, y);
                 y += 10;
@@ -379,6 +380,7 @@ const SummaryStep = memo(({
 
                     doc.setFont('helvetica', 'normal');
                     doc.setFontSize(9);
+                    doc.setTextColor(...colors.primary);
                     doc.text(posNum, margin + 2, y);
                     doc.text(formatNum(pos.quantity), margin + 18, y, { align: 'right' });
                     doc.text(pos.unit, margin + 32, y);
@@ -408,6 +410,7 @@ const SummaryStep = memo(({
                 // Kategorie-Summe
                 checkPageBreak(12);
                 doc.setFont('helvetica', 'bold');
+                doc.setTextColor(...colors.primary);
                 doc.text(`Summe ${catNum}. ${cat.name || cat.category}`, margin + 48, y);
                 doc.text(`${formatNum(categorySum)}`, pageWidth - margin - 2, y, { align: 'right' });
                 y += 15;

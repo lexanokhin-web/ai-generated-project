@@ -5,7 +5,8 @@ import {
     servicesPricing,
     additionalOptions,
     getAveragePrice,
-    volumeDiscounts
+    volumeDiscounts,
+    VAT_RATE
 } from '../../../data/calculatorPricing';
 
 /**
@@ -122,8 +123,7 @@ export const useCalculator = () => {
             if (service.packages && customData.packageId) {
                 const pkg = service.packages.find(p => p.id === customData.packageId);
                 if (pkg) {
-                    const VAT_F = 1.19;
-                    const avgPackagePriceBrutto = getAveragePrice(pkg.min, pkg.max) * materialCoefficient * VAT_F;
+                    const avgPackagePriceBrutto = getAveragePrice(pkg.min, pkg.max) * materialCoefficient * (1 + VAT_RATE);
                     const pkgTotalBrutto = avgPackagePriceBrutto * quantity * propertyCoefficient;
                     packagesTotal += pkgTotalBrutto;
 
@@ -136,17 +136,16 @@ export const useCalculator = () => {
                         laborCost: pkgTotalBrutto,
                         materialCost: 0,
                         totalCost: pkgTotalBrutto,
-                        pricePerUnitNetto: avgPackagePriceBrutto / VAT_F
+                        pricePerUnitNetto: avgPackagePriceBrutto / (1 + VAT_RATE)
                     });
+                    laborTotal += pkgTotalBrutto;
                 }
-                laborTotal += pkgTotalBrutto;
                 return;
             }
 
             // Für normale Services (pro m² oder Punkt)
-            const VAT_F = 1.19;
-            const avgLaborBrutto = getAveragePrice(service.laborMin, service.laborMax) * VAT_F;
-            const avgMaterialBrutto = getAveragePrice(service.materialMin, service.materialMax) * VAT_F;
+            const avgLaborBrutto = getAveragePrice(service.laborMin, service.laborMax) * (1 + VAT_RATE);
+            const avgMaterialBrutto = getAveragePrice(service.materialMin, service.materialMax) * (1 + VAT_RATE);
 
             const laborCostBrutto = avgLaborBrutto * quantity * subMultiplier * propertyCoefficient;
             const materialCostBrutto = avgMaterialBrutto * quantity * subMultiplier * materialCoefficient * propertyCoefficient;
@@ -167,7 +166,7 @@ export const useCalculator = () => {
                 laborCost: laborCostBrutto,
                 materialCost: materialCostBrutto,
                 totalCost: laborCostBrutto + materialCostBrutto,
-                pricePerUnitNetto: (avgLaborBrutto + avgMaterialBrutto) / VAT_F
+                pricePerUnitNetto: (avgLaborBrutto + avgMaterialBrutto) / (1 + VAT_RATE)
             });
 
             // Fixed Costs hinzufügen (wenn ausgewählt)
@@ -175,7 +174,7 @@ export const useCalculator = () => {
                 customData.fixedCosts.forEach(fcId => {
                     const fc = service.fixedCosts.find(f => f.id === fcId);
                     if (fc) {
-                        const fcPriceBrutto = getAveragePrice(fc.min, fc.max) * materialCoefficient * VAT_F;
+                        const fcPriceBrutto = getAveragePrice(fc.min, fc.max) * materialCoefficient * (1 + VAT_RATE);
                         fixedCostsTotal += fcPriceBrutto;
 
                         breakdown.push({
@@ -187,7 +186,7 @@ export const useCalculator = () => {
                             laborCost: fcPriceBrutto,
                             materialCost: 0,
                             totalCost: fcPriceBrutto,
-                            pricePerUnitNetto: fcPriceBrutto / VAT_F
+                            pricePerUnitNetto: fcPriceBrutto / (1 + VAT_RATE)
                         });
                         laborTotal += fcPriceBrutto;
                     }

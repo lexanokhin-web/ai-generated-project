@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import { propertyTypes, materialClasses, servicesPricing } from '../../../data/calculatorPricing';
+import { propertyTypes, materialClasses, servicesPricing, VAT_RATE } from '../../../data/calculatorPricing';
 
 /**
  * Schritt 6: Zusammenfassung und PDF-Export
@@ -18,7 +18,7 @@ const SummaryStep = memo(({
     const [pdfError, setPdfError] = useState(null);
 
     // Hilfsfunktion: Wandelt UI-Services in detaillierte Angebotspositionen um
-    const getExpandedWorkItems = (allWorkCategories, calculation) => {
+    const getExpandedWorkItems = useCallback((allWorkCategories, calculation) => {
         const totalArea = areaDetails.totalArea || 0;
         const roomCountNum = areaDetails.roomCount || 3;
         const roomCountStr = roomCountNum.toFixed(1);
@@ -124,15 +124,15 @@ const SummaryStep = memo(({
                     description: ['Fachgerechte Ausführung gemäß Auswahl'],
                     quantity: item.quantity,
                     unit: item.unit,
-                    pricePerUnit: item.totalCost / 1.19 / item.quantity,
-                    naturalTotal: item.totalCost / 1.19
+                    pricePerUnit: item.totalCost / (1 + VAT_RATE) / item.quantity,
+                    naturalTotal: item.totalCost / (1 + VAT_RATE)
                 });
             }
         });
 
         // --- GLOBAL RECONCILIATION ---
         // Ziel: Netto-Total PDF === Netto-Total UI (Labor + Pauschalen)
-        const uiNettoTotal = calculation.laborTotal / 1.19;
+        const uiNettoTotal = calculation.laborTotal / (1 + VAT_RATE);
         const fixedSetupNetto = bePos.pricePerUnit; // Be-Pos ist Netto
 
         const otherPositions = allPositions.filter(p => p.categoryId !== 'baustelleneinrichtung');
@@ -164,7 +164,7 @@ const SummaryStep = memo(({
         });
 
         return grouped;
-    };
+    }, [areaDetails, selectedServices]);
 
     // Hilfsfunktionen
     const formatCurrency = (value) => {
@@ -181,12 +181,13 @@ const SummaryStep = memo(({
 
     // PDF generieren
     const generatePDF = useCallback(async () => {
+        if (isGeneratingPdf) return;
         setIsGeneratingPdf(true);
         setPdfError(null);
 
         try {
             const { default: jsPDF } = await import('jspdf');
-            const { allWorkCategories, VAT_RATE } = await import('../../../data/serviceWorkItems');
+            const { allWorkCategories } = await import('../../../data/serviceWorkItems'); // VAT_RATE is imported from calculatorPricing
 
             const doc = new jsPDF('p', 'mm', 'a4');
             const pageWidth = doc.internal.pageSize.getWidth();
@@ -206,6 +207,17 @@ const SummaryStep = memo(({
             let y = 100; // Start auf Seite 1 (nach dem großen Header)
             let currentPage = 1;
             let currentCarriage = 0; // Übertrag
+            const offerNo = `A-${Math.floor(100 + Math.random() * 900)}`;
+            const projectNo = `P-${Math.floor(1000 + Math.random() * 9000)}`;
+
+            // Dynamic Title Logic
+            const uniqueServiceIds = [...new Set(selectedServices.map(s => s.serviceId))];
+            let offerTitle = 'Wohnungskomplettmodernisierung';
+            if (uniqueServiceIds.length === 1) {
+                const service = servicesPricing.find(s => s.id === uniqueServiceIds[0]);
+                if (service) offerTitle = service.name;
+            }
+
             const categoryTotals = [];
 
             // Helper: Formatierung
@@ -238,7 +250,7 @@ const SummaryStep = memo(({
                 // Logo rechts oben
                 try {
                     doc.addImage('/images/logo.png', 'PNG', pageWidth - margin - 50, 10, 50, 20);
-                } catch (e) {
+                } catch {
                     console.warn('Logo could not be loaded in PDF');
                 }
 
@@ -272,19 +284,19 @@ const SummaryStep = memo(({
                     // Angebotsdaten
                     doc.setFontSize(14);
                     doc.setFont('helvetica', 'bold');
-                    doc.text(`Angebot - A-${Math.floor(100 + Math.random() * 900)}`, margin, 90);
+                    doc.text(`Angebot - ${offerNo}`, margin, 90);
 
                     doc.setFontSize(9);
                     doc.setFont('helvetica', 'normal');
                     doc.text('Betreff', margin, 100);
                     doc.setFont('helvetica', 'bold');
-                    doc.text('Angebot - Wohnungskomplettmodernisierung', margin, 105);
+                    doc.text(`Angebot - ${offerTitle}`, margin, 105);
 
                     doc.setFont('helvetica', 'normal');
                     doc.text('Kunde', pageWidth - 70, 100);
                     doc.text('10088', pageWidth - 70, 105);
                     doc.text('Projekt', pageWidth - 50, 100);
-                    doc.text(`P-${Math.floor(1000 + Math.random() * 9000)}`, pageWidth - 50, 105);
+                    doc.text(`${projectNo}`, pageWidth - 50, 105);
                     doc.text('Datum', pageWidth - margin, 100, { align: 'right' });
                     doc.text(new Date().toLocaleDateString('de-DE'), pageWidth - margin, 105, { align: 'right' });
 
@@ -294,10 +306,10 @@ const SummaryStep = memo(({
                     doc.setFontSize(10);
                     doc.setFont('helvetica', 'bold');
                     doc.setTextColor(...colors.primary);
-                    doc.text(`Angebot - A-XXXXX`, margin, 15);
+                    doc.text(`Angebot - ${offerNo}`, margin, 15);
                     doc.setFontSize(8);
                     doc.setFont('helvetica', 'normal');
-                    doc.text('Angebot - Wohnungskomplettmodernisierung', margin, 20);
+                    doc.text(`Angebot - ${offerTitle}`, margin, 20);
                     doc.text(`vom ${new Date().toLocaleDateString('de-DE')}`, margin, 24);
 
                     y = 35;
@@ -410,7 +422,7 @@ const SummaryStep = memo(({
 
             y += 20;
             const totalNetto = currentCarriage;
-            const totalVAT = totalNetto * 0.19;
+            const totalVAT = totalNetto * VAT_RATE;
             const totalBrutto = totalNetto + totalVAT;
 
             doc.setFontSize(10);
@@ -423,7 +435,7 @@ const SummaryStep = memo(({
             doc.text(formatNum(totalNetto) + ' €', pageWidth - margin - 2, y, { align: 'right' });
             y += 6;
 
-            doc.text(`Umsatzsteuer (${Math.round(0.19 * 100)} %):`, margin, y);
+            doc.text(`Umsatzsteuer (${Math.round(VAT_RATE * 100)} %):`, margin, y);
             doc.text(formatNum(totalVAT) + ' €', pageWidth - margin - 2, y, { align: 'right' });
             y += 2;
 
@@ -530,7 +542,7 @@ const SummaryStep = memo(({
         } finally {
             setIsGeneratingPdf(false);
         }
-    }, [areaDetails, selectedServices, calculation, getMaterialClassName, getPropertyTypeName]);
+    }, [getExpandedWorkItems, calculation, isGeneratingPdf, selectedServices]);
 
     return (
         <div className="space-y-8">
@@ -690,7 +702,7 @@ const SummaryStep = memo(({
                             <div className="flex justify-between items-end">
                                 <div>
                                     <p className="text-xs text-slate-400">Gesamtkosten</p>
-                                    <p className="text-xs text-slate-500">inkl. 19% MwSt.</p>
+                                    <p className="text-xs text-slate-500">inkl. {Math.round(VAT_RATE * 100)}% MwSt.</p>
                                 </div>
                                 <p className="text-3xl font-bold text-accent">{formatCurrency(calculation.total)}</p>
                             </div>

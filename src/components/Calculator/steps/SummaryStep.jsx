@@ -276,12 +276,18 @@ const SummaryStep = memo(({
                     doc.text('Michael Winter', rightX, companyY + 32, { align: 'right' });
                     doc.text('E-Mail m.winter@wintuss.de', rightX, companyY + 36, { align: 'right' });
 
-                    doc.setFontSize(10);
-                    doc.setTextColor(...colors.primary);
-                    // Beispiel-Adressat
-                    doc.text('Herr / Frau Kunde', margin, 60);
-                    doc.text('straße ', margin, 65);
-                    doc.text('Ort ', margin, 70);
+                    // Adressat (PropCo / MVGM) - Ausgerichtet auf Höhe der Firmendaten (companyY = 40)
+                    doc.setFontSize(7);
+                    doc.text('Winter & Usselmann GbR | Jägerstraße 24a | 23909 Ratzeburg', margin, 42);
+
+                    doc.setFontSize(9);
+                    doc.text('PropCo 1 Diamond S.a r.l. c/o MVGM Property', margin, 48);
+                    doc.text('Management Dt. GmbH PF 73 01 22 06045 Halle', margin, 52);
+                    doc.text('(Saale)', margin, 56);
+
+                    doc.setFontSize(8);
+                    doc.text('Leistungsempfänger: ProCo 1 Diamond S.á r.l. 1, Rue', margin, 62);
+                    doc.text('du Chateau L- 5374 Munsbach, LUXEMBURG', margin, 66);
 
                     // Angebotsdaten
                     doc.setFontSize(14);

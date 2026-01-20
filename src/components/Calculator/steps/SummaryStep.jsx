@@ -7,6 +7,7 @@ import { propertyTypes, materialClasses, servicesPricing } from '../../../data/c
 const SummaryStep = memo(({
     propertyType,
     areaDetails,
+    selectedServices,
     materialClass,
     selectedExtras,
     calculation,
@@ -15,6 +16,155 @@ const SummaryStep = memo(({
 }) => {
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
     const [pdfError, setPdfError] = useState(null);
+
+    // Hilfsfunktion: Wandelt UI-Services in detaillierte Angebotspositionen um
+    const getExpandedWorkItems = (allWorkCategories, calculation) => {
+        const totalArea = areaDetails.totalArea || 0;
+        const roomCountNum = areaDetails.roomCount || 3;
+        const roomCountStr = roomCountNum.toFixed(1);
+        const wallArea = totalArea * 2.6;
+        const bathroomArea = areaDetails.bathroomArea || 0;
+
+        const allPositions = [];
+
+        // 1. Baustelleneinrichtung (Fixer Startwert)
+        const beCat = allWorkCategories.find(c => c.id === 'baustelleneinrichtung');
+        const hasAsbest = selectedServices.some(s => s.serviceId === 'asbestsanierung');
+        const bePos = beCat.positions.find(p => p.id === (hasAsbest ? 'be-asbest' : 'be-standard'));
+        allPositions.push({ ...bePos, categoryId: 'baustelleneinrichtung', categoryName: 'Baustelleneinrichtung', quantity: 1, naturalTotal: bePos.pricePerUnit });
+
+        // 2. Abbruch
+        const abbruchCat = allWorkCategories.find(c => c.id === 'abbrucharbeiten');
+        const addAbbruch = (posId, quantity) => {
+            const p = abbruchCat.positions.find(p => p.id === posId);
+            if (p) allPositions.push({ ...p, categoryId: 'abbrucharbeiten', categoryName: 'Abbruch', quantity, naturalTotal: quantity * p.pricePerUnit });
+        };
+
+        if (selectedServices.some(s => s.serviceId === 'maler-schimmelsanierung')) {
+            addAbbruch('tapeten-entfernen', Math.round(wallArea));
+            addAbbruch('sockelleisten-entfernen', Math.round(totalArea * 0.85));
+        }
+        if (selectedServices.some(s => s.serviceId === 'bodenbelagsarbeiten')) {
+            addAbbruch('bodenbelag-entfernen', totalArea);
+        }
+        if (selectedServices.some(s => s.serviceId === 'fliesen-badsanierung')) {
+            addAbbruch('fliesen-abbrechen', Math.max(15, bathroomArea * 4));
+        }
+
+        // 3. Asbest
+        if (selectedServices.some(s => s.serviceId === 'asbestsanierung')) {
+            const cat = allWorkCategories.find(c => c.id === 'asbestsanierung');
+            cat.positions.forEach(p => {
+                const qty = p.unit === 'm²' ? totalArea : (p.unit === 'Stk.' ? 4 : 1);
+                allPositions.push({ ...p, categoryId: 'asbest', categoryName: 'Asbestsanierung', quantity: qty, naturalTotal: qty * p.pricePerUnit });
+            });
+        }
+
+        // 4. Elektro
+        if (selectedServices.some(s => s.serviceId === 'elektroarbeiten')) {
+            const cat = allWorkCategories.find(c => c.id === 'elektroarbeiten');
+            const p1 = cat.positions.find(p => p.id === 'elektroanlage-komplett');
+            const price = p1.priceByRooms?.[roomCountStr] || p1.pricePerUnit;
+            allPositions.push({ ...p1, categoryId: 'elektro', categoryName: 'E-Mod. komplett', quantity: 1, naturalTotal: price });
+            const p2 = cat.positions.find(p => p.id === 'wohnungsverteiler');
+            allPositions.push({ ...p2, categoryId: 'elektro', categoryName: 'E-Mod. komplett', quantity: 1, naturalTotal: p2.pricePerUnit });
+        }
+
+        // 5. Sanitär Bad
+        if (selectedServices.some(s => s.serviceId === 'fliesen-badsanierung')) {
+            const cat = allWorkCategories.find(c => c.id === 'sanitaer-bad');
+            cat.positions.filter(p => p.id !== 'gastherme-wartung').forEach(p => {
+                allPositions.push({ ...p, categoryId: 'sanitaer-bad', categoryName: 'Sanitärarbeiten Badezimmer', quantity: 1, naturalTotal: p.pricePerUnit });
+            });
+        }
+
+        // 6. Heizung
+        if (selectedServices.some(s => s.serviceId === 'heizungsarbeiten')) {
+            const cat = allWorkCategories.find(c => c.id === 'heizungsarbeiten');
+            cat.positions.forEach(p => {
+                const qty = p.unit === 'Stk.' ? (p.id === 'thermostatventile' ? roomCountNum + 2 : 1) : 1;
+                allPositions.push({ ...p, categoryId: 'heizung', categoryName: 'Heizungsarbeiten', quantity: qty, naturalTotal: qty * p.pricePerUnit });
+            });
+        }
+
+        // 7. Fliesen
+        if (selectedServices.some(s => s.serviceId === 'fliesen-badsanierung')) {
+            const cat = allWorkCategories.find(c => c.id === 'fliesenarbeiten');
+            const p = cat.positions.find(p => p.id === 'bad-komplett');
+            if (p) allPositions.push({ ...p, categoryId: 'fliesen', categoryName: 'Fliesenarbeiten', quantity: 1, naturalTotal: p.pricePerUnit });
+        }
+
+        // 8. Maler
+        if (selectedServices.some(s => s.serviceId === 'maler-schimmelsanierung')) {
+            const cat = allWorkCategories.find(c => c.id === 'malerarbeiten');
+            const p1 = cat.positions.find(p => p.id === 'waende-tapezieren');
+            allPositions.push({ ...p1, categoryId: 'maler', categoryName: 'Malerarbeiten', quantity: Math.round(wallArea), naturalTotal: wallArea * p1.pricePerUnit });
+            const p2 = cat.positions.find(p => p.id === 'decken-tapezieren');
+            allPositions.push({ ...p2, categoryId: 'maler', categoryName: 'Malerarbeiten', quantity: Math.round(totalArea * 0.9), naturalTotal: totalArea * 0.9 * p2.pricePerUnit });
+            const p3 = cat.positions.find(p => p.id === 'tueren-lackieren');
+            const price = p3.priceByRooms?.[roomCountStr] || p3.pricePerUnit;
+            allPositions.push({ ...p3, categoryId: 'maler', categoryName: 'Malerarbeiten', quantity: 1, naturalTotal: price });
+        }
+
+        // 11. Boden
+        if (selectedServices.some(s => s.serviceId === 'bodenbelagsarbeiten')) {
+            const cat = allWorkCategories.find(c => c.id === 'bodenbelagsarbeiten');
+            const p1 = cat.positions.find(p => p.id === 'vinyl-designplanken');
+            allPositions.push({ ...p1, categoryId: 'boden', categoryName: 'Bodenbelagsarbeiten', quantity: totalArea, naturalTotal: totalArea * p1.pricePerUnit });
+        }
+
+        // --- Catch-all für weitere Services ---
+        const mappedServiceIds = ['maler-schimmelsanierung', 'bodenbelagsarbeiten', 'fliesen-badsanierung', 'asbestsanierung', 'elektroarbeiten', 'heizungsarbeiten'];
+        calculation.breakdown.forEach(item => {
+            if (!mappedServiceIds.includes(item.serviceId)) {
+                allPositions.push({
+                    categoryId: 'diverses',
+                    categoryName: 'Zusätzliche Arbeiten',
+                    name: item.itemName ? `${item.serviceName} - ${item.itemName}` : item.serviceName,
+                    description: ['Fachgerechte Ausführung gemäß Auswahl'],
+                    quantity: item.quantity,
+                    unit: item.unit,
+                    pricePerUnit: item.totalCost / 1.19 / item.quantity,
+                    naturalTotal: item.totalCost / 1.19
+                });
+            }
+        });
+
+        // --- GLOBAL RECONCILIATION ---
+        // Ziel: Netto-Total PDF === Netto-Total UI (Labor + Pauschalen)
+        const uiNettoTotal = calculation.laborTotal / 1.19;
+        const fixedSetupNetto = bePos.pricePerUnit; // Be-Pos ist Netto
+
+        const otherPositions = allPositions.filter(p => p.categoryId !== 'baustelleneinrichtung');
+        const otherNaturalSum = otherPositions.reduce((sum, p) => sum + p.naturalTotal, 0); // Netto-Summe
+
+        const targetOtherNetto = uiNettoTotal - fixedSetupNetto;
+        const globalScalingFactor = (otherNaturalSum > 0 && targetOtherNetto > 0) ? (targetOtherNetto / otherNaturalSum) : 1;
+
+        const finalPositions = allPositions.map(p => {
+            const factor = p.categoryId === 'baustelleneinrichtung' ? 1 : globalScalingFactor;
+            const nettoTotal = p.naturalTotal * factor;
+
+            return {
+                ...p,
+                pricePerUnit: (p.pricePerUnit || (p.naturalTotal / p.quantity)) * factor, // Netto
+                total: nettoTotal,
+                nettoTotal: nettoTotal
+            };
+        });
+
+        const grouped = [];
+        finalPositions.forEach(p => {
+            let cat = grouped.find(g => g.id === p.categoryId);
+            if (!cat) {
+                cat = { id: p.categoryId, name: p.categoryName, positions: [] };
+                grouped.push(cat);
+            }
+            cat.positions.push(p);
+        });
+
+        return grouped;
+    };
 
     // Hilfsfunktionen
     const formatCurrency = (value) => {
@@ -36,283 +186,343 @@ const SummaryStep = memo(({
 
         try {
             const { default: jsPDF } = await import('jspdf');
+            const { allWorkCategories, VAT_RATE } = await import('../../../data/serviceWorkItems');
+
             const doc = new jsPDF('p', 'mm', 'a4');
             const pageWidth = doc.internal.pageSize.getWidth();
             const pageHeight = doc.internal.pageSize.getHeight();
             const margin = 20;
             const contentWidth = pageWidth - (margin * 2);
-            let y = 30;
 
-            // Farben definieren
+            // Farben & Styles
             const colors = {
-                primary: [15, 23, 42],   // Slate 900
-                accent: [245, 158, 11],  // Amber 500
-                gray: [100, 116, 139],   // Slate 500
-                lightGray: [248, 250, 252], // Slate 50
-                border: [226, 232, 240]  // Slate 200
+                primary: [30, 41, 59],   // Slate-800
+                accent: [180, 83, 9],    // Amber-700
+                gray: [100, 116, 139],   // Slate-500
+                lightGray: [241, 245, 249] // Slate-100
             };
 
-            // Hilfsfunktion: Linie zeichnen
-            const drawDivider = (currentY, weight = 0.2, color = colors.border) => {
-                doc.setDrawColor(...color);
-                doc.setLineWidth(weight);
-                doc.line(margin, currentY, pageWidth - margin, currentY);
+            const expandedItems = getExpandedWorkItems(allWorkCategories, calculation);
+            let y = 100; // Start auf Seite 1 (nach dem großen Header)
+            let currentPage = 1;
+            let currentCarriage = 0; // Übertrag
+            const categoryTotals = [];
+
+            // Helper: Formatierung
+            const formatNum = (num) => new Intl.NumberFormat('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(num);
+
+            // Hilfsfunktion: Footer zeichnen
+            const drawFooter = (pageNum) => {
+                doc.setFontSize(7);
+                doc.setFont('helvetica', 'normal');
+                doc.setTextColor(...colors.gray);
+                const footerY = pageHeight - 12;
+
+                doc.text('Geschäftsführer', margin, footerY);
+                doc.text('Michael Winter', margin, footerY + 4);
+
+                doc.text(`USt.-ID: DE362225547`, margin + 35, footerY);
+                doc.text(`Steuernummer: 27/284/74694`, margin + 35, footerY + 4);
+
+                doc.text('Kreissparkasse Herzogtum Lauenburg', margin + 90, footerY);
+                doc.text('IBAN  DE95 2305 2750 0081 9208 11', margin + 90, footerY + 4);
+                doc.text('BIC    NOLADE21RZB', margin + 90, footerY + 8);
+
+                doc.text(`Seite ${pageNum}`, pageWidth - margin, footerY + 4, { align: 'right' });
+                doc.setDrawColor(...colors.lightGray);
+                doc.line(margin, footerY - 5, pageWidth - margin, footerY - 5);
             };
 
-            // 1. Header & Logo
-            try {
-                // Versuche Logo zu laden
-                const logoUrl = '/images/logo.png';
-                doc.addImage(logoUrl, 'PNG', margin, 15, 25, 25);
-            } catch (e) {
-                console.warn('Logo could not be loaded for PDF:', e);
-                // Fallback: Text Logo
-                doc.setFontSize(18);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(...colors.accent);
-                doc.text('W&U', margin, 25);
-            }
-
-            // Company Info (Rechtsbündig)
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text('Winter & Usselmann GbR', pageWidth - margin, 20, { align: 'right' });
-
-            doc.setFontSize(8);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            const addressLines = [
-                'Jägerstraße 24a',
-                '23909 Ratzeburg',
-                'Tel: 0151-41389442',
-                'www.winter-usselmann.de'
-            ];
-            addressLines.forEach((line, i) => {
-                doc.text(line, pageWidth - margin, 25 + (i * 4), { align: 'right' });
-            });
-
-            y = 55;
-
-            // 2. Titel & Datum
-            doc.setDrawColor(...colors.accent);
-            doc.setLineWidth(1.5);
-            doc.line(margin, y, margin + 40, y);
-            y += 10;
-
-            doc.setFontSize(24);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text('KOSTENSCHÄTZUNG', margin, y);
-
-            const datum = new Date().toLocaleDateString('de-DE', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
-            doc.setFontSize(10);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            doc.text(`Datum: ${datum}`, pageWidth - margin, y, { align: 'right' });
-            y += 15;
-
-            // 3. Objektdaten Section
-            doc.setFillColor(...colors.lightGray);
-            doc.roundedRect(margin, y, contentWidth, 35, 3, 3, 'F');
-
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text('PROJEKT-DETAILS', margin + 5, y + 8);
-
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-
-            const col1 = margin + 5;
-            const col2 = margin + 60;
-            const rowStart = y + 16;
-
-            // Linke Spalte
-            doc.text('Objekttyp:', col1, rowStart);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text(getPropertyTypeName(), col1 + 25, rowStart);
-
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            doc.text('Fläche:', col1, rowStart + 8);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text(`${areaDetails.totalArea} m²`, col1 + 25, rowStart + 8);
-
-            // Rechte Spalte
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            doc.text('Räume:', col2, rowStart);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text(`${areaDetails.roomCount}`, col2 + 25, rowStart);
-
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            doc.text('Qualität:', col2, rowStart + 8);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text(getMaterialClassName(), col2 + 25, rowStart + 8);
-
-            y += 45;
-
-            // 4. Leistungen Tabelle
-            doc.setFontSize(12);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.primary);
-            doc.text('LEISTUNGSÜBERSICHT', margin, y);
-            y += 4;
-            drawDivider(y, 0.5, colors.primary);
-            y += 8;
-
-            // Table Header
-            doc.setFontSize(9);
-            doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.gray);
-            doc.text('Beschreibung', margin + 2, y);
-            doc.text('Menge', margin + 100, y);
-            doc.text('Einheit', margin + 120, y);
-            doc.text('Gesamt', pageWidth - margin - 2, y, { align: 'right' });
-            y += 4;
-            drawDivider(y);
-            y += 8;
-
-            const drawServiceItem = (name, subname, qty, unit, price) => {
-                if (y > 250) {
-                    doc.addPage();
-                    y = 30;
-                    // Repeat Header on new page
-                    doc.setFontSize(9);
-                    doc.setFont('helvetica', 'bold');
-                    doc.setTextColor(...colors.gray);
-                    doc.text('Beschreibung', margin + 2, y);
-                    doc.text('Menge', margin + 100, y);
-                    doc.text('Einheit', margin + 120, y);
-                    doc.text('Gesamt', pageWidth - margin - 2, y, { align: 'right' });
-                    y += 4;
-                    drawDivider(y);
-                    y += 8;
+            // Hilfsfunktion: Header zeichnen
+            const drawHeader = (pageNum) => {
+                // Logo rechts oben
+                try {
+                    doc.addImage('/images/logo.png', 'PNG', pageWidth - margin - 50, 10, 50, 20);
+                } catch (e) {
+                    console.warn('Logo could not be loaded in PDF');
                 }
 
-                doc.setFontSize(9);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(...colors.primary);
-                doc.text(name, margin + 2, y);
-
-                if (subname) {
+                if (pageNum === 1) {
+                    // Firmendaten rechts unter dem Logo
                     doc.setFontSize(8);
                     doc.setFont('helvetica', 'normal');
-                    doc.setTextColor(...colors.gray);
-                    doc.text(subname, margin + 2, y + 4);
+                    doc.setTextColor(...colors.primary);
+                    const rightX = pageWidth - margin;
+                    let companyY = 32;
+                    doc.text('Winter & Usselmann GbR', rightX, companyY, { align: 'right' });
+                    doc.text('Jägerstraße 24a', rightX, companyY + 4, { align: 'right' });
+                    doc.text('23909 Ratzeburg', rightX, companyY + 8, { align: 'right' });
+                    doc.text('www.wintuss.de', rightX, companyY + 12, { align: 'right' });
+                    doc.text('Telefon 0151 - 413 894 42', rightX, companyY + 16, { align: 'right' });
+                    doc.text('E-Mail info@wintuss.de', rightX, companyY + 20, { align: 'right' });
+
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Ansprechperson', rightX, companyY + 28, { align: 'right' });
+                    doc.setFont('helvetica', 'normal');
+                    doc.text('Michael Winter', rightX, companyY + 32, { align: 'right' });
+                    doc.text('E-Mail m.winter@wintuss.de', rightX, companyY + 36, { align: 'right' });
+
+                    doc.setFontSize(10);
+                    doc.setTextColor(...colors.primary);
+                    // Beispiel-Adressat
+                    doc.text('Herr / Frau Kunde', margin, 60);
+                    doc.text('straße ', margin, 65);
+                    doc.text('Ort ', margin, 70);
+
+                    // Angebotsdaten
+                    doc.setFontSize(14);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(`Angebot - A-${Math.floor(100 + Math.random() * 900)}`, margin, 90);
+
+                    doc.setFontSize(9);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text('Betreff', margin, 100);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Angebot - Wohnungskomplettmodernisierung', margin, 105);
+
+                    doc.setFont('helvetica', 'normal');
+                    doc.text('Kunde', pageWidth - 70, 100);
+                    doc.text('10088', pageWidth - 70, 105);
+                    doc.text('Projekt', pageWidth - 50, 100);
+                    doc.text(`P-${Math.floor(1000 + Math.random() * 9000)}`, pageWidth - 50, 105);
+                    doc.text('Datum', pageWidth - margin, 100, { align: 'right' });
+                    doc.text(new Date().toLocaleDateString('de-DE'), pageWidth - margin, 105, { align: 'right' });
+
+                    y = 130; // Startposition Content auf Seite 1
+                } else {
+                    // FOLGESEITEN: Kompakter Header
+                    doc.setFontSize(10);
+                    doc.setFont('helvetica', 'bold');
+                    doc.setTextColor(...colors.primary);
+                    doc.text(`Angebot - A-XXXXX`, margin, 15);
+                    doc.setFontSize(8);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text('Angebot - Wohnungskomplettmodernisierung', margin, 20);
+                    doc.text(`vom ${new Date().toLocaleDateString('de-DE')}`, margin, 24);
+
+                    y = 35;
                 }
 
+                // Tabellen-Header (außer auf Summary Pages)
+                doc.setFillColor(245, 245, 245);
+                doc.rect(margin, y, contentWidth, 8, 'F');
                 doc.setFontSize(9);
-                doc.setFont('helvetica', 'normal');
-                doc.setTextColor(...colors.primary);
-                doc.text(`${qty}`, margin + 100, y);
-                doc.text(`${unit}`, margin + 120, y);
-                doc.text(formatCurrency(price), pageWidth - margin - 2, y, { align: 'right' });
+                doc.setFont('helvetica', 'bold');
+                doc.setTextColor(50, 50, 50);
+                doc.text('Pos.', margin + 2, y + 5.5);
+                doc.text('Menge', margin + 18, y + 5.5, { align: 'right' });
+                doc.text('Einheit', margin + 32, y + 5.5);
+                doc.text('Beschreibung', margin + 48, y + 5.5);
+                doc.text('Preis', pageWidth - margin - 25, y + 5.5, { align: 'right' });
+                doc.text('Gesamt', pageWidth - margin - 2, y + 5.5, { align: 'right' });
 
-                y += subname ? 12 : 8;
-                drawDivider(y - 4);
-                y += 4;
+                y += 12;
+
+                if (pageNum > 1) {
+                    // Übertrag von Vorseite
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Übertrag:', pageWidth - margin - 25, y, { align: 'right' });
+                    doc.text(`${formatNum(currentCarriage)}`, pageWidth - margin - 2, y, { align: 'right' });
+                    y += 10;
+                }
             };
 
-            calculation.breakdown.forEach((item) => {
-                drawServiceItem(item.serviceName, item.itemName, item.quantity, item.unit, item.totalCost);
+            const checkPageBreak = (neededHeight) => {
+                if (y + neededHeight > pageHeight - 35) {
+                    // Abschluss Übertrag auf alter Seite
+                    doc.setFont('helvetica', 'bold');
+                    doc.text('Übertrag auf nächste Seite:', pageWidth - margin - 25, pageHeight - 25, { align: 'right' });
+                    doc.text(`${formatNum(currentCarriage)}`, pageWidth - margin - 2, pageHeight - 25, { align: 'right' });
+
+                    drawFooter(currentPage);
+                    doc.addPage();
+                    currentPage++;
+                    drawHeader(currentPage);
+                    return true;
+                }
+                return false;
+            };
+
+            // INITIAL START
+            drawHeader(1);
+
+            // HAUPT-LOOP ÜBER KATEGORIEN
+            expandedItems.forEach((cat, catIdx) => {
+                const catNum = catIdx + 1;
+                let categorySum = 0;
+
+                checkPageBreak(15);
+                doc.setFont('helvetica', 'bold');
+                doc.setFontSize(10);
+                doc.text(`${catNum}.`, margin + 2, y);
+                doc.text(cat.name || cat.category, margin + 48, y);
+                y += 10;
+
+                cat.positions.forEach((pos, posIdx) => {
+                    const posNum = `${catNum}.${posIdx + 1}.`;
+                    const descriptionLines = doc.splitTextToSize(pos.description.join('\n'), contentWidth - 85);
+                    const neededH = 15 + (descriptionLines.length * 4);
+
+                    checkPageBreak(neededH);
+
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(9);
+                    doc.text(posNum, margin + 2, y);
+                    doc.text(formatNum(pos.quantity), margin + 18, y, { align: 'right' });
+                    doc.text(pos.unit, margin + 32, y);
+
+                    // Titel der Position unterstrichen
+                    doc.setFont('helvetica', 'bold');
+                    const titleWidth = doc.getTextWidth(pos.name);
+                    doc.text(pos.name, margin + 48, y);
+                    doc.line(margin + 48, y + 0.6, margin + 48 + titleWidth, y + 0.6);
+
+                    doc.text(formatNum(pos.pricePerUnit), pageWidth - margin - 25, y, { align: 'right' });
+                    doc.text(formatNum(pos.total), pageWidth - margin - 2, y, { align: 'right' });
+
+                    y += 6;
+
+                    // Beschreibung
+                    doc.setFont('helvetica', 'normal');
+                    doc.setFontSize(8.5);
+                    doc.setTextColor(...colors.gray);
+                    doc.text(descriptionLines, margin + 48, y);
+
+                    y += (descriptionLines.length * 4) + 8;
+                    currentCarriage += pos.total;
+                    categorySum += pos.total;
+                });
+
+                // Kategorie-Summe
+                checkPageBreak(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Summe ${catNum}. ${cat.name || cat.category}`, margin + 48, y);
+                doc.text(`${formatNum(categorySum)}`, pageWidth - margin - 2, y, { align: 'right' });
+                y += 15;
+
+                categoryTotals.push({ num: catNum, name: cat.name || cat.category, total: categorySum });
             });
 
-            if (selectedExtras.length > 0) {
-                y += 5;
-                doc.setFontSize(10);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(...colors.accent);
-                doc.text('Zusatzleistungen', margin + 2, y);
-                y += 8;
+            // FINAL SUMMARY PAGE (Zusammenstellung)
+            doc.addPage();
+            currentPage++;
+            drawHeader(currentPage);
 
-                calculation.extrasBreakdown.forEach((extra) => {
-                    drawServiceItem(extra.name, null, 1, 'Psch.', extra.value);
-                });
-            }
+            y += 20;
+            const totalNetto = currentCarriage;
+            const totalVAT = totalNetto * 0.19;
+            const totalBrutto = totalNetto + totalVAT;
 
-            // 5. Zusammenfassung
-            if (y > 220) {
-                doc.addPage();
-                y = 30;
-            } else {
-                y += 10;
-            }
+            doc.setFontSize(10);
+            doc.setFont('helvetica', 'bold');
+            doc.text('GESAMTÜBERSICHT', margin, y);
+            y += 10;
 
-            const summaryWidth = 80;
-            const summaryX = pageWidth - margin - summaryWidth;
+            doc.setFont('helvetica', 'normal');
+            doc.text('Summe der Arbeitsleistungen (Netto):', margin, y);
+            doc.text(formatNum(totalNetto) + ' €', pageWidth - margin - 2, y, { align: 'right' });
+            y += 6;
 
-            doc.setFillColor(...colors.lightGray);
-            doc.roundedRect(summaryX, y, summaryWidth, 55, 2, 2, 'F');
+            doc.text(`Umsatzsteuer (${Math.round(0.19 * 100)} %):`, margin, y);
+            doc.text(formatNum(totalVAT) + ' €', pageWidth - margin - 2, y, { align: 'right' });
+            y += 2;
 
-            let summaryY = y + 8;
-            const rowHeight = 6;
+            doc.setDrawColor(200, 200, 200);
+            doc.line(pageWidth - 80, y, pageWidth - margin, y);
+            y += 8;
 
-            const drawSummaryRow = (label, value, isTotal = false, isDiscount = false) => {
-                doc.setFontSize(isTotal ? 11 : 9);
-                doc.setFont('helvetica', isTotal ? 'bold' : 'normal');
+            doc.setFillColor(...colors.primary);
+            doc.rect(margin, y - 5, contentWidth, 10, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(11);
+            doc.setFont('helvetica', 'bold');
+            doc.text('GESAMTBETRAG (Brutto):', margin + 5, y + 2);
+            doc.text(formatNum(totalBrutto) + ' €', pageWidth - margin - 5, y + 2, { align: 'right' });
 
-                if (isDiscount) doc.setTextColor(0, 128, 0);
-                else doc.setTextColor(...colors.primary);
+            y += 20;
+            doc.setTextColor(...colors.gray);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'italic');
+            doc.text('Hinweis: Dieses Angebot bezieht sich rein auf die Arbeitsleistung.', margin, y);
+            y += 5;
+            doc.text('Materialkosten sind geschätzt und nicht Bestandteil dieses Angebots.', margin, y);
+            y += 10;
 
-                doc.text(label, summaryX + 5, summaryY);
-                doc.text(value, pageWidth - margin - 5, summaryY, { align: 'right' });
-                summaryY += rowHeight;
-            };
+            y += 20;
+            doc.setTextColor(...colors.primary);
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Zahlungsbedingungen:', margin, y);
+            y += 5;
+            doc.text('Die Zahlungsfrist nach Rechnungsstellung beträgt 7 Tage.', margin, y);
 
-            drawSummaryRow('Arbeitskosten:', formatCurrency(calculation.laborTotal));
-            drawSummaryRow('Materialkosten:', formatCurrency(calculation.materialTotal));
+            y += 15;
+            doc.setTextColor(...colors.accent);
+            doc.setFont('helvetica', 'bold');
+            doc.text('WICHTIGER HINWEIS ZU MATERIALKOSTEN:', margin, y);
+            y += 5;
+            doc.setTextColor(...colors.gray);
+            doc.setFont('helvetica', 'normal');
+            doc.setFontSize(8);
+            const disclaimerLines = doc.splitTextToSize('Die oben aufgeführten Preise beziehen sich auf die Arbeitsleistung. In der Online-Kalkulation angezeigte Materialkosten sind Schätzwerte zur Orientierung und nicht Bestandteil dieses Angebots. Diese dienen lediglich der Budgetplanung.', contentWidth);
+            doc.text(disclaimerLines, margin, y);
 
-            if (calculation.extrasTotal > 0) {
-                drawSummaryRow('Zusatzleistungen:', formatCurrency(calculation.extrasTotal));
-            }
+            y += (disclaimerLines.length * 4) + 10;
+            doc.setFontSize(9);
+            doc.setTextColor(...colors.primary);
+            doc.text('Wir freuen uns auf eine gute Zusammenarbeit!', margin, y);
 
-            if (calculation.discount > 0) {
-                drawSummaryRow('Mengenrabatt:', `-${formatCurrency(calculation.discount)}`, false, true);
-            }
+            y += 15;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Winter & Usselmann GbR', margin, y);
+            y += 5;
+            doc.setFont('helvetica', 'normal');
+            doc.text('Dieses Angebot ist 14 Tage gültig.', margin, y);
+            y += 20;
+            doc.setFontSize(9);
+            doc.setFont('helvetica', 'normal');
+            doc.text('Die Zahlungsfrist nach Rechnungsstellung beträgt 7 Tage.', margin, y);
+            y += 10;
+            doc.setFont('helvetica', 'italic');
+            doc.text('Ist dieses Angebot für Sie von Interesse? Dann freuen wir uns, wenn Sie uns den Auftrag erteilen.', margin, y);
+            y += 10;
+            doc.setFont('helvetica', 'bold');
+            doc.text('Dieses Schreiben wurde maschinell erstellt und ist deshalb auch ohne Unterschrift gültig.', margin, y);
+            y += 10;
+            doc.setFont('helvetica', 'normal');
+            doc.text('Falls Ihnen das Angebot zusagt, senden Sie es bitte unterschrieben an uns zurück.', margin, y);
+            y += 10;
+            doc.text('Mit dem Angebot bin ich einverstanden.', margin, y);
 
-            summaryY += 2;
-            doc.setDrawColor(...colors.border);
-            doc.line(summaryX + 5, summaryY, pageWidth - margin - 5, summaryY);
-            summaryY += 8;
+            y += 30;
+            doc.line(margin, y, margin + 70, y);
+            doc.text('Ort, Datum, Unterschrift Auftraggeber', margin, y + 5);
 
+            drawFooter(currentPage);
+
+            // ÜBERSICHT DER TITEL (Letzte Seite)
+            doc.addPage();
+            currentPage++;
+            drawHeader(currentPage);
+
+            y = 50;
             doc.setFontSize(12);
             doc.setFont('helvetica', 'bold');
-            doc.setTextColor(...colors.accent);
-            doc.text('GESAMT NETTO:', summaryX + 5, summaryY);
-            doc.text(formatCurrency(calculation.total), pageWidth - margin - 5, summaryY, { align: 'right' });
+            doc.text('Übersicht der Titel', margin, y);
+            y += 15;
 
-            y += 65;
+            categoryTotals.forEach(ct => {
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`${ct.num}.`, margin + 2, y);
+                doc.text(ct.name, margin + 25, y);
+                doc.text(`${formatNum(ct.total)} €`, pageWidth - margin - 2, y, { align: 'right' });
+                y += 8;
+            });
 
-            // 6. Disclaimer & Footer
-            doc.setFontSize(8);
-            doc.setFont('helvetica', 'italic');
-            doc.setTextColor(...colors.gray);
-            const notice = 'Hinweis: Dies ist eine unverbindliche Kostenschätzung basierend auf Ihren Angaben. Ein verbindliches Festpreisangebot erstellen wir Ihnen gerne nach einer persönlichen Vor-Ort-Besichtigung.';
-            const splitNotice = doc.splitTextToSize(notice, contentWidth);
-            doc.text(splitNotice, margin, y);
+            drawFooter(currentPage);
 
-            // Footer (Fixiert am Seitenende)
-            doc.setFontSize(7);
-            doc.setFont('helvetica', 'normal');
-            doc.setTextColor(...colors.gray);
-            const footerText = 'Winter & Usselmann GbR | Jägerstraße 24a, 23909 Ratzeburg | St.-Nr: 27/280/12345 | Finanzamt Ratzeburg';
-            doc.text(footerText, pageWidth / 2, pageHeight - 10, { align: 'center' });
-            doc.text(`Seite 1 von 1`, pageWidth - margin, pageHeight - 10, { align: 'right' });
-
-            // PDF speichern
-            doc.save(`Kostenschaetzung_${datum.replace(/\s/g, '_')}.pdf`);
+            doc.save(`Angebot_Winter_Usselmann_${new Date().toISOString().split('T')[0]}.pdf`);
 
         } catch (error) {
             console.error('PDF Fehler:', error);
@@ -320,7 +530,7 @@ const SummaryStep = memo(({
         } finally {
             setIsGeneratingPdf(false);
         }
-    }, [areaDetails, selectedExtras, calculation, getMaterialClassName, getPropertyTypeName]);
+    }, [areaDetails, selectedServices, calculation, getMaterialClassName, getPropertyTypeName]);
 
     return (
         <div className="space-y-8">

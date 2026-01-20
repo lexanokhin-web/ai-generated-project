@@ -122,9 +122,10 @@ export const useCalculator = () => {
             if (service.packages && customData.packageId) {
                 const pkg = service.packages.find(p => p.id === customData.packageId);
                 if (pkg) {
-                    const avgPackagePrice = getAveragePrice(pkg.min, pkg.max) * materialCoefficient;
-                    const pkgTotal = avgPackagePrice * quantity * propertyCoefficient;
-                    packagesTotal += pkgTotal;
+                    const VAT_F = 1.19;
+                    const avgPackagePriceBrutto = getAveragePrice(pkg.min, pkg.max) * materialCoefficient * VAT_F;
+                    const pkgTotalBrutto = avgPackagePriceBrutto * quantity * propertyCoefficient;
+                    packagesTotal += pkgTotalBrutto;
 
                     breakdown.push({
                         serviceId,
@@ -132,23 +133,26 @@ export const useCalculator = () => {
                         itemName: pkg.name,
                         quantity,
                         unit: 'Stk.',
-                        laborCost: 0,
-                        materialCost: pkgTotal,
-                        totalCost: pkgTotal
+                        laborCost: pkgTotalBrutto,
+                        materialCost: 0,
+                        totalCost: pkgTotalBrutto,
+                        pricePerUnitNetto: avgPackagePriceBrutto / VAT_F
                     });
                 }
+                laborTotal += pkgTotalBrutto;
                 return;
             }
 
             // Für normale Services (pro m² oder Punkt)
-            const avgLabor = getAveragePrice(service.laborMin, service.laborMax);
-            const avgMaterial = getAveragePrice(service.materialMin, service.materialMax);
+            const VAT_F = 1.19;
+            const avgLaborBrutto = getAveragePrice(service.laborMin, service.laborMax) * VAT_F;
+            const avgMaterialBrutto = getAveragePrice(service.materialMin, service.materialMax) * VAT_F;
 
-            const laborCost = avgLabor * quantity * subMultiplier * propertyCoefficient;
-            const materialCost = avgMaterial * quantity * subMultiplier * materialCoefficient * propertyCoefficient;
+            const laborCostBrutto = avgLaborBrutto * quantity * subMultiplier * propertyCoefficient;
+            const materialCostBrutto = avgMaterialBrutto * quantity * subMultiplier * materialCoefficient * propertyCoefficient;
 
-            laborTotal += laborCost;
-            materialTotal += materialCost;
+            laborTotal += laborCostBrutto;
+            materialTotal += materialCostBrutto;
 
             const subOptionName = subOptionId
                 ? service.subOptions?.find(so => so.id === subOptionId)?.name || ''
@@ -160,9 +164,10 @@ export const useCalculator = () => {
                 itemName: subOptionName,
                 quantity,
                 unit: service.unit,
-                laborCost,
-                materialCost,
-                totalCost: laborCost + materialCost
+                laborCost: laborCostBrutto,
+                materialCost: materialCostBrutto,
+                totalCost: laborCostBrutto + materialCostBrutto,
+                pricePerUnitNetto: (avgLaborBrutto + avgMaterialBrutto) / VAT_F
             });
 
             // Fixed Costs hinzufügen (wenn ausgewählt)
@@ -170,8 +175,8 @@ export const useCalculator = () => {
                 customData.fixedCosts.forEach(fcId => {
                     const fc = service.fixedCosts.find(f => f.id === fcId);
                     if (fc) {
-                        const fcPrice = getAveragePrice(fc.min, fc.max) * materialCoefficient;
-                        fixedCostsTotal += fcPrice;
+                        const fcPriceBrutto = getAveragePrice(fc.min, fc.max) * materialCoefficient * VAT_F;
+                        fixedCostsTotal += fcPriceBrutto;
 
                         breakdown.push({
                             serviceId,
@@ -179,17 +184,20 @@ export const useCalculator = () => {
                             itemName: fc.name,
                             quantity: 1,
                             unit: 'Pausch.',
-                            laborCost: 0,
-                            materialCost: fcPrice,
-                            totalCost: fcPrice
+                            laborCost: fcPriceBrutto,
+                            materialCost: 0,
+                            totalCost: fcPriceBrutto,
+                            pricePerUnitNetto: fcPriceBrutto / VAT_F
                         });
+                        laborTotal += fcPriceBrutto;
                     }
                 });
             }
         });
 
         // Zwischensumme
-        const subtotal = laborTotal + materialTotal + fixedCostsTotal + packagesTotal;
+        // Alle Service-Kosten (Labor + Pauschalen + Pakete) sind nun in laborTotal
+        const subtotal = laborTotal + materialTotal;
 
         // Zusatzoptionen berechnen
         let extrasPercentage = 0;

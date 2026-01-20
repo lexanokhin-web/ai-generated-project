@@ -1,3 +1,5 @@
+import { laborPrices } from './priceConfig';
+
 /**
  * Preisdaten für den Renovierungskostenrechner
  * Marktpreise für Schleswig-Holstein (Stand: 2024/2025)
@@ -96,18 +98,18 @@ export const servicesPricing = [
         category: 'surfaces',
         unit: 'm²',
         unitLabel: 'Fläche',
-        laborMin: 14,
-        laborMax: 32,
+        laborMin: laborPrices.waendeTapezierenStreichen * 0.9,
+        laborMax: laborPrices.waendeTapezierenStreichen * 1.1,
         materialMin: 4,
-        materialMax: 18,
+        materialMax: 12,
         icon: '🎨',
         description: 'Malerarbeiten, Tapezieren, Schimmelsanierung',
         calculationNote: 'Wand- und Deckenflächen',
         subOptions: [
-            { id: 'streichen', name: 'Streichen', multiplier: 1.0 },
-            { id: 'tapezieren', name: 'Tapezieren', multiplier: 1.25 },
-            { id: 'schimmel', name: 'Schimmelsanierung', multiplier: 1.8 },
-            { id: 'lackieren', name: 'Lackierarbeiten', multiplier: 1.4 }
+            { id: 'streichen', name: 'Streichen', multiplier: laborPrices.waendeStreichen / laborPrices.waendeTapezierenStreichen },
+            { id: 'tapezieren', name: 'Tapezieren', multiplier: 1.0 },
+            { id: 'schimmel', name: 'Schimmelsanierung', multiplier: 1.5 },
+            { id: 'lackieren', name: 'Lackierarbeiten', multiplier: 1.2 }
         ]
     },
     {
@@ -124,14 +126,14 @@ export const servicesPricing = [
         description: 'Fliesenverlegung, komplette Badsanierung',
         calculationNote: 'Boden- und Wandfläche im Bad',
         subOptions: [
-            { id: 'boden', name: 'Nur Bodenfliesen', multiplier: 0.85 },
-            { id: 'wand', name: 'Nur Wandfliesen', multiplier: 0.9 },
+            { id: 'boden', name: 'Nur Bodenfliesen', multiplier: laborPrices.bodenfliesen / ((laborPrices.bodenfliesen + laborPrices.wandfliesen) / 2) },
+            { id: 'wand', name: 'Nur Wandfliesen', multiplier: laborPrices.wandfliesen / ((laborPrices.bodenfliesen + laborPrices.wandfliesen) / 2) },
             { id: 'komplett', name: 'Komplettsanierung', multiplier: 1.3 },
             { id: 'barrierefrei', name: 'Barrierefreies Bad', multiplier: 1.5 }
         ],
         fixedCosts: [
-            { id: 'sanitaer', name: 'Sanitärobjekte (WC, Waschbecken)', min: 800, max: 3500 },
-            { id: 'dusche', name: 'Dusche/Wanne', min: 600, max: 4000 },
+            { id: 'sanitaer', name: 'Sanitärobjekte (WC, Waschbecken)', min: laborPrices.wcWandhaengend + laborPrices.waschtisch, max: (laborPrices.wcWandhaengend + laborPrices.waschtisch) * 1.5 },
+            { id: 'dusche', name: 'Dusche/Wanne', min: laborPrices.duschwanne, max: laborPrices.badewanne },
             { id: 'armaturen', name: 'Armaturen-Set', min: 250, max: 1500 }
         ]
     },
@@ -161,24 +163,24 @@ export const servicesPricing = [
         category: 'flooring',
         unit: 'm²',
         unitLabel: 'Bodenfläche',
-        laborMin: 22,
-        laborMax: 48,
-        materialMin: 18,
-        materialMax: 85,
+        laborMin: laborPrices.designbodenVinylplanken * 0.4, // Labor portion approx
+        laborMax: laborPrices.designbodenVinylplanken * 0.6,
+        materialMin: 30,
+        materialMax: 45,
         icon: '🪵',
         description: 'Laminat, Parkett, Vinyl, Teppich',
         calculationNote: 'Wohnfläche / Bodenfläche',
         subOptions: [
-            { id: 'laminat', name: 'Laminat', multiplier: 0.85 },
+            { id: 'laminat', name: 'Laminat', multiplier: 0.8 },
             { id: 'vinyl', name: 'Designvinyl', multiplier: 1.0 },
-            { id: 'parkett', name: 'Parkett', multiplier: 1.45 },
-            { id: 'fliesen', name: 'Bodenfliesen', multiplier: 1.2 },
+            { id: 'parkett', name: 'Parkett', multiplier: 1.6 },
+            { id: 'fliesen', name: 'Bodenfliesen', multiplier: 1.4 },
             { id: 'schleifen', name: 'Parkett schleifen', multiplier: 0.7 }
         ],
         additionalWork: [
-            { id: 'estrich', name: 'Estricharbeiten', pricePerSqm: 28 },
+            { id: 'estrich', name: 'Estricharbeiten', pricePerSqm: laborPrices.estricharbeiten },
             { id: 'daemmung', name: 'Trittschalldämmung', pricePerSqm: 8 },
-            { id: 'sockelleisten', name: 'Sockelleisten', pricePerMeter: 12 }
+            { id: 'sockelleisten', name: 'Sockelleisten', pricePerMeter: laborPrices.sockelleistenMontage }
         ]
     },
     {
@@ -195,11 +197,11 @@ export const servicesPricing = [
         description: 'Küchenmontage, Türen, Einbauschränke',
         calculationNote: 'Pauschalpreise je nach Umfang',
         packages: [
-            { id: 'kueche-klein', name: 'Küchenzeile (bis 3m)', min: 3500, max: 8000 },
-            { id: 'kueche-mittel', name: 'Küche L-Form (bis 5m)', min: 6000, max: 15000 },
+            { id: 'kueche-klein', name: 'Küchenzeile (bis 3m)', min: laborPrices.kuecheZeileMontage, max: laborPrices.kuecheZeileMontage * 1.5 },
+            { id: 'kueche-mittel', name: 'Küche L-Form (bis 5m)', min: laborPrices.kuecheLFormMontage, max: laborPrices.kuecheLFormMontage * 1.5 },
             { id: 'kueche-gross', name: 'Küche U-Form / Insel', min: 12000, max: 35000 },
-            { id: 'tuer', name: 'Innentür inkl. Zarge', min: 350, max: 900 },
-            { id: 'einbauschrank', name: 'Einbauschrank (pro lfm)', min: 450, max: 1200 }
+            { id: 'tuer', name: 'Innentür inkl. Zarge', min: laborPrices.innentuerErneuern, max: laborPrices.innentuerErneuern * 1.2 },
+            { id: 'einbauschrank', name: 'Einbauschrank (pro lfm)', min: laborPrices.einbauschrankMass, max: laborPrices.einbauschrankMass * 1.2 }
         ]
     },
     {
@@ -217,12 +219,12 @@ export const servicesPricing = [
         calculationNote: 'Pro Steckdose/Schalter/Anschluss',
         subOptions: [
             { id: 'steckdose', name: 'Steckdose/Schalter', multiplier: 1.0 },
-            { id: 'licht', name: 'Lichtauslass', multiplier: 1.1 },
+            { id: 'licht', name: 'Lichtauslass', multiplier: laborPrices.lichtauslass / laborPrices.steckdoseSchalter },
             { id: 'herd', name: 'Herdanschluss', multiplier: 2.5 },
             { id: 'smart', name: 'Smart Home Punkt', multiplier: 1.8 }
         ],
         fixedCosts: [
-            { id: 'verteiler', name: 'Unterverteilung neu', min: 800, max: 2500 },
+            { id: 'verteiler', name: 'Unterverteilung neu', min: laborPrices.wohnungsverteiler, max: laborPrices.wohnungsverteiler * 1.5 },
             { id: 'pruefung', name: 'E-Check / Prüfung', min: 150, max: 350 }
         ]
     },
@@ -240,9 +242,9 @@ export const servicesPricing = [
         description: 'Heizungsmodernisierung, Heizkörpertausch',
         calculationNote: 'Pauschalpreise je nach System',
         packages: [
-            { id: 'heizkoerper', name: 'Heizkörper tauschen (pro Stück)', min: 350, max: 800 },
-            { id: 'thermostat', name: 'Thermostate (pro Stück)', min: 80, max: 250 },
-            { id: 'fussbodenheizung', name: 'Fußbodenheizung (pro m²)', min: 45, max: 85 },
+            { id: 'heizkoerper', name: 'Heizkörper tauschen (pro Stück)', min: laborPrices.heizkoerperAustausch, max: laborPrices.heizkoerperAustausch * 1.5 },
+            { id: 'thermostat', name: 'Thermostate (pro Stück)', min: laborPrices.thermostatkopf, max: laborPrices.thermostatkopf * 2 },
+            { id: 'fussbodenheizung', name: 'Fußbodenheizung (pro m²)', min: laborPrices.fussbodenheizung, max: laborPrices.fussbodenheizung * 1.3 },
             { id: 'gastherme', name: 'Gastherme komplett', min: 4500, max: 9000 },
             { id: 'waermepumpe', name: 'Wärmepumpe komplett', min: 15000, max: 35000 }
         ]

@@ -15,6 +15,7 @@ const SummaryStep = memo(({
     onGoToStep
 }) => {
     const [isGeneratingPdf, setIsGeneratingPdf] = useState(false);
+    // eslint-disable-next-line no-unused-vars
     const [pdfError, setPdfError] = useState(null);
 
     // Hilfsfunktion: Wandelt UI-Services in detaillierte Angebotspositionen um
@@ -180,6 +181,7 @@ const SummaryStep = memo(({
     }, [materialClass]);
 
     // PDF generieren
+    // eslint-disable-next-line no-unused-vars
     const generatePDF = useCallback(async () => {
         if (isGeneratingPdf) return;
         setIsGeneratingPdf(true);

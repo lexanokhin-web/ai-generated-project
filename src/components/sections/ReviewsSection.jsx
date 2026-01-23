@@ -13,7 +13,7 @@ const REVIEWS = [
     {
         name: "Marc Jensen",
         location: "Hamburg-Eppendorf",
-        img: "/images/image-10.webp",
+        img: "/images/image-46.webp",
         text: "Hervorragende Arbeit bei unserem Altbau in Hamburg. Pünktlich, sauber und fachlich absolut top. Wir sind sehr zufrieden!"
     },
     {

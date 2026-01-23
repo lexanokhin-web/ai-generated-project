@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import StructuredData from '../components/SEO/StructuredData';
 
@@ -143,12 +144,12 @@ const Home = memo(() => {
                 <div className="container mx-auto px-6 text-center">
                     <h4 className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-6">Expertise in Norddeutschland</h4>
                     <div className="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm text-slate-500 font-medium">
-                        <span className="hover:text-accent transition-colors cursor-default">Renovierung Lübeck</span>
-                        <span className="hover:text-accent transition-colors cursor-default">Badsanierung Schleswig-Holstein</span>
-                        <span className="hover:text-accent transition-colors cursor-default">Sanierung Hamburg</span>
-                        <span className="hover:text-accent transition-colors cursor-default">Handwerker Lübeck</span>
-                        <span className="hover:text-accent transition-colors cursor-default">Innenausbau Norddeutschland</span>
-                        <span className="hover:text-accent transition-colors cursor-default">Trockenbau SH</span>
+                        <Link to="/renovierung-luebeck" className="hover:text-accent transition-colors">Renovierung Lübeck</Link>
+                        <Link to="/badsanierung-schleswig-holstein" className="hover:text-accent transition-colors">Badsanierung Schleswig-Holstein</Link>
+                        <Link to="/sanierung-luebeck" className="hover:text-accent transition-colors">Sanierung Lübeck</Link>
+                        <Link to="/renovierung-hamburg" className="hover:text-accent transition-colors">Renovierung Hamburg</Link>
+                        <Link to="/badsanierung-kiel" className="hover:text-accent transition-colors">Badsanierung Kiel</Link>
+                        <Link to="/badsanierung-ahrensburg" className="hover:text-accent transition-colors">Badsanierung Ahrensburg</Link>
                     </div>
                 </div>
             </div>

@@ -863,7 +863,7 @@ export const putzarbeiten = {
             description: [
                 'Bestehenden Putz abschlagen und entsorgen',
                 'Untergrund vorbereiten und grundieren',
-                'Wärmedämmputz или mineralischen Außenputz aufbringen',
+                'Wärmedämmputz oder mineralischen Außenputz aufbringen',
                 'Oberputz als Scheibenputz oder Rillenputz',
                 'Inkl. Armierungsgewebe'
             ],

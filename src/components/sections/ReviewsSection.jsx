@@ -42,7 +42,7 @@ const ReviewsSection = memo(() => {
                 <div className="text-center mb-12 md:mb-20">
                     <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Kundenstimmen</h2>
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900">
-                        Was unsere <span className="text-accent font-serif italic">Kunden</span> sagen
+                        Top-Bewertungen <span className="text-accent font-serif italic text-4xl md:text-6xl">unserer Kunden</span>
                     </h3>
                 </div>
 

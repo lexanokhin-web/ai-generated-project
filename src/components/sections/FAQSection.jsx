@@ -41,7 +41,7 @@ const FAQSection = memo(() => {
 
             <div className="container mx-auto px-6 max-w-3xl relative z-10">
                 <div className="text-center mb-12 md:mb-20">
-                    <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Support</h2>
+                    <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Support & Hilfe</h2>
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900">
                         Häufig gestellte <span className="text-accent font-serif italic">Fragen</span>
                     </h3>

@@ -80,7 +80,7 @@ const HeroScene = () => {
                         stencil: false,
                         depth: false,
                     }}
-                    dpr={[1, 1.5]} // Ограничиваем DPR
+                    dpr={[1, 1.5]} // Limit DPR
                     frameloop="demand" // Rendering nur bei Änderungen
                     performance={{ min: 0.5 }} // Adaptive Leistung
                 >

@@ -27,7 +27,7 @@ const HeroSection = memo(() => {
                         className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold uppercase tracking-wider mb-6"
                         data-aos="fade-down"
                     >
-                        Handwerkskunst in Lübeck, Hamburg & SH
+                        Ihr Handwerker für Lübeck & SH
                     </span>
                     <h1
                         className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-[1.1] mb-6 md:mb-8"
@@ -42,7 +42,7 @@ const HeroSection = memo(() => {
                         data-aos="fade-up"
                         data-aos-delay="200"
                     >
-                        Von der exklusiven Badsanierung bis zum trockenen Innenausbau: Winter & Usselmann steht für höchste handwerkliche Qualität.
+                        Ihr Spezialist für exklusive Badsanierung, Innenausbau & Renovierung. Winter & Usselmann steht für höchste Qualität in Lübeck und Norddeutschland.
                     </p>
 
                     <div
@@ -67,7 +67,7 @@ const HeroSection = memo(() => {
                 </div>
             </div>
 
-            {/* Floating Glass Card - только на десктопах */}
+            {/* Floating Glass Card - Desktop only */}
             <div className="absolute bottom-10 right-10 hidden xl:block" data-aos="fade-left" data-aos-delay="500">
                 <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-xs text-white">
                     <div className="flex items-center gap-3 mb-2">

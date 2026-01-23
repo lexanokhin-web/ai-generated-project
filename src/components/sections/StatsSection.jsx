@@ -5,7 +5,7 @@ import Section from '../UI/Section';
 // Statische Statistikdaten
 const STATS = [
     { target: 15, label: "Jahre Erfahrung", Icon: Calendar, color: "text-accent" },
-    { target: 700, label: "Projekte in SH", Icon: Trophy, color: "text-blue-400" },
+    { target: 700, label: "Projekte in Lübeck & SH", Icon: Trophy, color: "text-blue-400" },
     { target: 90, label: "Kundenzufriedenheit", Icon: Heart, color: "text-rose-400", prefix: "Über ", suffix: "%" }
 ];
 
@@ -48,6 +48,9 @@ const StatsSection = memo(() => {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent pointer-events-none" />
 
             <div className="container mx-auto px-6 relative z-10">
+                <div className="text-center mb-10 md:mb-16">
+                    <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em]">Qualität & Handwerk</h2>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 md:gap-10">
                     {STATS.map((stat, idx) => (
                         <div

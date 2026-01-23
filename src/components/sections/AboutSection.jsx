@@ -19,7 +19,7 @@ const AboutSection = memo(() => {
                             </div>
 
                             <h2 className="text-sm font-bold text-accent uppercase tracking-[0.2em] md:tracking-[0.3em] mb-3 md:mb-4">
-                                Über Winter & Usselmann
+                                Über W&U Lübeck
                             </h2>
                             <h3 className="text-3xl sm:text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 md:mb-8 leading-[1.1]">
                                 Wir bauen nicht nur um.<br />
@@ -28,12 +28,12 @@ const AboutSection = memo(() => {
 
                             <div className="space-y-4 md:space-y-6 text-slate-600 text-base md:text-lg lg:text-xl leading-relaxed font-light">
                                 <p>
-                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in Lübeck, Hamburg und Region, aber es passt nicht mehr ganz zu Ihrem Leben.
+                                    Kennen Sie das Gefühl? Sie lieben Ihr Zuhause in <strong>Lübeck</strong>, <strong>Hamburg</strong> und Region, aber es passt nicht mehr ganz zu Ihrem Leben.
                                     Das Bad ist veraltet, der Boden knarrt, oder Sie brauchen einfach mehr Platz.
                                 </p>
                                 <p>
                                     Eine Renovierung ist oft mit Ängsten verbunden: Lärm, Dreck, unzuverlässige Handwerker.
-                                    Wir treten an, um das zu ändern. Als Ihr lokaler Partner in Schleswig-Holstein garantieren wir Ihnen einen reibungslosen Ablauf.
+                                    Wir treten an, um das zu ändern. Als Ihr lokaler Partner für <strong>Renovierung in Lübeck</strong> und <strong>Schleswig-Holstein</strong> garantieren wir Ihnen einen reibungslosen Ablauf.
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 py-4 md:py-6 border-y border-slate-200/50 my-6 md:my-8">
@@ -63,14 +63,14 @@ const AboutSection = memo(() => {
                                 <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/40 via-transparent to-transparent" />
                             </div>
 
-                            {/* Floating Sticker - только на MD+ */}
+                            {/* Floating Sticker - MD+ only */}
                             <div className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-28 h-28 md:w-40 md:h-40 bg-accent rounded-full flex items-center justify-center text-white font-bold text-center p-4 md:p-6 shadow-2xl z-20 rotate-12 group-hover:rotate-0 transition-transform duration-500 hidden sm:flex">
                                 <div className="text-xs md:text-sm uppercase tracking-widest leading-tight">
                                     Meister<br />Qualität<br /><span className="text-[0.5rem] md:text-[0.6rem] font-medium opacity-80">Lübeck, HH & SH</span>
                                 </div>
                             </div>
 
-                            {/* Secondary Image - только на XL */}
+                            {/* Secondary Image - XL only */}
                             <div className="absolute -bottom-16 -left-16 w-2/3 z-30 rounded-3xl overflow-hidden shadow-2xl border-4 border-white hidden xl:block" data-aos="fade-up" data-aos-delay="400">
                                 <img src="/images/image-6.webp" alt="Detail" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>

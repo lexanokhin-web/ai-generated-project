@@ -42,13 +42,13 @@ const ProcessSection = memo(() => {
                 <div className="text-center mb-16 md:mb-24">
                     <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Der Prozess</h2>
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900">
-                        Ihr Weg zur <span className="text-accent font-serif italic">schönen Wohnung</span>
+                        Ihr Weg zur <span className="text-accent font-serif italic">Sanierung</span>
                     </h3>
                     <p className="text-slate-500 mt-4 text-base md:text-lg">In 4 einfachen Schritten zum Ziel</p>
                 </div>
 
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-16 relative">
-                    {/* Image - На мобильных сверху, на десктопах слева */}
+                    {/* Image - Mobile on top, Desktop on left */}
                     <div className="w-full lg:w-1/2 lg:sticky-container self-start z-20">
                         <div className="h-[250px] sm:h-[350px] lg:h-[600px] rounded-2xl overflow-hidden shadow-2xl relative bg-slate-900 flex items-center justify-center text-white border-4 border-white">
                             <img
@@ -59,7 +59,7 @@ const ProcessSection = memo(() => {
                                 decoding="async"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent" />
-                            <h3 className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-xl md:text-3xl font-bold">Der perfekte Plan</h3>
+                            <h3 className="absolute bottom-6 left-6 md:bottom-10 md:left-10 text-xl md:text-3xl font-bold">Ihre Sanierung Lübeck</h3>
                         </div>
                     </div>
 

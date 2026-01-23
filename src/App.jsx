@@ -17,6 +17,7 @@ const Datenschutz = lazy(() => import('./pages/Datenschutz'));
 const AGB = lazy(() => import('./pages/AGB'));
 const Blog = lazy(() => import('./pages/Blog'));
 const ArticleDetail = lazy(() => import('./pages/ArticleDetail'));
+const LocalLandingPage = lazy(() => import('./pages/LocalLandingPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Loading fallback für lazy-loaded Komponenten
@@ -56,6 +57,7 @@ function App() {
                             <Route path="impressum" element={<Impressum />} />
                             <Route path="datenschutz" element={<Datenschutz />} />
                             <Route path="agb" element={<AGB />} />
+                            <Route path=":slug" element={<LocalLandingPage />} />
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>

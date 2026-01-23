@@ -34,7 +34,7 @@ const Blog = () => {
             </Helmet>
 
             <div className="pt-24 pb-12 bg-slate-900 text-center">
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Unser <span className="text-accent italic">Ratgeber</span></h1>
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Experten <span className="text-accent italic">Ratgeber</span></h1>
                 <p className="text-slate-400 max-w-2xl mx-auto">
                     Hier teilen wir unser Fachwissen. Erfahren Sie alles über aktuelle Trends, Kosten und Tipps für Ihr nächstes Projekt.
                 </p>
@@ -42,7 +42,8 @@ const Blog = () => {
 
             <Section className="bg-slate-50">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {articles.map((article) => (
+                    {/* Articles sorted by date (newest first) */}
+                    {[...articles].sort((a, b) => new Date(b.date) - new Date(a.date)).map((article) => (
                         <Link to={`/ratgeber/${article.id}`} key={article.id} className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 block">
                             <div className="h-48 overflow-hidden relative">
                                 <img

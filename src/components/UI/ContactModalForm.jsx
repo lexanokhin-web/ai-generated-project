@@ -16,7 +16,7 @@ const ContactModalForm = () => {
                 </div>
                 <h3 className="text-2xl font-bold text-slate-900 mb-2">Vielen Dank!</h3>
                 <p className="text-slate-500 mb-8">
-                    Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns so schnell как возможно bei Ihnen melden.
+                    Ihre Nachricht wurde erfolgreich gesendet. Wir werden uns so schnell wie möglich bei Ihnen melden.
                 </p>
                 <button
                     onClick={resetStatus}

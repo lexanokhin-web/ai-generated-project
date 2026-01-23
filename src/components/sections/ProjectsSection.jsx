@@ -42,7 +42,7 @@ const ProjectsSection = memo(() => {
 
                     {/* Projekt-Grid — vereinfacht für Mobilgeräte */}
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 h-auto mb-8 md:mb-12">
-                        {/* Главный проект - 2x2 на десктопе */}
+                        {/* Main project - 2x2 on desktop */}
                         <div
                             className="col-span-2 row-span-1 lg:row-span-2 relative group overflow-hidden rounded-2xl md:rounded-3xl cursor-pointer h-[200px] sm:h-[300px] lg:h-auto"
                             data-aos="zoom-in"

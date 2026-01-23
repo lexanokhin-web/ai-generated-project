@@ -40,7 +40,7 @@ const ReasonsSection = memo(() => {
                 <div className="text-center mb-16 md:mb-32" data-aos="fade-up">
                     <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] md:tracking-[0.4em] mb-4">Ihre Vorteile</h2>
                     <h3 className="text-3xl sm:text-4xl md:text-6xl font-bold text-slate-900">
-                        Warum <span className="font-serif italic text-accent">Winter & Usselmann?</span>
+                        Winter & Usselmann <span className="font-serif italic text-accent text-3xl md:text-5xl border-b-4 border-accent/20">Handwerk & Qualität</span>
                     </h3>
                     <p className="mt-4 text-slate-500 text-base md:text-xl max-w-2xl mx-auto px-4 sm:px-0">
                         Weil wir Handwerk lieben, Service leben und Räume schaffen, in denen man sich wirklich zu Hause fühlt.

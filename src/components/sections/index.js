@@ -9,6 +9,7 @@ export { default as ComparisonSection } from './ComparisonSection';
 export { default as StatsSection } from './StatsSection';
 export { default as ReviewsSection } from './ReviewsSection';
 export { default as ProjectsSection } from './ProjectsSection';
+export { default as LocalProject } from './LocalProject';
 export { default as FAQSection } from './FAQSection';
 export { default as CalculatorSection } from './CalculatorSection';
 

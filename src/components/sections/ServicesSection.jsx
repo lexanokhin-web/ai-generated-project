@@ -25,7 +25,7 @@ const ServicesSection = memo(() => {
                         Alles für Ihr <span className="font-serif italic text-accent">perfektes Zuhause</span>
                     </h3>
                     <p className="text-slate-400 text-base md:text-lg px-4 sm:px-0">
-                        Von kleinen Reparaturen bis zur Kernsanierung – wir sind Ihre Experten in Schleswig-Holstein.
+                        Von kleinen Reparaturen bis zur Kernsanierung – wir sind Ihre Experten in <strong>Lübeck</strong> und ganz <strong>Schleswig-Holstein</strong>.
                     </p>
                 </div>
 
@@ -53,7 +53,7 @@ const ServicesSection = memo(() => {
                     ))}
                 </div>
 
-                {/* Liquid Glass Tools — только на десктопах */}
+                {/* Liquid Glass Tools — desktop only */}
                 <LiquidGlassTool Icon={Hammer} className="top-20 left-10 hidden lg:block" size={65} duration={7} />
                 <LiquidGlassTool Icon={Wrench} className="bottom-20 right-10 hidden lg:block" size={60} delay={1.5} duration={6} />
             </div>

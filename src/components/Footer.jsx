@@ -182,7 +182,8 @@ const Footer = () => {
                             ))}
                         </div>
                         <div className="flex flex-col space-y-2">
-                            <span className="text-white font-bold mb-2 uppercase tracking-widest text-xs">Rechtliches</span>
+                            <span className="text-white font-bold mb-2 uppercase tracking-widest text-xs">Informationen</span>
+                            <Link to="/ratgeber" className="hover:text-white transition-colors">Ratgeber</Link>
                             <Link to="/impressum" className="hover:text-white transition-colors">Impressum</Link>
                             <Link to="/datenschutz" className="hover:text-white transition-colors">Datenschutz</Link>
                             <Link to="/agb" className="hover:text-white transition-colors">AGB</Link>

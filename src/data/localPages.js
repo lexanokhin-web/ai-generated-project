@@ -59,7 +59,7 @@ export const localPagesData = {
         service: "Sanierung",
         title: "Sanierung Lübeck: Kernsanierung & Altbau-Modernisierung",
         subtitle: "Spezialist für energetische Sanierung und Kernsanierung in Lübeck. Wir machen Ihren Altbau fit für die Zukunft.",
-        heroImage: "/images/image-2.webp",
+        heroImage: "/images/image-39.webp",
         metaTitle: "Sanierung Lübeck | Kernsanierung & Altbau-Profi | W&U GbR",
         metaDesc: "Fachgerechte Sanierung in Lübeck. Energetische Modernisierung, Kernsanierung und Altbausanierung vom Experten. Qualität zum fairen Preis.",
         content: "Lübeck bietet wunderschöne historische Bausubstanz. Wir helfen Ihnen, diese Schätze energetisch und optisch auf den neuesten Stand zu bringen.",
@@ -86,7 +86,7 @@ export const localPagesData = {
         service: "Badsanierung",
         title: "Exklusive Badsanierung in Ahrensburg",
         subtitle: "Wir verwandeln Ihr Badezimmer in Ahrensburg in eine moderne Wohlfühloase. Hochwertige Materialien & maßgeschneidertes Design.",
-        heroImage: "/images/image-26.webp",
+        heroImage: "/images/image-40.webp",
         metaTitle: "Badsanierung Ahrensburg | Exklusive Bad-Modernisierung | W&U",
         metaDesc: "Traumbad in Ahrensburg gesucht? Winter & Usselmann bietet hochwertige Badsanierung und barrierefreie Umbauten für anspruchsvolle Kunden in Ahrensburg.",
         content: "Ahrensburg ist bekannt für seine gehobene Wohnqualität. Wir bringen diesen Standard in Ihr Badezimmer – mit exklusiven Fliesen, smarten Lichtkonzepten und handwerklicher Perfektion.",
@@ -96,7 +96,7 @@ export const localPagesData = {
                 type: "Luxury Bathroom",
                 quote: "Herausragende Arbeit. Das Team hat unsere Wünsche perfekt umgesetzt und sauber gearbeitet.",
                 client: "Familie Weber",
-                image: "/images/image-28.webp"
+                image: "/images/image-41.webp"
             }
         ]
     },
@@ -146,7 +146,7 @@ export const localPagesData = {
         service: "Badsanierung",
         title: "Badsanierung Kiel: Moderne Bäder für die Landeshauptstadt",
         subtitle: "Von der Planung bis zum ersten Bad: Wir sanieren Ihr Badezimmer in Kiel professionell und zum Festpreis.",
-        heroImage: "/images/image-26.webp",
+        heroImage: "/images/image-42.webp",
         metaTitle: "Badsanierung Kiel | Bad-Modernisierung & Design | W&U GbR",
         metaDesc: "Ihr neues Bad in Kiel. Wir bieten komplette Badsanierungen, barrierefreie Lösungen und modernes Design in der Landeshauptstadt Kiel.",
         content: "Kiel wächst und wir wachsen mit. Wir bieten Ihnen moderne Badlösungen, die perfekt zu Ihrem urbanen Lebensstil in Kiel passen.",
@@ -156,7 +156,7 @@ export const localPagesData = {
                 type: "Exklusive Badsanierung",
                 quote: "Fachlich top und sehr freundlich. Unser Bad ist jetzt das Highlight der Wohnung.",
                 client: "Familie G.",
-                image: "/images/image-26.webp"
+                image: "/images/image-43.webp"
             }
         ]
     },
@@ -166,7 +166,7 @@ export const localPagesData = {
         service: "Renovierung",
         title: "Renovierung Hamburg: Exklusive Sanierung & Modernisierung",
         subtitle: "Ihr erfahrener Partner für hochwertige Renovierungsprojekte in der Hansestadt Hamburg. Von Elbe bis Alster.",
-        heroImage: "/images/image-2.webp",
+        heroImage: "/images/image-38.webp",
         metaTitle: "Renovierung Hamburg | Wohnungs- & Haussanierung | W&U GbR",
         metaDesc: "Professionelle Renovierung in Hamburg. Wir sanieren Altbau-Wohnungen und Häuser mit höchstem Anspruch an Qualität und Design. Jetzt anfragen.",
         content: "Hamburg stellt besondere Ansprüche an den Innenausbau. Ob Altbau-Charme in Eppendorf oder moderne Loft-Sanierung in der HafenCity – wir setzen Ihre Wünsche fachgerecht um.",
@@ -176,7 +176,7 @@ export const localPagesData = {
                 type: "Altbaumodernisierung",
                 quote: "Ein eingespieltes Team, das hält, was es verspricht. Die Renovierung in Altona war ein voller Erfolg.",
                 client: "K. Petersen",
-                image: "/images/image-27.webp"
+                image: "/images/image-44.webp"
             }
         ]
     },
@@ -196,7 +196,7 @@ export const localPagesData = {
                 type: "Komplett-Badsanierung",
                 quote: "Endlich eine Firma, die wirklich alles koordiniert. Das neue Bad ist fantastisch geworden.",
                 client: "Familie Janssen",
-                image: "/images/image-28.webp"
+                image: "/images/image-45.webp"
             }
         ]
     },

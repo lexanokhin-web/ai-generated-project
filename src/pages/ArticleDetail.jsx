@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import StructuredData from '../components/SEO/StructuredData';
 import Section from '../components/UI/Section';
@@ -7,7 +7,22 @@ import { articles } from '../data/articles';
 
 const ArticleDetail = () => {
     const { id } = useParams();
+    const navigate = useNavigate();
     const article = articles.find(a => a.id === id);
+
+    // Smooth navigation for links inside dangerouslySetInnerHTML
+    const handleContentClick = (e) => {
+        const target = e.target.closest('a');
+        if (target && target.getAttribute('href')?.startsWith('/')) {
+            const href = target.getAttribute('href');
+
+            // If it's a modal trigger or hash link, let standard behavior handle it or ignore
+            if (target.dataset.modal || href.includes('#')) return;
+
+            e.preventDefault();
+            navigate(href);
+        }
+    };
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -122,6 +137,7 @@ const ArticleDetail = () => {
                     <div
                         className="prose prose-lg prose-slate max-w-none prose-headings:font-bold prose-a:text-accent hover:prose-a:text-amber-700 prose-img:rounded-xl"
                         dangerouslySetInnerHTML={{ __html: article.content }}
+                        onClick={handleContentClick}
                     />
 
                     {/* Share / Back Links */}

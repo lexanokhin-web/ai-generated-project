@@ -17,7 +17,7 @@ export const propertyTypes = [
     },
     {
         id: 'house',
-        name: 'Einfamilienhaus',
+        name: 'Einfamilienhaus-Sanierung',
         description: 'Freistehendes Haus oder Doppelhaushälfte',
         coefficient: 1.15,
         icon: '🏠'

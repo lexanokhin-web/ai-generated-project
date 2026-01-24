@@ -37,11 +37,11 @@ const AboutSection = memo(() => {
                                 </p>
 
                                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 py-4 md:py-6 border-y border-slate-200/50 my-6 md:my-8">
-                                    <img src="/images/image-4.webp" alt="Unterschrift Michael Winter" className="h-12 md:h-16 opacity-80" loading="lazy" decoding="async" />
+                                    <img src="/images/logonew.webp" alt="Unterschrift Michael Winter" className="h-12 md:h-16 opacity-80" loading="lazy" decoding="async" />
                                     <div className="h-px sm:h-12 w-full sm:w-px bg-slate-200" />
                                     <div>
                                         <p className="font-bold text-slate-900">Michael Winter</p>
-                                        <p className="text-sm text-accent">Geschäftsführer & Visionär</p>
+                                        <p className="text-sm text-accent">Geschäftsführer</p>
                                     </div>
                                 </div>
                             </div>

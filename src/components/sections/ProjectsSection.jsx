@@ -4,10 +4,10 @@ import ProjectGalleryModal from '../UI/ProjectGalleryModal';
 
 // Statisches Projekt-Array
 const PROJECT_IMAGES = [
-    { img: "/images/image-21.webp", title: "Badezimmermodernisierung", cat: "Sanierung", desc: "Komplette Neuerstellung eines barrierefreien und modernen Badezimmers." },
+    { img: "/images/image-45.webp", title: "Badezimmermodernisierung", cat: "Sanierung", desc: "Komplette Neuerstellung eines barrierefreien und modernen Badezimmers." },
     { img: "/images/bathroom.webp", title: "Wohnzimmer Redesign", cat: "Innenausbau", desc: "Exklusive Wandgestaltung und Bodenerneuerung für ein wohnliches Ambiente." },
     { img: "/images/kitchen.webp", title: "Balkonrenovierung", cat: "Außenbau", desc: "Fachgerechte Betonsanierung und Belagserneuerung für Außenbereiche." },
-    { img: "/images/living-room.webp", title: "Badezimmer-Renovierung", cat: "Modernisierung", desc: "Vollständige Sanierung von Fliesen und Sanitäranlagen aus einer Hand." },
+    { img: "/images/image-40.webp", title: "Küchenrenovierung", cat: "Modernisierung", desc: "Komplette Modernisierung der Küche inklusive Fliesenarbeiten, Bodenverlegung und fachgerechter Montage." },
     { img: "/images/open-plan.webp", title: "Open-Plan Living", cat: "Innenausbau", desc: "Zusammenführung von Wohnbereichen durch präzise Trockenbauarbeiten." },
     { img: "/images/wardrobe.webp", title: "Maßgeschneiderter Stauraum", cat: "Tischlerarbeiten", desc: "Individuell gefertigte Einbauschränke für maximale Platzeffizienz." },
     { img: "/images/image-22.webp", title: "Moderner Bad-Traum", cat: "Sanierung", desc: "Luxuriöse Badsanierung mit Fokus auf Design und Funktionalität." },

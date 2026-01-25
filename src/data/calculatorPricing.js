@@ -3,7 +3,7 @@ import { laborPrices } from './priceConfig';
 /**
  * Preisdaten für den Renovierungskostenrechner
  * Marktpreise für Schleswig-Holstein (Stand: 2024/2025)
- * Alle Preise inkl. 19% MwSt.
+ * Alle Preise Exkl. MwSt. & Material (Nur Arbeitskosten)
  */
 
 // Objekttypen mit Koeffizienten
@@ -38,37 +38,7 @@ export const propertyTypes = [
     }
 ];
 
-// Materialklassen mit Preismultiplikatoren
-export const materialClasses = [
-    {
-        id: 'economy',
-        name: 'Economy',
-        description: 'Bewährte Standardmaterialien',
-        coefficient: 0.75,
-        examples: 'Standard-Fliesen, Laminat, Dispersionsfarbe'
-    },
-    {
-        id: 'standard',
-        name: 'Standard',
-        description: 'Gutes Preis-Leistungs-Verhältnis',
-        coefficient: 1.0,
-        examples: 'Markenprodukte, Vinyl-Design, hochwertige Farben'
-    },
-    {
-        id: 'premium',
-        name: 'Premium',
-        description: 'Hochwertige Markenprodukte',
-        coefficient: 1.5,
-        examples: 'Feinsteinzeug, Parkett, Silikonharzfarbe'
-    },
-    {
-        id: 'luxury',
-        name: 'Exklusiv',
-        description: 'Exklusive Designer-Materialien',
-        coefficient: 2.2,
-        examples: 'Naturstein, Massivholz, Spezialoberflächen'
-    }
-];
+
 
 // Dienstleistungen mit Preisen (€ pro Einheit, inkl. MwSt.)
 // Preise basieren auf durchschnittlichen Marktpreisen in Schleswig-Holstein
@@ -81,8 +51,8 @@ export const servicesPricing = [
         unitLabel: 'Wandfläche',
         laborMin: laborPrices.innenputzKalkzement * 0.85,
         laborMax: laborPrices.innenputzKalkzement * 1.15,
-        materialMin: 12,
-        materialMax: 35,
+        materialMin: 0,
+        materialMax: 0,
         icon: '🧱',
         description: 'Putzarbeiten, Fassadensanierung, Mauerwerksinstandsetzung',
         calculationNote: 'Wandfläche = Umfang × Deckenhöhe',
@@ -317,7 +287,7 @@ export const roomTypes = [
 ];
 
 // MwSt. Satz Deutschland
-export const VAT_RATE = 0.19;
+
 
 // Rabattstaffeln (optional für spätere Verwendung)
 export const volumeDiscounts = [

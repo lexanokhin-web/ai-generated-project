@@ -8,9 +8,8 @@ const CalculatorProgress = memo(({ currentStep, totalSteps, onStepClick, isStepC
         { num: 1, label: 'Objekttyp' },
         { num: 2, label: 'Fläche' },
         { num: 3, label: 'Leistungen' },
-        { num: 4, label: 'Material' },
-        { num: 5, label: 'Extras' },
-        { num: 6, label: 'Übersicht' }
+        { num: 4, label: 'Extras' },
+        { num: 5, label: 'Übersicht' }
     ];
 
     return (

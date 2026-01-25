@@ -1,12 +1,10 @@
 import { useState, useCallback, useMemo } from 'react';
 import {
     propertyTypes,
-    materialClasses,
     servicesPricing,
     additionalOptions,
     getAveragePrice,
-    volumeDiscounts,
-    VAT_RATE
+    volumeDiscounts
 } from '../../../data/calculatorPricing';
 
 /**
@@ -16,7 +14,7 @@ import {
 export const useCalculator = () => {
     // Aktueller Schritt im Wizard
     const [currentStep, setCurrentStep] = useState(1);
-    const TOTAL_STEPS = 6;
+    const TOTAL_STEPS = 5;
 
     // Schritt 1: Objekttyp
     const [propertyType, setPropertyType] = useState(null);
@@ -34,8 +32,7 @@ export const useCalculator = () => {
     const [selectedServices, setSelectedServices] = useState([]);
     // Format: [{ serviceId, subOptionId, quantity, customData }]
 
-    // Schritt 4: Materialklasse
-    const [materialClass, setMaterialClass] = useState(null);
+
 
     // Schritt 5: Zusatzoptionen
     const [selectedExtras, setSelectedExtras] = useState([]);
@@ -47,11 +44,7 @@ export const useCalculator = () => {
         return type ? type.coefficient : 1;
     }, [propertyType]);
 
-    const materialCoefficient = useMemo(() => {
-        if (!materialClass) return 1;
-        const cls = materialClasses.find(c => c.id === materialClass);
-        return cls ? cls.coefficient : 1;
-    }, [materialClass]);
+    const materialCoefficient = 1;
 
     // Dienstleistung hinzufügen
     const addService = useCallback((serviceId, subOptionId = null, quantity = 0, customData = {}) => {
@@ -99,12 +92,8 @@ export const useCalculator = () => {
         );
     }, []);
 
-    // Berechnung der Gesamtkosten
     const calculation = useMemo(() => {
         let laborTotal = 0;
-        let materialTotal = 0;
-        let fixedCostsTotal = 0;
-        let packagesTotal = 0;
         const breakdown = [];
 
         // Für jede ausgewählte Dienstleistung
@@ -123,9 +112,9 @@ export const useCalculator = () => {
             if (service.packages && customData.packageId) {
                 const pkg = service.packages.find(p => p.id === customData.packageId);
                 if (pkg) {
-                    const avgPackagePriceBrutto = getAveragePrice(pkg.min, pkg.max) * materialCoefficient * (1 + VAT_RATE);
-                    const pkgTotalBrutto = avgPackagePriceBrutto * quantity * propertyCoefficient;
-                    packagesTotal += pkgTotalBrutto;
+                    const avgPackagePrice = getAveragePrice(pkg.min, pkg.max);
+                    const pkgTotal = avgPackagePrice * quantity * propertyCoefficient;
+
 
                     breakdown.push({
                         serviceId,
@@ -133,25 +122,21 @@ export const useCalculator = () => {
                         itemName: pkg.name,
                         quantity,
                         unit: 'Stk.',
-                        laborCost: pkgTotalBrutto,
+                        laborCost: pkgTotal,
                         materialCost: 0,
-                        totalCost: pkgTotalBrutto,
-                        pricePerUnitNetto: avgPackagePriceBrutto / (1 + VAT_RATE)
+                        totalCost: pkgTotal,
+                        pricePerUnitNetto: avgPackagePrice
                     });
-                    laborTotal += pkgTotalBrutto;
+                    laborTotal += pkgTotal;
                 }
                 return;
             }
 
             // Für normale Services (pro m² oder Punkt)
-            const avgLaborBrutto = getAveragePrice(service.laborMin, service.laborMax) * (1 + VAT_RATE);
-            const avgMaterialBrutto = getAveragePrice(service.materialMin, service.materialMax) * (1 + VAT_RATE);
+            const avgLabor = getAveragePrice(service.laborMin, service.laborMax);
+            const laborCost = avgLabor * quantity * subMultiplier * propertyCoefficient;
 
-            const laborCostBrutto = avgLaborBrutto * quantity * subMultiplier * propertyCoefficient;
-            const materialCostBrutto = avgMaterialBrutto * quantity * subMultiplier * materialCoefficient * propertyCoefficient;
-
-            laborTotal += laborCostBrutto;
-            materialTotal += materialCostBrutto;
+            laborTotal += laborCost;
 
             const subOptionName = subOptionId
                 ? service.subOptions?.find(so => so.id === subOptionId)?.name || ''
@@ -163,10 +148,10 @@ export const useCalculator = () => {
                 itemName: subOptionName,
                 quantity,
                 unit: service.unit,
-                laborCost: laborCostBrutto,
-                materialCost: materialCostBrutto,
-                totalCost: laborCostBrutto + materialCostBrutto,
-                pricePerUnitNetto: (avgLaborBrutto + avgMaterialBrutto) / (1 + VAT_RATE)
+                laborCost: laborCost,
+                materialCost: 0,
+                totalCost: laborCost,
+                pricePerUnitNetto: avgLabor
             });
 
             // Fixed Costs hinzufügen (wenn ausgewählt)
@@ -174,29 +159,26 @@ export const useCalculator = () => {
                 customData.fixedCosts.forEach(fcId => {
                     const fc = service.fixedCosts.find(f => f.id === fcId);
                     if (fc) {
-                        const fcPriceBrutto = getAveragePrice(fc.min, fc.max) * materialCoefficient * (1 + VAT_RATE);
-                        fixedCostsTotal += fcPriceBrutto;
-
+                        const fcPrice = getAveragePrice(fc.min, fc.max);
                         breakdown.push({
                             serviceId,
                             serviceName: service.name,
                             itemName: fc.name,
                             quantity: 1,
                             unit: 'Pausch.',
-                            laborCost: fcPriceBrutto,
+                            laborCost: fcPrice,
                             materialCost: 0,
-                            totalCost: fcPriceBrutto,
-                            pricePerUnitNetto: fcPriceBrutto / (1 + VAT_RATE)
+                            totalCost: fcPrice,
+                            pricePerUnitNetto: fcPrice
                         });
-                        laborTotal += fcPriceBrutto;
+                        laborTotal += fcPrice;
                     }
                 });
             }
         });
 
         // Zwischensumme
-        // Alle Service-Kosten (Labor + Pauschalen + Pakete) sind nun in laborTotal
-        const subtotal = laborTotal + materialTotal;
+        const subtotal = laborTotal;
 
         // Zusatzoptionen berechnen
         let extrasPercentage = 0;
@@ -254,9 +236,7 @@ export const useCalculator = () => {
 
         return {
             laborTotal,
-            materialTotal,
-            fixedCostsTotal,
-            packagesTotal,
+            materialTotal: 0,
             subtotal,
             extrasPercentage,
             extrasFixed,
@@ -269,7 +249,7 @@ export const useCalculator = () => {
             priceMax,
             breakdown
         };
-    }, [selectedServices, selectedExtras, materialCoefficient, propertyCoefficient, areaDetails.totalArea]);
+    }, [selectedServices, selectedExtras, propertyCoefficient, areaDetails.totalArea]);
 
     // Navigation
     const nextStep = useCallback(() => {
@@ -298,17 +278,14 @@ export const useCalculator = () => {
             bathroomArea: 0
         });
         setSelectedServices([]);
-        setMaterialClass(null);
         setSelectedExtras([]);
     }, []);
 
     // Prüfen ob Schritt abgeschlossen ist
     const isStepComplete = useCallback((step) => {
-        // Zuerst prüfen ob alle vorherigen Schritte abgeschlossen sind
         const step1Complete = propertyType !== null;
         const step2Complete = areaDetails.totalArea > 0 && areaDetails.roomCount > 0;
         const step3Complete = selectedServices.length > 0;
-        const step4Complete = materialClass !== null;
 
         switch (step) {
             case 1:
@@ -318,17 +295,14 @@ export const useCalculator = () => {
             case 3:
                 return step1Complete && step2Complete && step3Complete;
             case 4:
-                return step1Complete && step2Complete && step3Complete && step4Complete;
+                // Extras sind optional
+                return step1Complete && step2Complete && step3Complete;
             case 5:
-                // Extras sind optional, aber vorherige Schritte müssen abgeschlossen sein
-                return step1Complete && step2Complete && step3Complete && step4Complete;
-            case 6:
-                // Alle vorherigen Schritte müssen abgeschlossen sein
-                return step1Complete && step2Complete && step3Complete && step4Complete;
+                return step1Complete && step2Complete && step3Complete;
             default:
                 return false;
         }
-    }, [propertyType, areaDetails, selectedServices, materialClass]);
+    }, [propertyType, areaDetails, selectedServices]);
 
     // Kann zum nächsten Schritt?
     const canProceed = useMemo(() => isStepComplete(currentStep), [isStepComplete, currentStep]);
@@ -340,7 +314,7 @@ export const useCalculator = () => {
         propertyType,
         areaDetails,
         selectedServices,
-        materialClass,
+
         selectedExtras,
 
         // Berechnete Werte
@@ -351,7 +325,6 @@ export const useCalculator = () => {
         // Setter
         setPropertyType,
         setAreaDetails,
-        setMaterialClass,
 
         // Actions
         addService,

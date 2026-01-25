@@ -54,17 +54,6 @@ const ServicesStep = memo(({
         return service?.quantity || 0;
     }, [selectedServices]);
 
-    // Preis-Range formatieren
-    const formatPrice = (min, max) => {
-        const f = (val) => new Intl.NumberFormat('de-DE', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 2
-        }).format(val);
-
-        if (Math.abs(min - max) < 0.01) return `${f(min)}€`;
-        return `${f(min)}€ - ${f(max)}€`;
-    };
-
     return (
         <div className="space-y-8">
             {/* Header */}
@@ -116,12 +105,7 @@ const ServicesStep = memo(({
                                     </div>
                                     <p className="text-sm text-slate-500 line-clamp-2">{service.description}</p>
 
-                                    {/* Price hint */}
-                                    {!hasPackages && (
-                                        <p className="text-xs text-slate-400 mt-2">
-                                            ab {formatPrice(service.laborMin + service.materialMin, service.laborMax + service.materialMax)} / {service.unit}
-                                        </p>
-                                    )}
+
                                 </div>
 
                                 {/* Expand Arrow */}
@@ -187,14 +171,7 @@ const ServicesStep = memo(({
                                                                     )}
                                                                 </div>
                                                             </div>
-                                                            {subOption.multiplier !== 1 && (
-                                                                <p className="text-xs text-slate-400 mt-1">
-                                                                    {subOption.multiplier > 1
-                                                                        ? `+${Math.round((subOption.multiplier - 1) * 100)}%`
-                                                                        : `-${Math.round((1 - subOption.multiplier) * 100)}%`
-                                                                    }
-                                                                </p>
-                                                            )}
+
 
                                                             {/* Quantity Input */}
                                                             {isSubSelected && (
@@ -245,9 +222,6 @@ const ServicesStep = memo(({
                                                         >
                                                             <div className="flex items-center justify-between mb-2">
                                                                 <span className="font-medium text-slate-800">{pkg.name}</span>
-                                                                <span className="text-sm text-slate-500">
-                                                                    {formatPrice(pkg.min, pkg.max)}
-                                                                </span>
                                                             </div>
                                                             <div className="flex items-center gap-3">
                                                                 <span className="text-sm text-slate-500">Anzahl:</span>

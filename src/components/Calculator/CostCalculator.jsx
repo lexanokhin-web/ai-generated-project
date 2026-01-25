@@ -5,7 +5,7 @@ import { useCalculator } from './hooks/useCalculator';
 import PropertyTypeStep from './steps/PropertyTypeStep';
 import AreaDetailsStep from './steps/AreaDetailsStep';
 import ServicesStep from './steps/ServicesStep';
-import MaterialClassStep from './steps/MaterialClassStep';
+
 import ExtrasStep from './steps/ExtrasStep';
 import SummaryStep from './steps/SummaryStep';
 
@@ -25,12 +25,10 @@ const CostCalculator = memo(() => {
         propertyType,
         areaDetails,
         selectedServices,
-        materialClass,
         selectedExtras,
         calculation,
         setPropertyType,
         setAreaDetails,
-        setMaterialClass,
         addService,
         removeService,
         updateServiceQuantity,
@@ -72,14 +70,6 @@ const CostCalculator = memo(() => {
                 );
             case 4:
                 return (
-                    <MaterialClassStep
-                        selectedClass={materialClass}
-                        onSelect={setMaterialClass}
-                        selectedServices={selectedServices}
-                    />
-                );
-            case 5:
-                return (
                     <ExtrasStep
                         selectedExtras={selectedExtras}
                         areaDetails={areaDetails}
@@ -87,13 +77,12 @@ const CostCalculator = memo(() => {
                         calculation={calculation}
                     />
                 );
-            case 6:
+            case 5:
                 return (
                     <SummaryStep
                         propertyType={propertyType}
                         areaDetails={areaDetails}
                         selectedServices={selectedServices}
-                        materialClass={materialClass}
                         selectedExtras={selectedExtras}
                         calculation={calculation}
                         onReset={resetCalculator}
@@ -125,7 +114,7 @@ const CostCalculator = memo(() => {
                         {renderStep()}
 
                         {/* Navigation Buttons (not on summary) */}
-                        {currentStep < 6 && (
+                        {currentStep < 5 && (
                             <div className="flex justify-between items-center mt-10 pt-6 border-t border-slate-100">
                                 <button
                                     onClick={prevStep}
@@ -155,7 +144,7 @@ const CostCalculator = memo(() => {
                                         }
                                     `}
                                 >
-                                    {currentStep === 5 ? 'Zur Übersicht' : 'Weiter'}
+                                    {currentStep === 4 ? 'Zur Übersicht' : 'Weiter'}
                                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                                     </svg>
@@ -166,7 +155,7 @@ const CostCalculator = memo(() => {
                 </div>
 
                 {/* Sticky Price Panel (not on summary) */}
-                {currentStep < 6 && (
+                {currentStep < 5 && (
                     <div className="lg:col-span-1 hidden lg:block">
                         <div className="sticky top-24">
                             <PriceDisplay calculation={calculation} />
@@ -176,7 +165,7 @@ const CostCalculator = memo(() => {
             </div>
 
             {/* Mobile Price Bar (shown after interaction starts) */}
-            {currentStep < 6 && (currentStep > 1 || propertyType !== null) && (
+            {currentStep < 5 && (currentStep > 1 || propertyType !== null) && (
                 <div className="lg:hidden fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-slate-200 shadow-lg z-50 animate-in slide-in-from-bottom duration-300">
                     <PriceDisplay calculation={calculation} isCompact={true} />
                 </div>

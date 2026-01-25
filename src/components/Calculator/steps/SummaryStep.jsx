@@ -1,5 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
-import { propertyTypes, materialClasses, servicesPricing, VAT_RATE } from '../../../data/calculatorPricing';
+import { propertyTypes, servicesPricing } from '../../../data/calculatorPricing';
 
 /**
  * Schritt 6: Zusammenfassung und PDF-Export
@@ -8,7 +8,6 @@ const SummaryStep = memo(({
     propertyType,
     areaDetails,
     selectedServices,
-    materialClass,
     selectedExtras,
     calculation,
     onReset,
@@ -125,19 +124,18 @@ const SummaryStep = memo(({
                     description: ['Fachgerechte Ausführung gemäß Auswahl'],
                     quantity: item.quantity,
                     unit: item.unit,
-                    pricePerUnit: item.totalCost / (1 + VAT_RATE) / item.quantity,
-                    naturalTotal: item.totalCost / (1 + VAT_RATE)
+                    pricePerUnit: item.totalCost / item.quantity,
+                    naturalTotal: item.totalCost
                 });
             }
         });
 
         // --- GLOBAL RECONCILIATION ---
-        // Ziel: Netto-Total PDF === Netto-Total UI (Labor + Pauschalen)
-        const uiNettoTotal = calculation.laborTotal / (1 + VAT_RATE);
-        const fixedSetupNetto = bePos.pricePerUnit; // Be-Pos ist Netto
+        const uiNettoTotal = calculation.laborTotal;
+        const fixedSetupNetto = bePos.pricePerUnit;
 
         const otherPositions = allPositions.filter(p => p.categoryId !== 'baustelleneinrichtung');
-        const otherNaturalSum = otherPositions.reduce((sum, p) => sum + p.naturalTotal, 0); // Netto-Summe
+        const otherNaturalSum = otherPositions.reduce((sum, p) => sum + p.naturalTotal, 0);
 
         const targetOtherNetto = uiNettoTotal - fixedSetupNetto;
         const globalScalingFactor = (otherNaturalSum > 0 && targetOtherNetto > 0) ? (targetOtherNetto / otherNaturalSum) : 1;
@@ -176,9 +174,7 @@ const SummaryStep = memo(({
         return propertyTypes.find(t => t.id === propertyType)?.name || '-';
     }, [propertyType]);
 
-    const getMaterialClassName = useCallback(() => {
-        return materialClasses.find(c => c.id === materialClass)?.name || '-';
-    }, [materialClass]);
+
 
     // PDF generieren
     // eslint-disable-next-line no-unused-vars
@@ -456,8 +452,6 @@ const SummaryStep = memo(({
 
             y += 20;
             const totalNetto = currentCarriage;
-            const totalVAT = totalNetto * VAT_RATE;
-            const totalBrutto = totalNetto + totalVAT;
 
             doc.setFontSize(10);
             doc.setFont('helvetica', 'bold');
@@ -467,14 +461,6 @@ const SummaryStep = memo(({
             doc.setFont('helvetica', 'normal');
             doc.text('Summe der Arbeitsleistungen (Netto):', margin, y);
             doc.text(formatNum(totalNetto) + ' €', pageWidth - margin - 2, y, { align: 'right' });
-            y += 6;
-
-            doc.text(`Umsatzsteuer (${Math.round(VAT_RATE * 100)} %):`, margin, y);
-            doc.text(formatNum(totalVAT) + ' €', pageWidth - margin - 2, y, { align: 'right' });
-            y += 2;
-
-            doc.setDrawColor(200, 200, 200);
-            doc.line(pageWidth - 80, y, pageWidth - margin, y);
             y += 8;
 
             doc.setFillColor(...colors.primary);
@@ -482,8 +468,8 @@ const SummaryStep = memo(({
             doc.setTextColor(255, 255, 255);
             doc.setFontSize(11);
             doc.setFont('helvetica', 'bold');
-            doc.text('GESAMTBETRAG (Brutto):', margin + 5, y + 2);
-            doc.text(formatNum(totalBrutto) + ' €', pageWidth - margin - 5, y + 2, { align: 'right' });
+            doc.text('GESAMTBETRAG (Netto):', margin + 5, y + 2);
+            doc.text(formatNum(totalNetto) + ' €', pageWidth - margin - 5, y + 2, { align: 'right' });
 
             y += 20;
             doc.setTextColor(...colors.gray);
@@ -503,14 +489,15 @@ const SummaryStep = memo(({
             doc.text('Die Zahlungsfrist nach Rechnungsstellung beträgt 7 Tage.', margin, y);
 
             y += 15;
+            y += 15;
             doc.setTextColor(...colors.accent);
             doc.setFont('helvetica', 'bold');
-            doc.text('WICHTIGER HINWEIS ZU MATERIALKOSTEN:', margin, y);
+            doc.text('HINWEIS:', margin, y);
             y += 5;
             doc.setTextColor(...colors.gray);
             doc.setFont('helvetica', 'normal');
             doc.setFontSize(8);
-            const disclaimerLines = doc.splitTextToSize('Die oben aufgeführten Preise beziehen sich auf die Arbeitsleistung. In der Online-Kalkulation angezeigte Materialkosten sind Schätzwerte zur Orientierung und nicht Bestandteil dieses Angebots. Diese dienen lediglich der Budgetplanung.', contentWidth);
+            const disclaimerLines = doc.splitTextToSize('Dies ist ein unverbindlicher Kostenvoranschlag rein für die Arbeitsleistungen. Materialkosten sowie die gesetzliche MwSt. sind nicht enthalten und werden separat in Rechnung gestellt.', contentWidth);
             doc.text(disclaimerLines, margin, y);
 
             y += (disclaimerLines.length * 4) + 10;
@@ -636,10 +623,7 @@ const SummaryStep = memo(({
                                 <p className="text-slate-400">Räume</p>
                                 <p className="font-bold text-slate-900">{areaDetails.roomCount}</p>
                             </div>
-                            <div>
-                                <p className="text-slate-400">Material</p>
-                                <p className="font-bold text-slate-900">{getMaterialClassName()}</p>
-                            </div>
+
                         </div>
                     </div>
 
@@ -715,12 +699,8 @@ const SummaryStep = memo(({
 
                         <div className="space-y-3 text-sm mb-6">
                             <div className="flex justify-between">
-                                <span className="text-slate-400">Arbeitskosten</span>
+                                <span className="text-slate-400">Gewerke (Lohn)</span>
                                 <span>{formatCurrency(calculation.laborTotal)}</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span className="text-slate-400">Materialkosten</span>
-                                <span>{formatCurrency(calculation.materialTotal)}</span>
                             </div>
                             {(calculation.fixedCostsTotal + calculation.packagesTotal) > 0 && (
                                 <div className="flex justify-between">
@@ -745,14 +725,11 @@ const SummaryStep = memo(({
                         <div className="border-t border-slate-700 pt-4 mb-6">
                             <div className="flex justify-between items-end">
                                 <div>
-                                    <p className="text-xs text-slate-400">Gesamtkosten</p>
-                                    <p className="text-xs text-slate-500">inkl. {Math.round(VAT_RATE * 100)}% MwSt.</p>
+                                    <p className="text-xs text-slate-400">Gesamtbetrag (Netto)</p>
+                                    <p className="text-xs text-slate-500">Exkl. MwSt. & Material</p>
                                 </div>
                                 <p className="text-3xl font-bold text-accent">{formatCurrency(calculation.total)}</p>
                             </div>
-                            <p className="text-xs text-slate-500 mt-2 text-right">
-                                Spanne: {formatCurrency(calculation.priceMin)} - {formatCurrency(calculation.priceMax)}
-                            </p>
                         </div>
 
                         {/* Actions */}

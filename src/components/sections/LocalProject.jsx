@@ -24,7 +24,7 @@ const LocalProject = memo(({ project }) => {
                             <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H8c0-1.1.9-2 2-2h2V8h-2zm12 0c-3.3 0-6 2.7-6 6v10h10V14h-6c0-1.1.9-2 2-2h2V8h-2z" />
                         </svg>
                         <p className="text-slate-600 italic text-lg leading-relaxed relative z-10 mb-6">
-                            "{project.quote}"
+                            &quot;{project.quote}&quot;
                         </p>
                     </div>
 

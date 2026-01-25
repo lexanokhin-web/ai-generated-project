@@ -94,7 +94,7 @@ export const servicesPricing = [
     },
     {
         id: 'maler-schimmelsanierung',
-        name: 'Maler- & Lackierarbeiten',
+        name: 'Malerarbeiten',
         category: 'surfaces',
         unit: 'm²',
         unitLabel: 'Fläche',
@@ -108,8 +108,27 @@ export const servicesPricing = [
         subOptions: [
             { id: 'streichen', name: 'Streichen', multiplier: laborPrices.waendeStreichen / laborPrices.waendeTapezierenStreichen },
             { id: 'tapezieren', name: 'Tapezieren', multiplier: 1.0 },
-            { id: 'schimmel', name: 'Schimmelsanierung', multiplier: 1.5 },
-            { id: 'lackieren', name: 'Lackierarbeiten', multiplier: 1.2 }
+            { id: 'schimmel', name: 'Schimmelsanierung', multiplier: 1.5 }
+        ]
+    },
+    {
+        id: 'Lackier',
+        name: 'Lackierarbeiten',
+        category: 'surfaces',
+        unit: 'Stück',
+        unitLabel: 'Einheit',
+        laborMin: 80,
+        laborMax: 160,
+        materialMin: 20,
+        materialMax: 40,
+        icon: '🖌️',
+        description: 'Lackierarbeiten für Türen, Fenster, Heizkörper und Fußleisten',
+        calculationNote: 'Preis pro Stück / Einheit',
+        subOptions: [
+            { id: 'turen', name: 'Türzargen & Zargen', multiplier: 1.0 },
+            { id: 'fenster', name: 'Fenster', multiplier: 1.0 },
+            { id: 'heizkörper', name: 'Heizkörper', multiplier: 1.0 },
+            { id: 'fußleisten', name: 'Fußleisten', multiplier: 1.0 }
         ]
     },
     {
@@ -128,8 +147,7 @@ export const servicesPricing = [
         subOptions: [
             { id: 'boden', name: 'Nur Bodenfliesen', multiplier: laborPrices.bodenfliesen / ((laborPrices.bodenfliesen + laborPrices.wandfliesen) / 2) },
             { id: 'wand', name: 'Nur Wandfliesen', multiplier: laborPrices.wandfliesen / ((laborPrices.bodenfliesen + laborPrices.wandfliesen) / 2) },
-            { id: 'komplett', name: 'Komplettsanierung', multiplier: 1.3 },
-            { id: 'barrierefrei', name: 'Barrierefreies Bad', multiplier: 1.5 }
+            { id: 'abdichtung', name: 'Abdichtung', multiplier: 1.0 }
         ],
         fixedCosts: [
             { id: 'sanitaer', name: 'Sanitärobjekte (WC, Waschbecken)', min: laborPrices.wcWandhaengend + laborPrices.waschtisch, max: (laborPrices.wcWandhaengend + laborPrices.waschtisch) * 1.5 },
@@ -152,9 +170,7 @@ export const servicesPricing = [
         calculationNote: 'Wandfläche oder Deckenfläche',
         subOptions: [
             { id: 'trennwand', name: 'Trennwand einfach', multiplier: 1.0 },
-            { id: 'schallschutz', name: 'Mit Schallschutz', multiplier: 1.25 },
-            { id: 'decke', name: 'Abgehängte Decke', multiplier: 1.15 },
-            { id: 'dachausbau', name: 'Dachausbau', multiplier: 1.4 }
+            { id: 'decke', name: 'Abgehängte Decke', multiplier: 1.15 }
         ]
     },
     {
@@ -199,9 +215,7 @@ export const servicesPricing = [
         packages: [
             { id: 'kueche-klein', name: 'Küchenzeile (bis 3m)', min: laborPrices.kuecheZeileMontage, max: laborPrices.kuecheZeileMontage * 1.5 },
             { id: 'kueche-mittel', name: 'Küche L-Form (bis 5m)', min: laborPrices.kuecheLFormMontage, max: laborPrices.kuecheLFormMontage * 1.5 },
-            { id: 'kueche-gross', name: 'Küche U-Form / Insel', min: 12000, max: 35000 },
-            { id: 'tuer', name: 'Innentür inkl. Zarge', min: laborPrices.innentuerErneuern, max: laborPrices.innentuerErneuern * 1.2 },
-            { id: 'einbauschrank', name: 'Einbauschrank (pro lfm)', min: laborPrices.einbauschrankMass, max: laborPrices.einbauschrankMass * 1.2 }
+            { id: 'tuer', name: 'Innentür inkl. Zarge', min: laborPrices.innentuerErneuern, max: laborPrices.innentuerErneuern * 1.2 }
         ]
     },
     {
@@ -244,9 +258,11 @@ export const servicesPricing = [
         packages: [
             { id: 'heizkoerper', name: 'Heizkörper tauschen (pro Stück)', min: laborPrices.heizkoerperAustausch, max: laborPrices.heizkoerperAustausch * 1.5 },
             { id: 'thermostat', name: 'Thermostate (pro Stück)', min: laborPrices.thermostatkopf, max: laborPrices.thermostatkopf * 2 },
-            { id: 'fussbodenheizung', name: 'Fußbodenheizung (pro m²)', min: laborPrices.fussbodenheizung, max: laborPrices.fussbodenheizung * 1.3 },
-            { id: 'gastherme', name: 'Gastherme komplett', min: 4500, max: 9000 },
-            { id: 'waermepumpe', name: 'Wärmepumpe komplett', min: 15000, max: 35000 }
+            { id: 'waschtisch', name: 'Waschtisch', min: 500, max: 700 },
+            { id: 'wc-Anlagen', name: 'WC-Anlagen', min: 500, max: 700 },
+            { id: 'duschwanne', name: 'Duschwanne 90x90', min: 800, max: 900 },
+            { id: 'duschkabine', name: 'Duschkabine', min: 1000, max: 1100 },
+            { id: 'handtuchheizkörper', name: 'Handtuchheizkörper', min: 800, max: 900 }
         ]
     },
     {
@@ -263,9 +279,9 @@ export const servicesPricing = [
         description: 'Asbest, KMF, Schadstoffe fachgerecht entsorgen',
         calculationNote: 'Nach TRGS 519 - Zertifizierter Fachbetrieb',
         subOptions: [
-            { id: 'asbest-fest', name: 'Festgebundener Asbest', multiplier: 1.0 },
-            { id: 'asbest-schwach', name: 'Schwachgebundener Asbest', multiplier: 1.8 },
-            { id: 'kmf', name: 'Künstl. Mineralfasern (KMF)', multiplier: 0.85 }
+            { id: 'asbestsanierung', name: 'Asbestsanierung', multiplier: 1.0 },
+            { id: 'bodenbelag', name: 'Bodenbelag', multiplier: 1.0 },
+            { id: 'fensterbank', name: 'Fensterbank', multiplier: 1.0 }
         ],
         fixedCosts: [
             { id: 'probenahme', name: 'Laboranalyse / Probenahme', min: 150, max: 400 },
@@ -276,54 +292,6 @@ export const servicesPricing = [
 
 // Zusatzoptionen
 export const additionalOptions = [
-    {
-        id: 'urgent',
-        name: 'Expresszuschlag',
-        description: 'Ausführung innerhalb von 2 Wochen',
-        type: 'percentage',
-        value: 20,
-        icon: '⏱️'
-    },
-    {
-        id: 'weekend',
-        name: 'Wochenendarbeit',
-        description: 'Arbeiten an Samstagen',
-        type: 'percentage',
-        value: 25,
-        icon: '📅'
-    },
-    {
-        id: 'waste',
-        name: 'Entsorgung & Container',
-        description: 'Bauschutt, Sperrmüll, Container',
-        type: 'fixed',
-        value: 650,
-        icon: '🚛'
-    },
-    {
-        id: 'design',
-        name: 'Planungsleistung',
-        description: 'Aufmaß, 3D-Planung, Materialberatung',
-        type: 'fixed',
-        value: 890,
-        icon: '📋'
-    },
-    {
-        id: 'procurement',
-        name: 'Materialbeschaffung',
-        description: 'Wir kümmern uns um den Einkauf',
-        type: 'percentage',
-        value: 8,
-        icon: '🛒'
-    },
-    {
-        id: 'furniture',
-        name: 'Möbeleinlagerung',
-        description: 'Zwischenlagerung während der Arbeiten',
-        type: 'fixed',
-        value: 450,
-        icon: '📦'
-    },
     {
         id: 'cleaning',
         name: 'Baufeinreinigung',

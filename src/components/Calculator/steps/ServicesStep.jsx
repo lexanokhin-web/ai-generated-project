@@ -33,6 +33,8 @@ const ServicesStep = memo(({
 
             if (service?.category === 'bathroom') {
                 defaultQty = areaDetails.bathroomArea || areaDetails.bathroomCount * 8;
+            } else if (service?.unit === 'Stück' || service?.unit === 'Punkt' || service?.id === 'Lackier') {
+                defaultQty = 1;
             }
 
             // Nicht hinzufügen wenn Menge 0 ist
@@ -150,7 +152,9 @@ const ServicesStep = memo(({
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                                                 {service.subOptions.map((subOption) => {
                                                     const qty = getServiceQuantity(service.id, subOption.id);
-                                                    const isSubSelected = qty > 0;
+                                                    const isSubSelected = selectedServices.some(
+                                                        s => s.serviceId === service.id && s.subOptionId === subOption.id
+                                                    );
 
                                                     return (
                                                         <div
@@ -193,8 +197,11 @@ const ServicesStep = memo(({
                                                                     <input
                                                                         type="number"
                                                                         min="1"
-                                                                        value={qty}
-                                                                        onChange={(e) => onUpdateQuantity(service.id, subOption.id, parseFloat(e.target.value) || 0)}
+                                                                        value={qty || ''}
+                                                                        onChange={(e) => {
+                                                                            const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
+                                                                            onUpdateQuantity(service.id, subOption.id, val);
+                                                                        }}
                                                                         className="w-20 px-2 py-1 border border-slate-200 rounded-lg text-sm text-center focus:ring-1 focus:ring-accent"
                                                                     />
                                                                     <span className="text-xs text-slate-500">{service.unit}</span>
@@ -280,13 +287,14 @@ const ServicesStep = memo(({
                                                 <input
                                                     type="number"
                                                     min="1"
-                                                    value={getServiceQuantity(service.id) || areaDetails.totalArea}
+                                                    value={getServiceQuantity(service.id) || (isSelected ? '' : areaDetails.totalArea)}
                                                     onChange={(e) => {
-                                                        const qty = parseFloat(e.target.value) || 0;
-                                                        if (qty > 0) {
-                                                            onAddService(service.id, null, qty, {});
-                                                        } else {
-                                                            onRemoveService(service.id, null);
+                                                        const val = e.target.value === '' ? 0 : parseFloat(e.target.value);
+                                                        if (val > 0) {
+                                                            onAddService(service.id, null, val, {});
+                                                        } else if (isSelected) {
+                                                            // Keep it selected but with 0 quantity if cleared
+                                                            onAddService(service.id, null, 0, {});
                                                         }
                                                     }}
                                                     className="w-24 px-3 py-2 border border-slate-200 rounded-lg text-center focus:ring-1 focus:ring-accent"

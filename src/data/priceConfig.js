@@ -17,8 +17,8 @@ export const laborPrices = {
     fliesenAbbrechen: 18.50,
 
     // 3. ASBESTSANIERUNG
-    vinylAsbestAufnehmen: 13.50,
-    bitumenkleberSchleifen: 25.50,
+    vinylAsbestAufnehmen: 38.00,
+    bitumenkleberSchleifen: 65.00,
     asbestFensterbank: 149.75,
     ausgleichsmasse: 9.50,
 

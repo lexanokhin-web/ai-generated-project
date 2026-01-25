@@ -279,7 +279,7 @@ export const servicesPricing = [
         description: 'Asbest, KMF, Schadstoffe fachgerecht entsorgen',
         calculationNote: 'Nach TRGS 519 - Zertifizierter Fachbetrieb',
         subOptions: [
-            { id: 'asbestsanierung', name: 'Asbestsanierung', multiplier: 1.0 },
+            { id: 'asbest-entsorgung', name: 'Asbestsanierung', multiplier: 1.0 },
             { id: 'bodenbelag', name: 'Bodenbelag', multiplier: 1.0 },
             { id: 'fensterbank', name: 'Fensterbank', multiplier: 1.0 }
         ],

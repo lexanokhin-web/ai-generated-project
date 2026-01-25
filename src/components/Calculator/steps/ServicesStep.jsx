@@ -56,9 +56,13 @@ const ServicesStep = memo(({
 
     // Preis-Range formatieren
     const formatPrice = (min, max) => {
-        const round = (val) => Math.round(val * 100) / 100;
-        if (min === max) return `${round(min)}€`;
-        return `${round(min)}€ - ${round(max)}€`;
+        const f = (val) => new Intl.NumberFormat('de-DE', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        }).format(val);
+
+        if (Math.abs(min - max) < 0.01) return `${f(min)}€`;
+        return `${f(min)}€ - ${f(max)}€`;
     };
 
     return (

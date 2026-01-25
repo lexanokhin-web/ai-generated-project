@@ -33,7 +33,7 @@ const ServicesStep = memo(({
 
             if (service?.category === 'bathroom') {
                 defaultQty = areaDetails.bathroomArea || areaDetails.bathroomCount * 8;
-            } else if (service?.unit === 'Stück' || service?.unit === 'Punkt' || service?.id === 'Lackier') {
+            } else if (service?.unit === 'Stück' || service?.unit === 'Punkt' || service?.id === 'lackierarbeiten') {
                 defaultQty = 1;
             }
 
@@ -56,7 +56,9 @@ const ServicesStep = memo(({
 
     // Preis-Range formatieren
     const formatPrice = (min, max) => {
-        return `${min}€ - ${max}€`;
+        const round = (val) => Math.round(val * 100) / 100;
+        if (min === max) return `${round(min)}€`;
+        return `${round(min)}€ - ${round(max)}€`;
     };
 
     return (

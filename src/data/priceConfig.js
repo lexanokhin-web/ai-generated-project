@@ -43,10 +43,11 @@ export const laborPrices = {
     // 5. SANITÄRARBEITEN BADEZIMMER
     sanitaerDemontage: 350.00,
     grundinstallationBad: 1750.00,
-    wcWandhaengend: 570.45,
-    waschtisch: 298.50,
-    duschwanne: 975.85,
+    wcWandhaengend: 600.00,
+    waschtisch: 600.00,
+    duschwanne: 800.00,
     badewanne: 1250.00,
+    duschkabine: 1100.00,
     wasserzaehler: 485.50,
     gasthermeWartung: 375.50,
 
@@ -55,7 +56,7 @@ export const laborPrices = {
     spuelenarmatur: 175.00,
 
     // 7. HEIZUNGSARBEITEN
-    handtuchHeizkoerper: 595.78,
+    handtuchHeizkoerper: 850.00,
     thermostatkopf: 39.85,
     heizkoerperAustausch: 485.00,
     fussbodenheizung: 65.00,

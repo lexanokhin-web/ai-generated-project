@@ -79,8 +79,8 @@ export const servicesPricing = [
         category: 'walls',
         unit: 'm²',
         unitLabel: 'Wandfläche',
-        laborMin: 28,
-        laborMax: 52,
+        laborMin: laborPrices.innenputzKalkzement * 0.85,
+        laborMax: laborPrices.innenputzKalkzement * 1.15,
         materialMin: 12,
         materialMax: 35,
         icon: '🧱',
@@ -88,8 +88,8 @@ export const servicesPricing = [
         calculationNote: 'Wandfläche = Umfang × Deckenhöhe',
         subOptions: [
             { id: 'interior', name: 'Innenputz', multiplier: 1.0 },
-            { id: 'facade', name: 'Außenfassade', multiplier: 1.35 },
-            { id: 'sanierung', name: 'Sanierputz (Feuchte)', multiplier: 1.5 }
+            { id: 'facade', name: 'Außenfassade', multiplier: laborPrices.aussenputz / laborPrices.innenputzKalkzement },
+            { id: 'sanierung', name: 'Sanierputz (Feuchte)', multiplier: laborPrices.sanierputz / laborPrices.innenputzKalkzement }
         ]
     },
     {
@@ -112,23 +112,23 @@ export const servicesPricing = [
         ]
     },
     {
-        id: 'Lackier',
+        id: 'lackierarbeiten',
         name: 'Lackierarbeiten',
         category: 'surfaces',
         unit: 'Stück',
         unitLabel: 'Einheit',
-        laborMin: 80,
-        laborMax: 160,
+        laborMin: laborPrices.heizkoerperLackieren * 0.9,
+        laborMax: laborPrices.eingangstuerLackieren * 1.5,
         materialMin: 20,
         materialMax: 40,
         icon: '🖌️',
         description: 'Lackierarbeiten für Türen, Fenster, Heizkörper und Fußleisten',
         calculationNote: 'Preis pro Stück / Einheit',
         subOptions: [
-            { id: 'turen', name: 'Türzargen & Zargen', multiplier: 1.0 },
+            { id: 'turen', name: 'Türzargen & Zargen', multiplier: 1.2 },
             { id: 'fenster', name: 'Fenster', multiplier: 1.0 },
-            { id: 'heizkörper', name: 'Heizkörper', multiplier: 1.0 },
-            { id: 'fußleisten', name: 'Fußleisten', multiplier: 1.0 }
+            { id: 'heizkoerper', name: 'Heizkörper', multiplier: 1.0 },
+            { id: 'fussleisten', name: 'Fußleisten', multiplier: 0.4 }
         ]
     },
     {
@@ -161,8 +161,8 @@ export const servicesPricing = [
         category: 'construction',
         unit: 'm²',
         unitLabel: 'Fläche',
-        laborMin: 38,
-        laborMax: 72,
+        laborMin: laborPrices.trennwandEinfach * 0.8,
+        laborMax: laborPrices.trennwandSchallschutz * 1.2,
         materialMin: 18,
         materialMax: 45,
         icon: '📐',
@@ -170,7 +170,8 @@ export const servicesPricing = [
         calculationNote: 'Wandfläche oder Deckenfläche',
         subOptions: [
             { id: 'trennwand', name: 'Trennwand einfach', multiplier: 1.0 },
-            { id: 'decke', name: 'Abgehängte Decke', multiplier: 1.15 }
+            { id: 'schallschutz', name: 'Mit Schallschutz', multiplier: laborPrices.trennwandSchallschutz / laborPrices.trennwandEinfach },
+            { id: 'decke', name: 'Abgehängte Decke', multiplier: laborPrices.abgehaengteDecke / laborPrices.trennwandEinfach }
         ]
     },
     {
@@ -258,11 +259,11 @@ export const servicesPricing = [
         packages: [
             { id: 'heizkoerper', name: 'Heizkörper tauschen (pro Stück)', min: laborPrices.heizkoerperAustausch, max: laborPrices.heizkoerperAustausch * 1.5 },
             { id: 'thermostat', name: 'Thermostate (pro Stück)', min: laborPrices.thermostatkopf, max: laborPrices.thermostatkopf * 2 },
-            { id: 'waschtisch', name: 'Waschtisch', min: 500, max: 700 },
-            { id: 'wc-Anlagen', name: 'WC-Anlagen', min: 500, max: 700 },
-            { id: 'duschwanne', name: 'Duschwanne 90x90', min: 800, max: 900 },
-            { id: 'duschkabine', name: 'Duschkabine', min: 1000, max: 1100 },
-            { id: 'handtuchheizkörper', name: 'Handtuchheizkörper', min: 800, max: 900 }
+            { id: 'waschtisch', name: 'Waschtisch', min: laborPrices.waschtisch, max: laborPrices.waschtisch },
+            { id: 'wc-anlagen', name: 'WC-Anlagen', min: laborPrices.wcWandhaengend, max: laborPrices.wcWandhaengend },
+            { id: 'duschwanne', name: 'Duschwanne 90x90', min: laborPrices.duschwanne, max: laborPrices.duschwanne },
+            { id: 'duschkabine', name: 'Duschkabine', min: laborPrices.duschkabine, max: laborPrices.duschkabine },
+            { id: 'handtuchheizkoerper', name: 'Handtuchheizkörper', min: laborPrices.handtuchHeizkoerper, max: laborPrices.handtuchHeizkoerper }
         ]
     },
     {

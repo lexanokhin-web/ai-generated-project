@@ -610,7 +610,7 @@ const SummaryStep = memo(({
                                 Bearbeiten
                             </button>
                         </div>
-                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
                             <div>
                                 <p className="text-slate-400">Typ</p>
                                 <p className="font-bold text-slate-900">{getPropertyTypeName()}</p>
@@ -674,7 +674,7 @@ const SummaryStep = memo(({
                                     Zusatzleistungen
                                 </h4>
                                 <button
-                                    onClick={() => onGoToStep(5)}
+                                    onClick={() => onGoToStep(4)}
                                     className="text-sm text-accent hover:underline"
                                 >
                                     Bearbeiten
@@ -722,13 +722,15 @@ const SummaryStep = memo(({
                             )}
                         </div>
 
-                        <div className="border-t border-slate-700 pt-4 mb-6">
-                            <div className="flex justify-between items-end">
-                                <div>
-                                    <p className="text-xs text-slate-400">Gesamtbetrag (Netto)</p>
-                                    <p className="text-xs text-slate-500">Exkl. MwSt. & Material</p>
+                        <div className="border-t border-slate-700 pt-5 mb-6">
+                            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-3">
+                                <div className="min-w-0">
+                                    <p className="text-xs text-slate-400 font-medium">Gesamtbetrag (Netto)</p>
+                                    <p className="text-[10px] text-slate-500 leading-tight">Exkl. MwSt. & Material</p>
                                 </div>
-                                <p className="text-3xl font-bold text-accent">{formatCurrency(calculation.total)}</p>
+                                <div className="text-right w-full sm:w-auto">
+                                    <p className="text-3xl font-bold text-accent truncate">{formatCurrency(calculation.total)}</p>
+                                </div>
                             </div>
                         </div>
 

@@ -5,6 +5,7 @@ import Section from '../components/UI/Section';
 import { LocalProject, ServicesSection, ReviewsSection, FAQSection, CalculatorSection } from '../components/sections';
 import { localPagesData } from '../data/localPages';
 import StructuredData from '../components/SEO/StructuredData';
+import NotFound from './NotFound';
 
 const LocalLandingPage = memo(() => {
     const { slug } = useParams();
@@ -15,7 +16,7 @@ const LocalLandingPage = memo(() => {
     }, [slug]);
 
     if (!data) {
-        return <Navigate to="/" replace />;
+        return <NotFound />;
     }
 
     // Local Business Schema for the specific city/service

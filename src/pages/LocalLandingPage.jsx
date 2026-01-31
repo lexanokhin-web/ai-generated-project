@@ -1,5 +1,5 @@
 import React, { useEffect, memo } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import Section from '../components/UI/Section';
 import { LocalProject, ServicesSection, ReviewsSection, FAQSection, CalculatorSection } from '../components/sections';
@@ -87,7 +87,7 @@ const LocalLandingPage = memo(() => {
             </div>
 
             {/* Local About Content */}
-            <Section className="bg-white">
+            <Section className="bg-white" id="about">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-sm font-bold text-accent uppercase tracking-[0.3em] mb-4">Regional & Kompetent</h2>
                     <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-8">
@@ -98,6 +98,51 @@ const LocalLandingPage = memo(() => {
                     </p>
                 </div>
             </Section>
+
+            {/* Structured SEO Article */}
+            {data.article && (
+                <Section className="bg-white pt-0">
+                    <div className="max-w-4xl mx-auto">
+                        <div className="prose prose-slate prose-lg max-w-none">
+                            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-8">{data.article.title}</h2>
+                            <p className="text-slate-600 mb-12 leading-relaxed italic border-l-4 border-accent pl-6 py-2 bg-slate-50 rounded-r-lg">
+                                {data.article.intro}
+                            </p>
+
+                            <div className="space-y-16">
+                                {data.article.sections.map((section, idx) => (
+                                    <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-12 items-start`}>
+                                        <div className="flex-1">
+                                            <h3 className="text-2xl font-bold text-slate-900 mb-6">{section.title}</h3>
+                                            <div className="space-y-4 text-slate-600 leading-relaxed">
+                                                {section.paragraphs.map((p, pIdx) => (
+                                                    <p key={pIdx} dangerouslySetInnerHTML={{ __html: p.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent hover:underline font-semibold">$1</a>') }} />
+                                                ))}
+                                            </div>
+                                        </div>
+                                        {section.image && (
+                                            <div className="flex-1 w-full">
+                                                <div className="relative group overflow-hidden rounded-2xl shadow-xl">
+                                                    <img
+                                                        src={section.image.src}
+                                                        alt={section.image.alt}
+                                                        className="w-full h-[300px] object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    />
+                                                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+
+                            <p className="text-xl text-slate-700 mt-16 font-bold text-center border-t border-slate-100 pt-12">
+                                {data.article.outro}
+                            </p>
+                        </div>
+                    </div>
+                </Section>
+            )}
 
             {/* Featured Local Projects */}
             <Section className="bg-slate-50">

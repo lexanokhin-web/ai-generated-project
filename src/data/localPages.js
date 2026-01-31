@@ -11,7 +11,7 @@ export const localPagesData = {
         content: "Wir sind Ihr zuverlässiger Partner für Renovierungsprojekte in Lübeck. Von der Altbauvilla in St. Jürgen bis zur modernen Wohnung in Travemünde – wir bringen frischen Wind in Ihr Zuhause.",
         article: {
             title: "Wohnungsrenovierung in Lübeck: Kosten, Ablauf & Profi-Tipps",
-            intro: "Sie planen eine Renovierung in Lübeck и задаетесь вопросом: 'С чего начать и сколько это стоит?' Как эксперты с многолетним опытом, мы раскрываем все нюансы — от технических стандартов DIN до оптимизации бюджета.",
+            intro: "Sie planen eine Renovierung in Lübeck und fragen sich: 'Wo fange ich an und was kostet es?' Als Experten mit langjähriger Erfahrung beleuchten wir alle Details — von DIN-Standards bis zur Budgetoptimierung.",
             sections: [
                 {
                     title: "Was kostet eine Renovierung in Lübeck pro Quadratmeter?",
@@ -145,7 +145,7 @@ export const localPagesData = {
         content: "Lübeck bietet wunderschöne historische Bausubstanz. Wir helfen Ihnen, diese Schätze energetisch und optisch auf den neuesten Stand zu bringen.",
         article: {
             title: "Kernsanierung in Lübeck: Energetische Optimierung & Werterhalt",
-            intro: "Eine Sanierung ist kein gewöhnlicher Umbau — es ist eine technische Aufwertung. Erfahren Sie, wie wir in Lübeck Altbau-Charme mit hocheffizienter Gebäudetechnik verbinden и что нужно знать о разрешениях.",
+            intro: "Eine Sanierung ist kein gewöhnlicher Umbau — es ist eine technische Aufwertung. Erfahren Sie, wie wir in Lübeck Altbau-Charme mit hocheffizienter Gebäudetechnik verbinden und was Sie über Genehmigungen wissen müssen.",
             sections: [
                 {
                     title: "Energetische Sanierung: Wie man Lübecker Altbauten fit für 2030 macht",
@@ -328,7 +328,7 @@ export const localPagesData = {
                 {
                     title: "Kostenfaktoren bei der Badsanierung in Kiel",
                     paragraphs: [
-                        "Was kostet ein neues Bad действительно? Eine [Teilbadsanierung (nur Dusche)](/#services) startet in Kiel oft schon bei 5.000€ bis 8.000€. Für eine Komplettsanierung inkl. Verrohrung sollten Sie 18.000€ bis 30.000€ einplanen.",
+                        "Was kostet ein neues Bad wirklich? Eine [Teilbadsanierung (nur Dusche)](/#services) startet in Kiel oft schon bei 5.000€ bis 8.000€. Für eine Komplettsanierung inkl. Verrohrung sollten Sie 18.000€ bis 30.000€ einplanen.",
                         "Wir bieten Ihnen eine transparente Kostenaufstellung zum Festpreis – so haben Sie volle Planungssicherheit für Ihr Projekt in Schleswig-Holstein."
                     ],
                     image: {
